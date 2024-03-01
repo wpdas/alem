@@ -1,22 +1,23 @@
 {
-  "name": "bos-workspace",
-  "description": "BOS Workspace CLI",
-  "version": "0.0.1-alpha.5",
+  "name": "near-script",
+  "description": "Create applications for BOS with a focus on performance while using concepts that are based on ReactJS.",
+  "version": "0.0.1-alpha.1",
   "main": "main.js",
-  "author": "Achraf - sking.near",
+  "author": "Wenderson - wendersonpires.near",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NEARBuilders/bos-workspace.git"
+    "url": "git+https://github.com/wpdas/near-react.git"
   },
   "keywords": [
     "near",
     "bos",
+    "script",
     "nearprotocol"
   ],
   "bin": {
-    "bos-workspace": "./bin/bos-workspace",
-    "bw": "./bin/bos-workspace"
+    "near-script": "./bin/near-script",
+    "ns": "./bin/near-script"
   },
   "files": [
     "bin",
