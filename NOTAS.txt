@@ -1,0 +1,3 @@
+1 - Pensar num nome para a lib.
+2 - Configurar o isIndex do bos.config.json. Deve usar "Index" se for true ou "NomeProjecto" se for false na construção do data.json
+3 - Testar o compilador TypeScript. Fiz um teste na tela "single-file-bundle-bos" e não gerou arquivo js a partir de um ts que criei
