@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import logo from "../assets/near-script-logo-white.png";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -60,23 +61,51 @@ export function NavigationWrapper(props) {
         <Link
           to="/"
           className="text-white text-2xl font-black"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+          }}
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          bos-workspace
+          <img src={logo} height={32} />
+          <p style={{ marginBottom: 0 }}>Near Script</p>
         </Link>
         <div className="navigation-section"></div>
         <div className="user-section">
           {!props.signedIn && (
-            <button onClick={() => props.requestSignIn()}>Sign in</button>
+            <button
+              style={{
+                borderRadius: 4,
+                padding: 4,
+                border: "1px solid #fff",
+                background: "#000",
+                color: "#fff",
+              }}
+              onClick={() => props.requestSignIn()}
+            >
+              Sign in
+            </button>
           )}
           {props.signedIn && (
             <>
               <span className="text-white me-4">
                 {`Signed in as ${props.signedAccountId}`}
               </span>
-              <button onClick={() => props.logOut()}>Sign out</button>
+              <button
+                style={{
+                  borderRadius: 4,
+                  padding: 4,
+                  border: "1px solid #fff",
+                  background: "#000",
+                  color: "#fff",
+                }}
+                onClick={() => props.logOut()}
+              >
+                Sign out
+              </button>
             </>
           )}
         </div>

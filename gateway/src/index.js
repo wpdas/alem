@@ -12,6 +12,7 @@ import {
   Route,
   Routes,
   useLocation,
+  useNavigate,
   BrowserRouter,
 } from "react-router-dom";
 import { useHashRouterLegacy } from "./useHashRouterLegacy";
@@ -28,7 +29,7 @@ function Viewer({ widgetSrc, code }) {
       Array.from(searchParams.entries()).reduce((props, [key, value]) => {
         props[key] = value;
         return props;
-      }, {}),
+      }, {})
     );
   }, [location]);
 
@@ -69,8 +70,10 @@ function Viewer({ widgetSrc, code }) {
 }
 
 function Home() {
+  const navigate = useNavigate();
   const { components: redirectMap } = useRedirectMap();
   const widgets = {};
+
   Object.keys(redirectMap).forEach((key) => {
     const parts = key.split("/widget/");
     if (!widgets[parts[0]]) {
@@ -79,37 +82,34 @@ function Home() {
     widgets[parts[0]].push(parts[1]);
   });
 
-  return (
-    <div className="container">
-      <div className="row mt-3 mb-2">
-        <span>Your local widgets:</span>
-      </div>
-      <div className="row mb-2">
-        <ul className="list-group">
-          {Object.keys(widgets).length === 0 && (
+  let account;
+  let widgetName;
+
+  const widgetKey = Object.keys(redirectMap);
+  if (widgetKey.length > 0) {
+    const widgetKeyParts = widgetKey[0].split("/widget/");
+    account = widgetKeyParts[0];
+    widgetName = widgetKeyParts[1];
+  }
+
+  if (!widgetName) {
+    return (
+      <div className="container">
+        <div className="row mb-2 mt-4">
+          <ul className="list-group">
             <li className="list-group-item">No widgets found</li>
-          )}
-          {Object.keys(widgets).map((acc) => (
-            <details className="list-group-item" key={acc}>
-              <summary className="cursor-pointer">{acc}</summary>
-              <ul>
-                {widgets[acc].map((key) => (
-                  <li key={key}>
-                    <Link
-                      to={`${acc}/widget/${key}`}
-                    >{`${acc}/widget/${key}`}</Link>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ))}
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  navigate(`${account}/widget/${widgetName}`);
+
+  return "";
 }
 
-function App(props) {
+function App() {
   useHashRouterLegacy();
 
   const passProps = useAuth();
@@ -137,5 +137,5 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
 );

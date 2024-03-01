@@ -21,7 +21,7 @@ function useRedirectMap() {
       });
 
       socket.on("connect_error", () => {
-        console.warning("WebSocket connection error. Switching to HTTP.");
+        console.info("WebSocket connection error. Switching to HTTP.");
         setUWebSocket(false);
         socket.disconnect();
       });

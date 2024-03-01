@@ -1,3 +1,9 @@
 1 - Pensar num nome para a lib.
-2 - Configurar o isIndex do bos.config.json. Deve usar "Index" se for true ou "NomeProjecto" se for false na construção do data.json
-3 - Testar o compilador TypeScript. Fiz um teste na tela "single-file-bundle-bos" e não gerou arquivo js a partir de um ts que criei
+DONE - 2 - Configurar o isIndex do bos.config.json. Deve usar "Index" se for true ou "NomeProjecto" se for false na construção do data.json
+3 - Configurar Servidor de arquivos (com bos-loader?)
+4 - Configurar Gateway
+5 - Testar o compilador TypeScript. Fiz um teste na tela "single-file-bundle-bos" e não gerou arquivo js a partir de um ts que criei
+
+-- Tudo acima tem que estar pronto para fazer o abaixo --
+6 - Criar uma conta NEAR para este projeto (near-react.near ?). Fazer isso depois de publicar a lib para ter certeza
+de que o nome está liberado. Depois de criar a conta, applicar para esse Pot: https://bos.potlock.org/?tab=pot&potId=oss.v1.potfactory.potlock.near

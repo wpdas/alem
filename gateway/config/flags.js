@@ -11,5 +11,3 @@ export const flags = {
   enableHotReload:
     process.env.ENABLE_HOT_RELOAD ?? config.enableHotReload ?? true,
 };
-
-console.log("flags", flags);
