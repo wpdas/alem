@@ -131,25 +131,3 @@ The `linktree` and `image` can be different. For instance, you can use a URL for
 Take a look at [https://docs.near.org/social/contract](https://docs.near.org/social/contract) to get to know more.
 
 This file is mandatory because it is from it that information will be extracted for application deployments.
-
-## BOS Types
-
-```ts
-declare interface BosContext {
-  accountId?: string;
-  networkId: NetworkId;
-}
-
-declare var props: any;
-
-declare var context: BosContext;
-
-declare const Widget: (params: {
-  src: string;
-  props: object;
-}) => React.ReactNode;
-
-declare const Markdown: (params: {
-  text: string | undefined;
-}) => React.ReactNode;
-```
