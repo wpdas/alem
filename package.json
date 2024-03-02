@@ -1,5 +1,5 @@
 {
-  "name": "near-script",
+  "name": "alem",
   "description": "Create applications for BOS with a focus on performance while using concepts that are based on ReactJS.",
   "version": "0.0.1-alpha.1",
   "main": "main.js",
@@ -12,12 +12,11 @@
   "keywords": [
     "near",
     "bos",
-    "script",
+    "alem",
     "nearprotocol"
   ],
   "bin": {
-    "near-script": "./bin/near-script",
-    "ns": "./bin/near-script"
+    "alem": "./bin/alem"
   },
   "files": [
     "bin",
