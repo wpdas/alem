@@ -35,13 +35,17 @@ const Hero = ({ text }: HeroProps) => {
     </div>
   );
 };
+
+export default Hero;
 ```
 
-There is no need to `import` features. VM does not natively support this. All the features will be right available to be used. e.g.:
+All the features will be right available to be used. e.g.:
 
 (updating App.tsx including the Hero component)
 
 ```tsx
+import Hero from "./Hero"
+
 // App.tsx
 const App = () => {
   return (
