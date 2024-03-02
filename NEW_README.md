@@ -132,7 +132,24 @@ Take a look at [https://docs.near.org/social/contract](https://docs.near.org/soc
 
 This file is mandatory because it is from it that information will be extracted for application deployments.
 
-## To Test
+## BOS Types
 
-- Remove spaces: The function for this is ready (parse.js -> removeComments(...))
-- Routes: As this is a new arctecture, I can implement a route solution
+```ts
+declare interface BosContext {
+  accountId?: string;
+  networkId: NetworkId;
+}
+
+declare var props: any;
+
+declare var context: BosContext;
+
+declare const Widget: (params: {
+  src: string;
+  props: object;
+}) => React.ReactNode;
+
+declare const Markdown: (params: {
+  text: string | undefined;
+}) => React.ReactNode;
+```
