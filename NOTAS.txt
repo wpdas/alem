@@ -8,8 +8,9 @@ DONE - Testar o compilador TypeScript. Fiz um teste na tela "single-file-bundle-
 DONE - Possibilitar a inserção de plugins: alguma estrutura que insere codigo no cabeçalho do arquivo final para permitir o uso dessas ferramentas/plugins
  Talvez pode ser o caso de criar um site gerenciado de plugins para o Near Script.
  - Criar um CLI para gerenciar os plugins do Alem
- - Criar sistema de rotas
- - Remover espacos e comentarios (usar o methodo pronto pra isso)
+DONE - Criar sistema de rotas
+DONE - Remover espacos e comentarios
+ - Minificar o codigo (somente as partes que podem)
 
 
 -- Tudo acima tem que estar pronto para fazer o abaixo --
