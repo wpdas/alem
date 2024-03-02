@@ -131,3 +131,7 @@ The `linktree` and `image` can be different. For instance, you can use a URL for
 Take a look at [https://docs.near.org/social/contract](https://docs.near.org/social/contract) to get to know more.
 
 This file is mandatory because it is from it that information will be extracted for application deployments.
+
+## Para Documentar
+
+- `props` é global do BOS. Por isso, deve-se usar outro nome para referenciar as props de um componente (ex: componentProps).

@@ -1,5 +1,26 @@
 // Store
-State.init({ stores: [] });
+// const previousStore = Storage.get("alem:store", "potlock.near/widget/Index");
+const previousStore = Storage.privateGet("alem:store");
+
+if (!previousStore) {
+  // TODO: Pensar um fallback aqui
+  return <AlemSpinner />;
+}
+
+console.log("previous store:", previousStore);
+
+// const [storageReady, setStorageReady] = useState(
+//   !!Storage.privateGet("alem:store"),
+// );
+// console.log("CHEEECK:", storageReady, Storage.privateGet("alem:store"));
+
+// useEffect(() => {
+//   if (previousStore && !storageReady) {
+//     setStorageReady(true);
+//   }
+// }, [previousStore]);
+
+State.init(previousStore ? { ...previousStore } : { stores: [] });
 
 /**
  * createStore - State Management
@@ -17,6 +38,11 @@ const createStore = (storeKey, obj) => {
       ? [...state.stores, storeKey]
       : [storeKey];
     State.update({ ...state, ...initParsedObj, stores: updatedStores });
+    Storage.privateSet("alem:store", {
+      ...state,
+      ...initParsedObj,
+      stores: updatedStores,
+    });
   }
 };
 
@@ -41,7 +67,9 @@ const useStore = (storeKey) => {
       Object.keys(updateObj).forEach(
         (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
       );
+      // Storage.set('alem:store', { ...state, ...updateParsedObj });
       State.update(updateParsedObj);
+      Storage.privateSet("alem:store", { ...state });
     },
   };
 };

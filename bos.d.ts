@@ -4,7 +4,7 @@ export declare interface BosContext {
   networkId: NetworkId;
 }
 
-// export declare var props: any;
+export declare var props: any;
 
 export declare var context: BosContext;
 
