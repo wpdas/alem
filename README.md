@@ -117,7 +117,7 @@ bos-workspace upload my-app
 
 ### 1. **App Configuration**
 
-In the `bos.config.json` file, you can specify the app account. It will be used as for development and deployment. And the build script will replace the `/*__@appAccount__*/` comment with the app account.
+In the `bos.config.json` file, you can specify the app account. It will be used as for development and deployment. And the build script will replace the `/*__@account__*/` comment with the app account.
 
 ### 2. **Alias Mapping**
 

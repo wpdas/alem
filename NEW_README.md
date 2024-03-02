@@ -109,7 +109,7 @@ Create an `bos.config.json` file at the root of the project with the following c
 ```json
 {
   "isIndex": true,
-  "appAccount": "potlock.near",
+  "account": "potlock.near",
   "name": "PotLock",
   "description": "PotLock is transforming the way public goods are funded. Create your project, donate to your favroite project, or earn automatic on-chain referrals from funding for your favorite public goods.\n\nLearn more at https://docs.potlock.io ",
   "linktree": {

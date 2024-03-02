@@ -11,7 +11,7 @@ afterEach(() => {
 test("reads the bos.config.json file correctly", () => {
   const config = read_bos_config("testAppFolder");
   expect(config).toEqual({
-    appAccount: "test",
+    account: "test",
     aliases: { test: "testAlias", nui: "nui.near" },
   });
 });

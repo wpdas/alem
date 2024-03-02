@@ -5,7 +5,7 @@ process.env.DIST_FOLDER = DIST_FOLDER;
 const folders = {
   "./apps/testAppFolder": {
     "bos.config.json": JSON.stringify({
-      appAccount: "test",
+      account: "test",
       aliases: {
         test: "testAlias",
         nui: "nui.near",

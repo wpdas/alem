@@ -72,7 +72,7 @@ describe("process_file", () => {
         test: "testAlias",
         nui: "nui.near",
       },
-      appAccount: "testAccount",
+      account: "testAccount",
     });
     expect(spy).toHaveBeenCalledWith(
       path.join(".", "apps", "testAppFolder", "widget", "test.js"),
@@ -87,7 +87,7 @@ describe("process_file", () => {
         test: "testAlias",
         nui: "nui.near",
       },
-      appAccount: "testAccount",
+      account: "testAccount",
     });
     expect(spy).not.toHaveBeenCalled();
   });
@@ -96,10 +96,10 @@ describe("process_file", () => {
 describe("processCommentCommands", () => {
   test("processes the comment commands correctly", () => {
     const aliases = { test: "testAlias" };
-    const appAccount = "testAccount";
+    const account = "testAccount";
     const fileContent =
-      'console.log("/*__@replace:test__*/"); console.log("/*__@appAccount__*/");';
-    const result = processCommentCommands(fileContent, aliases, appAccount);
+      'console.log("/*__@replace:test__*/"); console.log("/*__@account__*/");';
+    const result = processCommentCommands(fileContent, aliases, account);
     expect(result).toEqual(
       'console.log("testAlias"); console.log("testAccount");',
     );
@@ -107,9 +107,9 @@ describe("processCommentCommands", () => {
 
   test("returns original content when no aliases are found", () => {
     const aliases = { test: "testAlias" };
-    const appAccount = "testAccount";
+    const account = "testAccount";
     const fileContent = 'console.log("/*__@replace:nonexistent__*/");';
-    const result = processCommentCommands(fileContent, aliases, appAccount);
+    const result = processCommentCommands(fileContent, aliases, account);
     expect(result).toEqual('console.log("/*__@replace:nonexistent__*/");');
   });
 });

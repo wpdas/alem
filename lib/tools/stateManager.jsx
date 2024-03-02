@@ -1,24 +1,9 @@
 // Store
-// const previousStore = Storage.get("alem:store", "potlock.near/widget/Index");
 const previousStore = Storage.privateGet("alem:store");
 
 if (!previousStore) {
-  // TODO: Pensar um fallback aqui
   return <AlemSpinner />;
 }
-
-console.log("previous store:", previousStore);
-
-// const [storageReady, setStorageReady] = useState(
-//   !!Storage.privateGet("alem:store"),
-// );
-// console.log("CHEEECK:", storageReady, Storage.privateGet("alem:store"));
-
-// useEffect(() => {
-//   if (previousStore && !storageReady) {
-//     setStorageReady(true);
-//   }
-// }, [previousStore]);
 
 State.init(previousStore ? { ...previousStore } : { stores: [] });
 
@@ -28,7 +13,7 @@ State.init(previousStore ? { ...previousStore } : { stores: [] });
 
 const createStore = (storeKey, obj) => {
   // store was not initialized yet & obj is available...
-  if (!state.stores.includes(storeKey) && obj) {
+  if (!state.stores.includes(storeKey) && obj && previousStore) {
     const initParsedObj = {};
     Object.keys(obj).forEach(
       (key) => (initParsedObj[`${storeKey}_${key}`] = obj[key]),
@@ -63,13 +48,15 @@ const useStore = (storeKey) => {
     ...getParsedObj,
     // update method
     update: (updateObj) => {
-      const updateParsedObj = {};
-      Object.keys(updateObj).forEach(
-        (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
-      );
-      // Storage.set('alem:store', { ...state, ...updateParsedObj });
-      State.update(updateParsedObj);
-      Storage.privateSet("alem:store", { ...state });
+      if (previousStore) {
+        const updateParsedObj = {};
+        Object.keys(updateObj).forEach(
+          (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
+        );
+        // Storage.set('alem:store', { ...state, ...updateParsedObj });
+        State.update(updateParsedObj);
+        Storage.privateSet("alem:store", { ...state });
+      }
     },
   };
 };
