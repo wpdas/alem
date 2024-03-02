@@ -1,4 +1,4 @@
-1 - Pensar num nome para a lib (Near Script ja foi usado).
+DONE - Pensar num nome para a lib (Near Script ja foi usado). [Alem]
 DONE - 2 - Configurar o isIndex do bos.config.json. Deve usar "Index" se for true ou "NomeProjecto" se for false na construção do data.json
 DONE 3 - Configurar Servidor de arquivos (com bos-loader?)
 DONE 4 - Configurar Gateway
@@ -6,11 +6,12 @@ DONE - Configurar o Hot Reload
 DONE - Permitir o uso de: export, export default e import, porém, elimina-los no processo de build
 DONE - Testar o compilador TypeScript. Fiz um teste na tela "single-file-bundle-bos" e não gerou arquivo js a partir de um ts que criei
 DONE - Possibilitar a inserção de plugins: alguma estrutura que insere codigo no cabeçalho do arquivo final para permitir o uso dessas ferramentas/plugins
- Talvez pode ser o caso de criar um site gerenciado de plugins para o Near Script.
+ Talvez pode ser o caso de criar um site gerenciado de plugins para o Alem.
  - Criar um CLI para gerenciar os plugins do Alem
 DONE - Criar sistema de rotas
 DONE - Remover espacos e comentarios
- - Minificar o codigo (somente as partes que podem)
+DONE - Minificar o codigo (somente as partes que podem)
+ - Testar o State Management com estado vazio (IMPORTANTE)
 
 
 -- Tudo acima tem que estar pronto para fazer o abaixo --
