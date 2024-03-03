@@ -40,15 +40,15 @@ const Routes = ({ routes }) => {
 export default Routes;
 
 // go programatically to a new route
-// NOTE: removed for now to avoid confusion
-// export const navigate = (routePath: string) => {
-//   const { routes, update } = useAlemLibRoutesStore();
+export const navigate = (routePath) => {
+  const { routes, update } = useAlemLibRoutesStore();
 
-//   if (routes.includes(routePath)) {
-//     update({ activeRoute: routePath });
-//   }
-// };
+  if (routes.includes(routePath)) {
+    update({ activeRoute: routePath });
+  }
+};
 
+// Update the URL. (Slower but better for SEO)
 export const RouteLink = ({ to, children }) => {
   return (
     <a
@@ -57,6 +57,22 @@ export const RouteLink = ({ to, children }) => {
     >
       {children}
     </a>
+  );
+};
+
+// Doesn't update the URL. (Faster but bad for SEO)
+export const ContentRouteLink = ({ to, children }) => {
+  const onClickHandler = () => {
+    navigate(to);
+  };
+
+  return (
+    <div
+      style={{ cursor: "pointer", textDecoration: "none" }}
+      onClick={onClickHandler}
+    >
+      {children}
+    </div>
   );
 };
 

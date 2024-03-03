@@ -1,11 +1,24 @@
 // Store
-const previousStore = Storage.privateGet("alem:store");
 
-if (!previousStore) {
+// Load previous store
+let alemStoreReady = false;
+
+promisify(
+  () => Storage.privateGet("alem:store"),
+  (storeData) => {
+    State.init({ ...storeData });
+    alemStoreReady = true;
+  },
+  () => {
+    State.init({ stores: [] });
+    alemStoreReady = true;
+  },
+  300,
+);
+
+if (!alemStoreReady) {
   return <AlemSpinner />;
 }
-
-State.init(previousStore ? { ...previousStore } : { stores: [] });
 
 /**
  * createStore - State Management

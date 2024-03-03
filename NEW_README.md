@@ -137,3 +137,11 @@ This file is mandatory because it is from it that information will be extracted 
 - `props` é global do BOS. Por isso, deve-se usar outro nome para referenciar as props de um componente (ex: componentProps).
 
 - `useQuery` use isso ao invés de `props`
+
+- `promisify`
+
+- `RouteLink`
+
+- `ContentRouteLink`
+
+- `navigate`
