@@ -1,22 +1,20 @@
 // Store
 
 // Load previous store
-let alemStoreReady = false;
+State.init({ alemStoreReady: false });
 
 promisify(
   () => Storage.privateGet("alem:store"),
   (storeData) => {
-    State.init({ ...storeData });
-    alemStoreReady = true;
+    State.update({ alemStoreReady: true, ...storeData });
   },
   () => {
-    State.init({ stores: [] });
-    alemStoreReady = true;
+    State.update({ alemStoreReady: true, stores: [] });
   },
   300,
 );
 
-if (!alemStoreReady) {
+if (!state.alemStoreReady) {
   return <AlemSpinner />;
 }
 
@@ -26,7 +24,7 @@ if (!alemStoreReady) {
 
 const createStore = (storeKey, obj) => {
   // store was not initialized yet & obj is available...
-  if (!state.stores.includes(storeKey) && obj && previousStore) {
+  if (!state.stores.includes(storeKey) && obj && state.alemStoreReady) {
     const initParsedObj = {};
     Object.keys(obj).forEach(
       (key) => (initParsedObj[`${storeKey}_${key}`] = obj[key]),
@@ -61,7 +59,7 @@ const useStore = (storeKey) => {
     ...getParsedObj,
     // update method
     update: (updateObj) => {
-      if (previousStore) {
+      if (state.alemStoreReady) {
         const updateParsedObj = {};
         Object.keys(updateObj).forEach(
           (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
