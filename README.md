@@ -1,4 +1,4 @@
-# bos-react
+# Alem
 
 This library allows you to create applications for BOS with a focus on performance, in addition to requiring concepts that are based on ReactJS.
 
