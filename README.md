@@ -1,4 +1,4 @@
-# Alem
+# <div style="display: flex; align-items: center; gap: 8px;"><img src='./docs/assets/near-script-logo.png' height='27' alt='Alem logo' /> Alem</div>
 
 This library allows you to create applications for BOS with a focus on performance, in addition to requiring concepts that are based on ReactJS.
 
