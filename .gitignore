@@ -1,5 +1,7 @@
 /build
 /node_modules
+/gateway/dist
+/gateway/dist_
 .env
 
 /todo
