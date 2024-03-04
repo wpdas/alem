@@ -1,4 +1,4 @@
-<div align="center"><img src='./docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
+<div align="center"><img src='https://github.com/wpdas/alem/blob/main/docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
 
 # <div align="center">Alem</div>
 
