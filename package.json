@@ -3,7 +3,7 @@
   "description": "Create web3 applications for NEAR BOS with a focus on performance while using concepts that are based on ReactJS.",
   "version": "0.0.1-alpha.1",
   "main": "main.js",
-  "author": "Wenderson - wendersonpires.near",
+  "author": "Wenderson Pires - wendersonpires.near",
   "license": "ISC",
   "repository": {
     "type": "git",
