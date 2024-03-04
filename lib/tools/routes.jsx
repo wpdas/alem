@@ -1,9 +1,14 @@
 // built in route store
-createStore("alem:routes", { activeRoute: "", routes: [] });
+createStore("alem:routes", {
+  activeRoute: "",
+  type: "URLBased",
+  routes: [],
+});
 const useAlemLibRoutesStore = () => useStore("alem:routes");
 
-const Routes = ({ routes }) => {
+const Routes = ({ routes, type }) => {
   const { activeRoute, update } = useAlemLibRoutesStore();
+  const routeType = type || "URLBased";
 
   useEffect(() => {
     // BOS.props
@@ -13,9 +18,14 @@ const Routes = ({ routes }) => {
       update({
         // list routes
         routes: routes.map((route) => route.path),
+        type: routeType,
         // path= has priority
-        ...(bosProps.path ? { activeRoute: bosProps.path } : {}),
+        ...(bosProps.path && routeType === "URLBased"
+          ? { activeRoute: bosProps.path }
+          : { activeRoute: state.routeSystemInitialized ? activeRoute : "" }),
       });
+
+      State.update({ routeSystemInitialized: true });
     }
   }, []);
 
@@ -48,20 +58,20 @@ export const navigate = (routePath) => {
   }
 };
 
-// Update the URL. (Slower but better for SEO)
 export const RouteLink = ({ to, children }) => {
-  return (
-    <a
-      style={{ cursor: "pointer", textDecoration: "none" }}
-      href={`?path=${to}`}
-    >
-      {children}
-    </a>
-  );
-};
+  const { type } = useAlemLibRoutesStore();
 
-// Doesn't update the URL. (Faster but bad for SEO)
-export const ContentRouteLink = ({ to, children }) => {
+  if (type === "URLBased") {
+    return (
+      <a
+        style={{ cursor: "pointer", textDecoration: "none" }}
+        href={`?path=${to}`}
+      >
+        {children}
+      </a>
+    );
+  }
+
   const onClickHandler = () => {
     navigate(to);
   };

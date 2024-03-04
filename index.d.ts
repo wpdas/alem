@@ -8,14 +8,41 @@ export type Route = {
   component: () => JSX.Element;
 };
 
+/**
+ * Defines how the routes will behave
+ *
+ * `URLBased`: Update the URL and reload/load page
+ * `ContentBased`: Doesn't update the URL and doesn't reload page
+ *
+ * E.g.:
+ * ```
+ * const HomeRoute = createRoute("home", HomePage);
+ * const ProfileRoute = createRoute("profile", ProfilePage);
+ * return <Routes routes={[HomeRoute, ProfileRoute]} type="URLBased" />;
+ * ```
+ */
+export type RouteType = "URLBased" | "ContentBased";
+
 type RoutesProps = {
   routes: Route[];
+  /**
+   * Defines how the routes will behave. Default is `URLBased`.
+   *
+   * `URLBased`: Update the URL and reload/load page;
+   * `ContentBased`: Doesn't update the URL and doesn't reload page.
+   *
+   * Consider using `URLBased` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
+   */
+  type: RouteType;
 };
 
 /**
  * Create Routes
  */
-export declare const Routes: ({ routes }: RoutesProps) => JSX.Element | "";
+export declare const Routes: ({
+  routes,
+  type,
+}: RoutesProps) => JSX.Element | "";
 
 type RouteLinkProps = {
   to: string;
@@ -24,22 +51,8 @@ type RouteLinkProps = {
 
 /**
  * Route Link to access routes.
- * Update the URL. Slower than `ContentRouteLink`.
- *
- * Consider using this one if the URL path is important for your project. E.g.: sharing a link for a specific page.
  */
 export declare const RouteLink: ({
-  to,
-  children,
-}: RouteLinkProps) => JSX.Element;
-
-/**
- * Content Route Link to access routes.
- * Doesn't update the URL. Faster than `RouteLink`.
- *
- * Consider using `RouteLink` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
- */
-export declare const ContentRouteLink: ({
   to,
   children,
 }: RouteLinkProps) => JSX.Element;

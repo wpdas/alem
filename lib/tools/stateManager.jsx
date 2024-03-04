@@ -1,18 +1,30 @@
 // Store
 
-// Load previous store
-State.init({ alemStoreReady: false });
+// Alem control states
+State.init({ alemStoreReady: false, routeSystemInitialized: false });
 
-promisify(
-  () => Storage.privateGet("alem:store"),
-  (storeData) => {
-    State.update({ alemStoreReady: true, ...storeData });
-  },
-  () => {
-    State.update({ alemStoreReady: true, stores: [] });
-  },
-  300,
-);
+// Load previous store
+if (!state.alemStoreReady) {
+  promisify(
+    () => Storage.privateGet("alem:store"),
+    (storeData) => {
+      // Check if previous storage has data
+      if (Object.keys(storeData).length > 1) {
+        State.update({
+          alemStoreReady: true,
+          ...storeData,
+          stores: storeData?.stores || [],
+        });
+      } else {
+        State.update({ alemStoreReady: true, stores: [] });
+      }
+    },
+    () => {
+      State.update({ alemStoreReady: true, stores: [] });
+    },
+    300,
+  );
+}
 
 if (!state.alemStoreReady) {
   return <AlemSpinner />;
@@ -21,6 +33,13 @@ if (!state.alemStoreReady) {
 /**
  * createStore - State Management
  */
+
+// Remove state props that are used to control the Alem library states
+const removeAlemPropsFromState = (stateObj) => {
+  delete stateObj.alemStoreReady;
+  delete stateObj.routeSystemInitialized;
+  return stateObj;
+};
 
 const createStore = (storeKey, obj) => {
   // store was not initialized yet & obj is available...
@@ -33,12 +52,14 @@ const createStore = (storeKey, obj) => {
     const updatedStores = state.stores
       ? [...state.stores, storeKey]
       : [storeKey];
-    State.update({ ...state, ...initParsedObj, stores: updatedStores });
-    Storage.privateSet("alem:store", {
+
+    const updatedState = removeAlemPropsFromState({
       ...state,
       ...initParsedObj,
       stores: updatedStores,
     });
+    State.update(updatedState);
+    Storage.privateSet("alem:store", updatedState);
   }
 };
 
@@ -64,9 +85,13 @@ const useStore = (storeKey) => {
         Object.keys(updateObj).forEach(
           (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
         );
-        // Storage.set('alem:store', { ...state, ...updateParsedObj });
         State.update(updateParsedObj);
-        Storage.privateSet("alem:store", { ...state });
+
+        const updatedState = removeAlemPropsFromState({ ...state });
+        Storage.privateSet(
+          "alem:store",
+          removeAlemPropsFromState(updatedState),
+        );
       }
     },
   };
