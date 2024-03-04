@@ -11,9 +11,8 @@ DONE - Possibilitar a inserção de plugins: alguma estrutura que insere codigo 
 DONE - Criar sistema de rotas
 DONE - Remover espacos e comentarios
 DONE - Minificar o codigo (somente as partes que podem)
- - Testar o State Management com estado vazio (IMPORTANTE)
+DONE - Testar o State Management com estado vazio (IMPORTANTE)
  - Implementar um useRoutes para ver os dados da rota atual
- - mudar `routeSystemInitialized` para `alemRouteSystemInitialized`
 
 
 -- Tudo acima tem que estar pronto para fazer o abaixo --

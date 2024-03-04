@@ -20,12 +20,18 @@ const Routes = ({ routes, type }) => {
         routes: routes.map((route) => route.path),
         type: routeType,
         // path= has priority
-        ...(bosProps.path && routeType === "URLBased"
+        ...(bosProps.path && routeType === "URLBased" && state.alemRouteBlocked
           ? { activeRoute: bosProps.path }
-          : { activeRoute: state.routeSystemInitialized ? activeRoute : "" }),
+          : {
+              activeRoute: state.alemRouteSystemInitialized ? activeRoute : "",
+            }),
       });
 
-      State.update({ routeSystemInitialized: true });
+      // set route ready and block route to give priority to "path="
+      State.update({
+        alemRouteSystemInitialized: true,
+        alemRouteBlocked: true,
+      });
     }
   }, []);
 
@@ -54,6 +60,8 @@ export const navigate = (routePath) => {
   const { routes, update } = useAlemLibRoutesStore();
 
   if (routes.includes(routePath)) {
+    // Umblock route to bypass "path=" parameter and change route
+    State.update({ alemRouteBlocked: false });
     update({ activeRoute: routePath });
   }
 };

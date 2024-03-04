@@ -138,10 +138,12 @@ This file is mandatory because it is from it that information will be extracted 
 
 - `useQuery` use isso ao invés de `props`
 
-- `promisify`
+- `promisify`: Usado para criar uma promessa.
 
-- `RouteLink`
+- `RouteLink`: Usado para criar um link para um rota
 
-- `ContentRouteLink`
+- `navigate`: Quando usado, ignora o parametro "path=" da URL para ir para rota especificada
 
-- `navigate`
+- `clearStore`: Apaga todos os dados de store
+
+- instancias globais devem ter nomes únicos para evitar conflito entre elas

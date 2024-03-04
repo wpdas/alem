@@ -1,5 +1,3 @@
-// -- ROUTES --
-
 /**
  * Route register
  */
@@ -71,61 +69,3 @@ export declare const createRoute: (
   path: string,
   component: () => JSX.Element,
 ) => Route;
-
-// -- HOOKS --
-
-/**
- * Get query objects
- */
-export declare const useQuery: () => {
-  [values: string]: any;
-};
-
-// -- STATE MANAGEMENT --
-
-/**
- * State Management - useStore Hook
- *
- * ```
- * // Creating
- * createStore('myStore', {age: 12, name: 'Liz'});
- * // Custom Hook - Reading
- * const useMyStore = () => useStore('myStore');
- * // Reading from custom hook
- * const { age, name, update } = useMyStore();
- * // Updating / Creating new value
- * update({ age: 15, eyes: 'dark' });
- * ```
- */
-export declare const useStore: (storeKey: string) => {
-  //TODO: create generics
-  update: (updateState: Record<any, any>) => void;
-  [values: string]: any;
-};
-
-/**
- * State Management - create store
- */
-export declare const createStore: (storeKey: string, initialState: {}) => void;
-
-// -- UTILS --
-
-/**
- * Call resolve or reject for a given caller
- * E.g:
- * ```
- * const getStorage = () => Storage.get('my-key');
- * const resolve = (storageData) => console.log(storageData);
- * const reject = () => console.log('Error');
- * const timeout = 5000; // 5sec
- * promisify(getStorage, resolve, reject, timeout);
- * ```
- *
- * Default timeout is 10 seconds
- */
-export declare const promisify: (
-  caller: () => any,
-  resolve: (data: any) => void,
-  reject?: () => void,
-  _timeout?: number,
-) => void;

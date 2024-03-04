@@ -1,7 +1,14 @@
 // Store
 
 // Alem control states
-State.init({ alemStoreReady: false, routeSystemInitialized: false });
+// alemStoreReady: used to check when the store is ready
+// alemRouteSystemInitialized: used to check if route is ready to be used
+// alemRouteBlocked: used to force navigate to other paths even when the "path=" parameter is present into the URL
+State.init({
+  alemStoreReady: false,
+  alemRouteSystemInitialized: false,
+  alemRouteBlocked: true,
+});
 
 // Load previous store
 if (!state.alemStoreReady) {
@@ -37,16 +44,20 @@ if (!state.alemStoreReady) {
 // Remove state props that are used to control the Alem library states
 const removeAlemPropsFromState = (stateObj) => {
   delete stateObj.alemStoreReady;
-  delete stateObj.routeSystemInitialized;
+  delete stateObj.alemRouteSystemInitialized;
   return stateObj;
 };
+
+const ALEM_USESTORE_KEY_SEPARATOR = "::";
 
 const createStore = (storeKey, obj) => {
   // store was not initialized yet & obj is available...
   if (!state.stores.includes(storeKey) && obj && state.alemStoreReady) {
     const initParsedObj = {};
     Object.keys(obj).forEach(
-      (key) => (initParsedObj[`${storeKey}_${key}`] = obj[key]),
+      (key) =>
+        (initParsedObj[`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}${key}`] =
+          obj[key]),
     );
 
     const updatedStores = state.stores
@@ -66,13 +77,14 @@ const createStore = (storeKey, obj) => {
 /**
  * useStore - State Management
  */
-
 const useStore = (storeKey) => {
   // return its "values" and "update" method
   const getParsedObj = {};
   Object.keys(state).forEach((key) => {
-    if (key.includes(`${storeKey}_`)) {
-      getParsedObj[key.replace(`${storeKey}_`, "")] = state[key];
+    if (key.includes(`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}`)) {
+      getParsedObj[
+        key.replace(`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}`, "")
+      ] = state[key];
     }
   });
   return {
@@ -83,7 +95,10 @@ const useStore = (storeKey) => {
       if (state.alemStoreReady) {
         const updateParsedObj = {};
         Object.keys(updateObj).forEach(
-          (key) => (updateParsedObj[`${storeKey}_${key}`] = updateObj[key]),
+          (key) =>
+            (updateParsedObj[
+              `${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}${key}`
+            ] = updateObj[key]),
         );
         State.update(updateParsedObj);
 
@@ -95,4 +110,40 @@ const useStore = (storeKey) => {
       }
     },
   };
+};
+
+/**
+ * clearStore - State Management
+ */
+const clearStore = () => {
+  Storage.privateSet("alem:store", {});
+};
+
+/**
+ * Get all store data
+ */
+const getStore = () => {
+  const storesData = {};
+  if (state.stores) {
+    const stateKeys = Object.keys(state);
+    state.stores.forEach((storeKey) => {
+      // ignore alem states
+      if (!storeKey.includes("alem:")) {
+        stateKeys.forEach((stateKey) => {
+          if (stateKey.includes(storeKey)) {
+            // create object for key if it doesn't exist
+            if (!storesData[storeKey]) {
+              storesData[storeKey] = {};
+            }
+
+            storesData[storeKey][
+              stateKey.replace(`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}`, "")
+            ] = state[stateKey];
+          }
+        });
+      }
+    });
+  }
+
+  return storesData;
 };
