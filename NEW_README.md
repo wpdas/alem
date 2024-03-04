@@ -136,7 +136,7 @@ This file is mandatory because it is from it that information will be extracted 
 
 - `props` é global do BOS. Por isso, deve-se usar outro nome para referenciar as props de um componente (ex: componentProps).
 
-- `useQuery` use isso ao invés de `props`
+- `useParams` use isso ao invés de `props`
 
 - `promisify`: Usado para criar uma promessa.
 
@@ -145,5 +145,7 @@ This file is mandatory because it is from it that information will be extracted 
 - `navigate`: Quando usado, ignora o parametro "path=" da URL para ir para rota especificada
 
 - `clearStore`: Apaga todos os dados de store
+
+- `useLocation`:
 
 - instancias globais devem ter nomes únicos para evitar conflito entre elas
