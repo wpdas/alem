@@ -3,6 +3,7 @@
 .env
 
 /todo
+NOTES.txt
 
 # misc
 .DS_Store

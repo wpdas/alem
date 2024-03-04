@@ -1,234 +1,151 @@
-# bos-workspace (ALPHA)
+# bos-react
 
-🚧 **Warning: This library is in alpha and may undergo significant changes.** 🚧
+This library allows you to create applications for BOS with a focus on performance, in addition to requiring concepts that are based on ReactJS.
 
-![bos-workspace](./docs/assets/bos-workspace.gif)
+## Starting
 
-## Getting Started
+You can create any component file using **JavaScript** or **TypeScript**. The entrypoint must be an App component like so:
 
-To use bos-workspace, install it globally or in your existing workspace:
-
-```cmd
-> npm install bos-workspace
+```tsx
+// App.tsx
+const App = () => {
+  return (
+    <>
+      <h1>Hello World</h1>
+    </>
+  );
+};
 ```
 
-Or download and run [create-bos-app](https://github.com/archetype-org/create-bos-app). ( [integrate create-bos-app #41](https://github.com/NEARBuilders/bos-workspace/issues/41) )
+### Components
 
-```cmd
-> npm install create-bos-app
-> create-bos-app
-> cd newApp
-> npm install
-> npm run dev
+Components must be created following react standards:
+
+```tsx
+// Hero.tsx
+type HeroProps = { text: string };
+
+const Hero = ({ text }: HeroProps) => {
+  return (
+    <div>
+      <p>This is the Hero section</p>
+      <p>
+        <strong>{text}</strong>
+      </p>
+    </div>
+  );
+};
+
+export default Hero;
 ```
 
-## Features
+All the features will be right available to be used. e.g.:
 
-- [x] Alias Mapping
-- [x] Gateway for local development (without needing flags)
-- [x] Hot Reload
-- [x] TypeScript support
-- [x] Deploy widgets via GitHub Action
-- [x] Manage multiple apps configured with different root accountIds
-- [x] Support for flags on other gateways
+(updating App.tsx including the Hero component)
 
-### Commands
+```tsx
+import Hero from "./Hero"
 
-You can run `bw` or `bos-workspace` to see the list of commands.
-
-```bash
-Usage: bos-workspace [options] [command]
-
-BOS Workspace CLI
-
-Options:
-  -V, --version   output the version number
-  -h, --help      display help for command
-
-Commands:
-  dev             Run the development server
-  build           Build the project
-  deploy          Deploy the project
-  upload          Upload data to SocialDB
+// App.tsx
+const App = () => {
+  return (
+    <>
+      <h1>Hello World</h1>
+      <Hero text="First Component">
+    </>
+  );
+};
 ```
 
-> If the gateway can't fetch local components, try disabling brave shields or your adblock.
-> If the commands don't work, try again using Node >=16
+## State Management
 
-#### Command: `dev`
+The state management is made using built in `useStore` hook. This feature is used to create store objects that can be used over the app in any level down the tree.
 
-Run the development server with various options:
+```tsx
+// store.ts
+// initializing a store
+useStore("cartStore", { items: 2, totalPrice: 24 });
+// creating a hook for the store above
+const useCartStore = () => useStore("cartStore");
 
-```bash
-Usage: bos-workspace dev [options]
+// app.tsx
+// using the cart store hook
+// reading data
+const { items, totalPrice, update } = useCartStore();
+console.log(items, totalPrice); // 2, 24
 
-Options:
-  -p, --port <port>        Port to run the server on (default: 8080)
-  -no-gateway             Disable the gateway (default: false)
-  -no-hot                 Disable hot reloading (default: false)
-  -no-open                Disable opening the browser (default: false)
+// changing store data
+update({ items: 4, newValue: "Joe" });
+console.log(items, newValue); // 4, 'Joe'
 ```
 
-To start the development server with specific options, such as exposing components to port 8081 and not booting a local gateway, you can use the following command:
+Here's an example of this being used into the components we created above:
 
-```bash
-bos-workspace dev --port 8081 --no-gateway
+(updating Hero.tsx to use a store)
+
+```tsx
+// Hero.tsx
+type HeroProps = { text: string };
+
+const Hero = ({ text }: HeroProps) => {
+  const { items } = useCartStore();
+
+  return (
+    <div>
+      <p>This is the Hero section</p>
+      <p>
+        <strong>{text}</strong>
+      </p>
+      <p>Cart has {items} items</p>
+    </div>
+  );
+};
 ```
 
-#### Command: `build`
+## Config File
 
-Build the project:
-
-```bash
-Usage: bos-workspace build
-```
-
-This will output valid widget code to the `/build` directory.
-
-#### Command: `deploy`
-
-Deploy the project with the option to specify an app name (must be name of the folder in /apps directory):
-
-```bash
-Usage: bos-workspace deploy [app name]
-```
-
-To deploy the project for a specific app such as apps/my-app, use the following command:
-
-```bash
-bos-workspace deploy my-app
-```
-
-#### Command: `upload`
-
-Upload data to SocialDB with the option to specify an app name (must be name of the folder in /apps directory):
-
-```bash
-Usage: bos-workspace upload [app name]
-```
-
-To upload data to SocialDB for a specific app such as apps/my-app, use the following command:
-
-```bash
-bos-workspace upload my-app
-```
-
-## Key Features
-
-### 1. **App Configuration**
-
-In the `bos.config.json` file, you can specify the app account. It will be used as for development and deployment. And the build script will replace the `/*__@account__*/` comment with the app account.
-
-### 2. **Alias Mapping**
-
-The aliases from `bos.config.json` are used to replace comments with correct values, useful for widget sources.
-
-For example:
-
-```json
-"aliases": {
-    "nui": "nui.sking.near",
-    "something": "abc"
-}
-```
-
-Replacements:
-
-- `/*__@replace:something__*/` to `abc`
-- `<Widget src="/*__@replace:nui__*//widget/Button" />` to `<Widget src="nui.sking.near/widget/Button" />`
-
-### 3. **Module Importing**
-
-The build script will replace `/*__@import:moduleName__*/` with the module's source code from the `modules` folder.
-
-### 4. **Exclude Files**
-
-The build script will exclude files that have `/*__@skip__*/` comment.
-
-### 5. **Data.json**
-
-The build script will create a `data.json` file based on the `jsonc` and `txt` files under `apps/{appname}` folder. The `data.json` file will be used to store data under SocialDB.
-
-For instance, consider the following structure:
-
-```js
--apps -
-  { appname } -
-  something.txt -
-  types -
-  ui -
-  imageType.jsonc -
-  widget -
-  Button.metadata.jsonc;
-```
-
-The `data.json` file will appear as follows:
+Create an `bos.config.json` file at the root of the project with the following content:
 
 ```json
 {
-  "something": "unchanged content of something.txt",
-  "types": {
-    "ui": {
-      "imageType": "Stringified JSON content of imageType.jsonc"
-    }
+  "isIndex": true,
+  "account": "potlock.near",
+  "name": "PotLock",
+  "description": "PotLock is transforming the way public goods are funded. Create your project, donate to your favroite project, or earn automatic on-chain referrals from funding for your favorite public goods.\n\nLearn more at https://docs.potlock.io ",
+  "linktree": {
+    "website": "potlock.io/app"
   },
-  "widget": {
-    "Button.metadata": "Stringified JSON content of Button.metadata.jsonc"
-  }
+  "image": {
+    "ipfs_cid": "bafkreicwzq6dlcynhceovrtslsjja2d76b7ysnjih4qmqlk7atre3w2nay"
+  },
+  "tags": ["your", "dapp", "tags", "here"]
 }
 ```
 
-To exclude files from the `data.json` file, add the `/*__@ignore__*/` comment to the file.
+<!-- TODO: Improve this text -->
 
-#### jsonc files
+**isIndex:** This field is used to inform whether this is the account's main application or not. You can have multiple apps for the same account, but there can only be one main app (Index).
 
-The jsonc files will be passed through JSON.stringify before being stored in the `data.json` file, the build script will also remove all the comments and spaces from the jsonc files.
-If you want to skip the JSON.stringify operation and keep the structure, add the following comment at the beginning of the file:
-`/*__@noStringify__*/`
+The `linktree` and `image` can be different. For instance, you can use a URL for `image` like so: `"image": { "url": "https://link-to-the/image.jpg" }`.
 
-To use the [reusable workflow for deploying your apps](./.gitignore/workflows/deploy.yml) This workspace comes with a reusable workflow for deploying an app.
+Take a look at [https://docs.near.org/social/contract](https://docs.near.org/social/contract) to get to know more.
 
-Here's the cleaned-up documentation in Markdown:
+This file is mandatory because it is from it that information will be extracted for application deployments.
 
-## Deploying Widgets through GitHub Actions
+## Para Documentar
 
-To deploy widgets on push to branch, create a GitHub Actions workflow file in your repository, e.g., `.github/workflows/deploy-embeds-mainnet.yml`, and configure it as follows:
+- `props` é global do BOS. Por isso, deve-se usar outro nome para referenciar as props de um componente (ex: componentProps).
 
-```yaml
-name: Deploy 'AppName' App Components to Mainnet
+- `useParams` use isso ao invés de `props`
 
-on:
-  push:
-    branches: [main] // branch for trigger
+- `promisify`: Usado para criar uma promessa.
 
-jobs:
-  deploy-mainnet:
-    uses: NEARBuilders/bos-workspace/.github/workflows/deploy.yml@main
-    with:
-      deploy-env: "mainnet"  // environemnt to deploy to
-      app-name: "embeds" // app name with bos.config.json
-      deploy-account-address: ${{ vars.DEPLOY_ACCOUNT_ID }} // should match bos.config.json (TODO fix this)
-      signer-account-address: ${{ vars.SIGNER_ACCOUNT_ID }} // account to sign with
-      signer-public-key: ${{ vars.SIGNER_PUBLIC_KEY }}
-      signer-private-key: ${{ secrets.SIGNER_PRIVATE_KEY }}
-```
+- `RouteLink`: Usado para criar um link para um rota
 
-Adjust the workflow as needed, then configure your variables + secrets on GitHub Settings -> Actions -> secrets & variables. Use [near-cli-rs](https://github.com/near/near-cli-rs) for generating keypairs.
+- `navigate`: Quando usado, ignora o parametro "path=" da URL para ir para rota especificada
 
-### Workflow Inputs
+- `clearStore`: Apaga todos os dados de store
 
-The workflow accepts the following inputs:
+- `useLocation`:
 
-- `cli-version` (optional): Version of BOS CLI to use for deployment (e.g., 0.3.0). Default: "0.3.6"
-
-- `deploy-env` (optional): Environment to deploy component code to (e.g., mainnet, testnet). Default: "mainnet"
-
-- `app-name` (required): Workspace app name to deploy (from the /apps directory).
-
-- `deploy-account-address` (required): Account under which component code should be deployed.
-
-- `signer-account-address` (required): Account used for signing the deploy transaction, frequently the same as `deploy-account-address`.
-
-- `signer-public-key` (required): Public key for signing transactions in the format: `ed25519:<public_key>`.
-
-- `signer-private-key` (required): Private key for signing transactions in the format: `ed25519:<private_key>`.
+- instancias globais devem ter nomes únicos para evitar conflito entre elas
