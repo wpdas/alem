@@ -8,3 +8,6 @@ NOTES.txt
 
 # misc
 .DS_Store
+
+# temp
+/.github/workflows/deploy.yml
