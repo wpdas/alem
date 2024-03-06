@@ -9,7 +9,7 @@ Alem is a web3 JavaScript / TypeScript library for building user interfaces for 
 - **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
 - **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in Alem without rewriting existing code.
 
-[**Learn how to use Alem in your project**](#).
+[**Learn how to use Alem in your project**](https://near.org/alem-lib.near/widget/Index).
 
 ## Installation
 
@@ -51,9 +51,9 @@ yarn start
 
 ## Documentation
 
-You can find the Alem documentation [**on the website**](#).
+You can find the Alem documentation [**on the website**](https://near.org/alem-lib.near/widget/Index).
 
-Check out the [**Getting Started**](#) page for a quick overview.
+Check out the [**Getting Started**](https://near.org/alem-lib.near/widget/Index) page for a quick overview.
 
 ## Contributing
 
