@@ -1,5 +1,5 @@
 <!-- https://cdn.jsdelivr.net/gh/wpdas/alem/docs/assets/near-script-logo.png -->
-<div align="center"><img src='./docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
+<div align="center"><img src='https://cdn.jsdelivr.net/gh/wpdas/alem/docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
 
 # <div align="center">Alem</div>
 
@@ -57,6 +57,6 @@ Check out the [**Getting Started**](#) page for a quick overview.
 
 The main purpose of this repository is to continue evolving Alem core, making it faster and easier to use.
 
-### License
+## License
 
 Alem is [MIT licensed](./LICENSE).
