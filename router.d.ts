@@ -31,7 +31,7 @@ type RoutesProps = {
    *
    * Consider using `URLBased` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
    */
-  type: RouteType;
+  type?: RouteType;
 };
 
 /**

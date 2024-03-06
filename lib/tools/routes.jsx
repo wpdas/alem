@@ -23,7 +23,9 @@ const Routes = ({ routes, type }) => {
         ...(bosProps.path && routeType === "URLBased" && state.alemRouteBlocked
           ? { activeRoute: bosProps.path }
           : {
-              activeRoute: state.alemRouteSystemInitialized ? activeRoute : "",
+              activeRoute: state.alemRouteSystemInitialized
+                ? activeRoute
+                : routes[0].path,
             }),
       });
 

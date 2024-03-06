@@ -12,11 +12,9 @@
  * update({ age: 15, eyes: 'dark' });
  * ```
  */
-export declare const useStore: (storeKey: string) => {
-  //TODO: create generics
-  update: (updateState: Record<any, any>) => void;
-  [values: string]: any;
-};
+export declare const useStore: <T>(storeKey: string) => {
+  update: (updateState: T) => void;
+} & T;
 
 /**
  * State Management - create store

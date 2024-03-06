@@ -37,7 +37,7 @@ export declare function useEffect(
  *
  * Know more: https://docs.near.org/bos/api/web-methods#fetch
  */
-export declare const fetch: (url: string) => any;
+export declare const fetch: (url: string) => { body: any };
 
 /**
  * `asyncFetch` is the async version of `fetch`, meaning that it returns a promise instead of a value.
