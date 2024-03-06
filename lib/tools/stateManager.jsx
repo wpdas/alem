@@ -8,6 +8,9 @@ State.init({
   alemStoreReady: false,
   alemRouteSystemInitialized: false,
   alemRouteBlocked: true,
+  // Fonts
+  alemFontsLoaded: false,
+  alemFontsBody: "", // store fonts in css format
 });
 
 // Load previous store
@@ -45,6 +48,8 @@ if (!state.alemStoreReady) {
 const removeAlemPropsFromState = (stateObj) => {
   delete stateObj.alemStoreReady;
   delete stateObj.alemRouteSystemInitialized;
+  delete stateObj.alemFontsLoaded;
+  delete stateObj.alemFontsBody;
   return stateObj;
 };
 

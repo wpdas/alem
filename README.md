@@ -1,157 +1,62 @@
-<div align="center"><img src='https://github.com/wpdas/alem/blob/main/docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
+<!-- https://cdn.jsdelivr.net/gh/wpdas/alem/docs/assets/near-script-logo.png -->
+<div align="center"><img src='./docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
 
 # <div align="center">Alem</div>
 
-<div align="center">This library allows you to create applications for BOS with a focus on performance, in addition to requiring concepts that are based on ReactJS.</div><br/>
+Alem is a web3 JavaScript / TypeScript library for building user interfaces for NEAR Bos dApps.
 
-<p align="center">
-    <a href="#"><b>Documentation</b></a>
-</p>
+- **Declarative:** Alem makes it painless to create interactive UIs. Design simple views for each state in your application, and Alem will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.
+- **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
+- **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in Alem without rewriting existing code.
 
-## Starting
+[**Learn how to use Alem in your project**](#).
 
-You can create any component file using **JavaScript** or **TypeScript**. The entrypoint must be an App component like so:
+## Installation
 
-```tsx
-// App.tsx
-const App = () => {
-  return (
-    <>
-      <h1>Hello World</h1>
-    </>
-  );
-};
+Use the command bellow to start an initial boilerplate.
+
+### JavaScript
+
+```sh
+# Npx
+npx create-alem-dapp my-app
+cd my-app
+npm start
 ```
 
-### Components
-
-Components must be created following react standards:
-
-```tsx
-// Hero.tsx
-type HeroProps = { text: string };
-
-const Hero = ({ text }: HeroProps) => {
-  return (
-    <div>
-      <p>This is the Hero section</p>
-      <p>
-        <strong>{text}</strong>
-      </p>
-    </div>
-  );
-};
-
-export default Hero;
+```sh
+# Yarn
+yarn create alem-dapp my-app
+cd my-app
+yarn start
 ```
 
-All the features will be right available to be used. e.g.:
+### TypeScript
 
-(updating App.tsx including the Hero component)
-
-```tsx
-import Hero from "./Hero"
-
-// App.tsx
-const App = () => {
-  return (
-    <>
-      <h1>Hello World</h1>
-      <Hero text="First Component">
-    </>
-  );
-};
+```sh
+# Npx
+npx create-alem-dapp my-app --template typescript
+cd my-app
+npm start
 ```
 
-## State Management
-
-The state management is made using built in `useStore` hook. This feature is used to create store objects that can be used over the app in any level down the tree.
-
-```tsx
-// store.ts
-// initializing a store
-useStore("cartStore", { items: 2, totalPrice: 24 });
-// creating a hook for the store above
-const useCartStore = () => useStore("cartStore");
-
-// app.tsx
-// using the cart store hook
-// reading data
-const { items, totalPrice, update } = useCartStore();
-console.log(items, totalPrice); // 2, 24
-
-// changing store data
-update({ items: 4, newValue: "Joe" });
-console.log(items, newValue); // 4, 'Joe'
+```sh
+# Yarn
+yarn create alem-dapp my-app --template typescript
+cd my-app
+yarn start
 ```
 
-Here's an example of this being used into the components we created above:
+## Documentation
 
-(updating Hero.tsx to use a store)
+You can find the Alem documentation [**on the website**](#).
 
-```tsx
-// Hero.tsx
-type HeroProps = { text: string };
+Check out the [**Getting Started**](#) page for a quick overview.
 
-const Hero = ({ text }: HeroProps) => {
-  const { items } = useCartStore();
+## Contributing
 
-  return (
-    <div>
-      <p>This is the Hero section</p>
-      <p>
-        <strong>{text}</strong>
-      </p>
-      <p>Cart has {items} items</p>
-    </div>
-  );
-};
-```
+The main purpose of this repository is to continue evolving Alem core, making it faster and easier to use.
 
-## Config File
+### License
 
-Create an `bos.config.json` file at the root of the project with the following content:
-
-```json
-{
-  "isIndex": true,
-  "account": "potlock.near",
-  "name": "PotLock",
-  "description": "PotLock is transforming the way public goods are funded. Create your project, donate to your favroite project, or earn automatic on-chain referrals from funding for your favorite public goods.\n\nLearn more at https://docs.potlock.io ",
-  "linktree": {
-    "website": "potlock.io/app"
-  },
-  "image": {
-    "ipfs_cid": "bafkreicwzq6dlcynhceovrtslsjja2d76b7ysnjih4qmqlk7atre3w2nay"
-  },
-  "tags": ["your", "dapp", "tags", "here"]
-}
-```
-
-<!-- TODO: Improve this text -->
-
-**isIndex:** This field is used to inform whether this is the account's main application or not. You can have multiple apps for the same account, but there can only be one main app (Index).
-
-The `linktree` and `image` can be different. For instance, you can use a URL for `image` like so: `"image": { "url": "https://link-to-the/image.jpg" }`.
-
-Take a look at [https://docs.near.org/social/contract](https://docs.near.org/social/contract) to get to know more.
-
-This file is mandatory because it is from it that information will be extracted for application deployments.
-
-## Para Documentar
-
-- `props` é global do BOS. Por isso, deve-se usar outro nome para referenciar as props de um componente (ex: componentProps).
-
-- `useParams` use isso ao invés de `props`
-
-- `promisify`: Usado para criar uma promessa.
-
-- `RouteLink`: Usado para criar um link para um rota
-
-- `navigate`: Quando usado, ignora o parametro "path=" da URL para ir para rota especificada
-
-- `clearStore`: Apaga todos os dados de store
-
-- `useLocation`:
-
-- instancias globais devem ter nomes únicos para evitar conflito entre elas
+Alem is [MIT licensed](./LICENSE).
