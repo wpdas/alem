@@ -375,3 +375,45 @@ export declare const OverlayTrigger: (params: {
    */
   overlay: any;
 }) => React.ReactNode;
+
+/**
+ * Infinitely load a grid or list of items. This component allows you to create a simple, lightweight infinite scrolling page or element by supporting both window and scrollable elements.
+ *
+ * Read more about the [react-infinite-scroller](https://www.npmjs.com/package/react-infinite-scroller) package.
+ *
+ * Know more: https://docs.near.org/bos/api/builtin-components#infinitescroll
+ */
+export declare const InfiniteScroll: (params: {
+  loadMore: (page: number) => void;
+  hasMore: boolean;
+  useWindow?: boolean;
+}) => React.ReactNode;
+
+/**
+ * Provides a type-ahead input field for selecting an option from a list of choices. More information about the component can be found [here](https://github.com/ericgio/react-bootstrap-typeahead).
+ *
+ * Know more: https://docs.near.org/bos/api/builtin-components#typeahead
+ */
+export declare const TypeAhead: (params: {
+  options: string[];
+  multiple?: boolean;
+  placeholder?: string;
+  onChange?: (selectedValue: string) => void;
+}) => React.ReactNode;
+
+/**
+ * Displays a message once the mouse hovers over a particular item. This component was imported from [React-Bootstrap](https://react-bootstrap-v3.netlify.app/components/tooltips/).
+ */
+export declare const Tooltip: (params: {
+  id?: string;
+  children: JSX.Element;
+}) => React.ReactNode;
+
+/**
+ * Components can import functions from other components. This is useful to reuse code and to create libraries of components.
+ *
+ * Know more: https://docs.near.org/bos/api/state#import
+ */
+export declare const VM: {
+  require: (source: string) => any;
+};
