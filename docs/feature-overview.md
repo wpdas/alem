@@ -28,7 +28,7 @@ export default App;
 
 ## Component Props
 
-Para passar propriedades para um componente é muito simples. Basta usar os padrões do react:
+Passing properties to a component is very simple. Just use react's defaults:
 
 ```tsx
 export const ComponentA = ({ name }: { name: string }) => {

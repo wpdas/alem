@@ -1,6 +1,6 @@
 ## Route Link
 
-Este componente é usado para permitir os usuários navegarem entre as rotas. Vocé deve informar o caminho de destino usando a propriedade `to`.
+This component is used to allow users to navigate between routes. You must inform the destination path using the `to` property.
 
 ```tsx
 import { RouteLink } from "alem/router";

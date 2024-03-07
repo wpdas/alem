@@ -1,10 +1,10 @@
 ## Load Fonts
 
-Use este recurso para carregar fontes externas para dentro do seu aplicativo. Você pode usar qualquer fonte de fontes como Google Fonts ou CDN Fonts.
+Use this feature to load external fonts into your application. You can use any fonts like Google Fonts or CDN Fonts.
 
-Você deve especificar o `font-family` nos estilos da aplicação, seja usando arquivos .css ou styled-components.
+You must specify `font-family` in the application's styles, whether using .css or styled-components files.
 
-`loadFonts` retorna um `boolean` informando se todas as fontes já foram carregadas.
+`loadFonts` returns a `boolean` informing whether all fonts have already been loaded.
 
 ```css
 /* app-styles.css */

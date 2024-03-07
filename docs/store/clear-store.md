@@ -1,6 +1,6 @@
 ## Clear Store
 
-Recurso usado para remover todos os items do store.
+Resource used to remove all items from the store.
 
 ```ts
 import { getStore, clearStore } from "alem/store";

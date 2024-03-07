@@ -1,6 +1,6 @@
 ## Create Route
 
-Este recurso é usado para criar rotas. Essas rotas devem ser passadas para o componente `Routes` posteriormente.
+This feature is used to create routes. These routes must be passed to the `Routes` component later.
 
 ```tsx
 import { Routes, createRoute } from "alem/router";

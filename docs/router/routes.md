@@ -1,6 +1,6 @@
 ## Routes
 
-Este componente é responsável por gerenciar o conteúdo a ser exibido na tela de acordo com a rota ativa. Você pode utilizar o recurso `createRoute` para criar as rotas da aplicação e passa-las para o Routes.
+This component is responsible for managing the content to be displayed on the screen according to the active route. You can use the `createRoute` resource to create application routes and pass them to Routes.
 
 ```tsx
 import { Routes, createRoute } from "alem/router";
@@ -25,14 +25,14 @@ const AppRoutes = () => {
 export default AppRoutes;
 ```
 
-## Tipos de Comportamento
+## Types of Behavior
 
-O `Routes` pode tratar os links de duas formas:
+`Routes` can handle links in two ways:
 
-- **URLBased:** Este é o comportamento padrão. Todo link será irá recarregar a página alterando a estrutura da URL no navegador;
-- **ContentBased:** Este comportamento não muda a URL no navegador e não recarrega a página. Sendo assim, é mais rapida para exibir o conteúdo na tela.
+- **URLBased:** This is the default behavior. Every link will reload the page by changing the URL structure in the browser;
+- **ContentBased:** This behavior does not change the URL in the browser and does not reload the page. Therefore, it is faster to display content on the screen.
 
-Você pode passar o tipo de comportamento usando a propriedade `type` do Routes.
+You can pass the type of behavior using the `type` property of Routes.
 
 ```html
 <!-- URL Based -->

@@ -1,17 +1,15 @@
 ## Navigate
 
-Este recurso possibilita navegar programaticamente para as rotas disponíveis. A URL não será afetada!
+This feature makes it possible to programmatically navigate to available routes. The URL will not be affected!
 
-```ts
+```tsx
 import { navigate } from "alem/router";
 
 export const SomeComponent = () => {
   const onClickHandler = () => {
-    navigate("profile")
-  }
+    navigate("profile");
+  };
 
-  return (
-    <button onClick={onClickHandler}>Go to Profile</button>
-  );
+  return <button onClick={onClickHandler}>Go to Profile</button>;
 };
 ```

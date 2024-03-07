@@ -1,6 +1,6 @@
 ## Get Store
 
-Este recurso retorna todos os dados atuais de cada item do store global.
+This feature returns all current data for each item in the global store.
 
 ```ts
 import { getStore } from "alem/store";

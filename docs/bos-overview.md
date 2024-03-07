@@ -1,6 +1,6 @@
 ## Bos Props
 
-As propriedades do widget nativas do BOS continuam functionando assim como todos os outros recursos já presentes.
+The native BOS widget properties continue to function as well as all other features already present.
 
 ```tsx
 import { props } from "alem/bos";

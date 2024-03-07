@@ -1,6 +1,6 @@
 ## Creating a Store
 
-Os stores são importantes e facilitam tratar dados através da aplicação. Você pode cria-los e salva-los em uma pasta destinada apenas para este fim.
+Store is important and make it easier to process data through the application. You can create them and save them in a folder designed just for this purpose.
 
 ```tsx
 // ./stores/useCartStore.ts
@@ -16,7 +16,7 @@ const useCartStore = () => useStore<StoreProps>("cartStore");
 export default useCartStore;
 ```
 
-Seguindo o modelo acima, você pode facilmente acessar os dados do `cartStore` em outras partes da aplicação.
+By following the model above, you can easily access the `cartStore` data in other parts of the application.
 
 ```tsx
 import useCartStore from "./stores/useCartStore";
