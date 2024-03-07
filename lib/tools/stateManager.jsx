@@ -8,6 +8,15 @@ State.init({
   alemStoreReady: false,
   alemRouteSystemInitialized: false,
   alemRouteBlocked: true,
+  // Some resources can change its behaviour depending of the environment
+  // This is just to help out during the development process. Final result
+  // is going to be the same.
+  // #PORT# is a marker that is going to be changed during the build process
+  alemEnvironment: ":::ENV:::", // production | development
+  // During development, if the route is of type ContentBased, it will return to the
+  // first registered route every time a file is changed. This property enables or
+  // disables this behavior.
+  alemConfig_maintainRouteWhenDeveloping: ":::MAINTAIN_ROUTE:::", // boolean
   // Fonts
   alemFontsLoaded: false,
   alemFontsBody: "", // store fonts in css format
@@ -50,6 +59,9 @@ const removeAlemPropsFromState = (stateObj) => {
   delete stateObj.alemRouteSystemInitialized;
   delete stateObj.alemFontsLoaded;
   delete stateObj.alemFontsBody;
+  delete stateObj.alemRouteBlocked;
+  delete stateObj.alemEnvironment;
+  delete stateObj.alemConfig_maintainRouteWhenDeveloping;
   return stateObj;
 };
 

@@ -25,7 +25,9 @@ Create an `bos.config.json` file at the root of the project with the following c
   // Alem options
   "options": {
     // The storage need to be loaded before rendering any content. If this is "true", a Spinner is going to be shown till the storage is ready
-    "showFallbackSpinner": false
+    "showFallbackSpinner": false,
+    // During development, if the route is of type ContentBased, it will return to the first registered route every time a file is changed. This property enables or disables this behavior.
+    "maintainRouteWhenDeveloping": true
   }
 }
 ```

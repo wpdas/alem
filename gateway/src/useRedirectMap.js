@@ -33,7 +33,8 @@ function useRedirectMap() {
       fetch(flags.bosLoaderUrl)
         .then((r) => r.json())
         .then((d) => {
-          console.log("File change detected via HTTP", d);
+          // console.log("File change detected via HTTP", d);
+          console.log("File change detected via HTTP");
           setDevJson(d);
         })
         .catch((error) => {

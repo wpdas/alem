@@ -14,6 +14,10 @@ const Routes = ({ routes, type }) => {
     // BOS.props
     const bosProps = props;
 
+    // ContentBased config only: should maintain the current route over refreshes?
+    const maintainRoutesWhenDeveloping =
+      isDevelopment && state.alemConfig_maintainRouteWhenDeveloping;
+
     if (routes) {
       update({
         // list routes
@@ -23,9 +27,12 @@ const Routes = ({ routes, type }) => {
         ...(bosProps.path && routeType === "URLBased" && state.alemRouteBlocked
           ? { activeRoute: bosProps.path }
           : {
-              activeRoute: state.alemRouteSystemInitialized
-                ? activeRoute
-                : routes[0].path,
+              activeRoute:
+                // maintainRoutesWhenDeveloping: If in development and ContentBased type,
+                // maintain the route even when alemRouteSystemInitialized is not initialized?
+                state.alemRouteSystemInitialized || maintainRoutesWhenDeveloping
+                  ? activeRoute
+                  : routes[0].path,
             }),
       });
 
@@ -35,7 +42,7 @@ const Routes = ({ routes, type }) => {
         alemRouteBlocked: true,
       });
     }
-  }, []);
+  }, [props.path, activeRoute]);
 
   // Default route
   if (activeRoute === "") {
@@ -68,12 +75,13 @@ export const navigate = (routePath) => {
   }
 };
 
-export const RouteLink = ({ to, children }) => {
+export const RouteLink = ({ to, children, className }) => {
   const { type } = useAlemLibRoutesStore();
 
   if (type === "URLBased") {
     return (
       <a
+        className={className}
         style={{ cursor: "pointer", textDecoration: "none" }}
         href={`?path=${to}`}
       >

@@ -45,15 +45,13 @@ export declare const Routes: ({
 type RouteLinkProps = {
   to: string;
   children: JSX.Element;
+  className?: string;
 };
 
 /**
  * Route Link to access routes.
  */
-export declare const RouteLink: ({
-  to,
-  children,
-}: RouteLinkProps) => JSX.Element;
+export declare const RouteLink: (props: RouteLinkProps) => JSX.Element;
 
 /**
  * Go programmatically to the route ("route Path").

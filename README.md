@@ -1,7 +1,7 @@
 <!-- https://cdn.jsdelivr.net/gh/wpdas/alem/docs/assets/near-script-logo.png -->
 <div align="center"><img src='https://cdn.jsdelivr.net/gh/wpdas/alem/docs/assets/near-script-logo.png' height='57' alt='Alem logo' /></div>
 
-# <div align="center">Alem</div>
+# <div align="center">Além</div>
 
 Alem is a web3 JavaScript / TypeScript library for building user interfaces for NEAR Bos dApps.
 

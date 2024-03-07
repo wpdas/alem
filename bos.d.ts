@@ -417,3 +417,18 @@ export declare const Tooltip: (params: {
 export declare const VM: {
   require: (source: string) => any;
 };
+
+/**
+ * BOS State - handle the global component's state
+ *
+ * Know more: https://docs.near.org/bos/api/state
+ */
+export declare const State: {
+  init: (defaultValue: {}) => void;
+  update: (updatedValues: {}) => void;
+};
+
+/**
+ * BOS State - access all state items
+ */
+export declare const state: Record<string, any>;
