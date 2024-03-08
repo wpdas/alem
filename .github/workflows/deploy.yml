@@ -1,4 +1,4 @@
-name: Deploy BOS dApp (built using Alem)
+name: Deploy BOS DApp (built using Alem)
 on:
   workflow_call:
     inputs:
@@ -12,22 +12,14 @@ on:
         description: "Environment to deploy component code to (e.g. mainnet, testnet)"
         type: string
         default: "mainnet"
-      app-name:
-        required: true
-        description: "Workspace app name to deploy (from /apps directory)"
-        type: string
       working-directory:
         required: false
         description: "Relative path to root"
         type: string
         default: "./"
-      deploy-account-address:
-        required: true
-        description: "Account under which component code should be deployed"
-        type: string
       signer-account-address:
         required: true
-        description: "Account which will be used for signing deploy transaction, frequently the same as deploy-account-address"
+        description: "Account under which component code should be deployed and which will be used for signing deploy transaction"
         type: string
       signer-public-key:
         required: true
@@ -45,7 +37,6 @@ jobs:
     env:
       DEPLOY_ENV: ${{ inputs.deploy-env }}
       WORKSPACE_DIRECTORY: ${{ inputs.working-directory }}
-      DEPLOY_ACCOUNT_ID: ${{ inputs.deploy-account-address }}
       SIGNER_ACCOUNT_ID: ${{ inputs.signer-account-address }}
       SIGNER_PUBLIC_KEY: ${{ inputs.signer-public-key }}
       SIGNER_PRIVATE_KEY: ${{ secrets.SIGNER_PRIVATE_KEY }}
@@ -82,4 +73,4 @@ jobs:
         run: |
           pwd
           cd "$WORKSPACE_DIRECTORY/build"
-          bos components deploy "$DEPLOY_ACCOUNT_ID" sign-as "$SIGNER_ACCOUNT_ID" network-config "$DEPLOY_ENV" sign-with-plaintext-private-key --signer-public-key "$SIGNER_PUBLIC_KEY" --signer-private-key "$SIGNER_PRIVATE_KEY" send
+          bos components deploy "$SIGNER_ACCOUNT_ID" sign-as "$SIGNER_ACCOUNT_ID" network-config "$DEPLOY_ENV" sign-with-plaintext-private-key --signer-public-key "$SIGNER_PUBLIC_KEY" --signer-private-key "$SIGNER_PRIVATE_KEY" send
