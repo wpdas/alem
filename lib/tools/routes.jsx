@@ -3,12 +3,38 @@ createStore("alem:routes", {
   activeRoute: "",
   type: "URLBased",
   routes: [],
+  parameterName: "path",
 });
 const useAlemLibRoutesStore = () => useStore("alem:routes");
 
-const Routes = ({ routes, type }) => {
-  const { activeRoute, update } = useAlemLibRoutesStore();
+const Routes = ({ routes, type, parameterName }) => {
+  const {
+    parameterName: paramName,
+    activeRoute,
+    update,
+  } = useAlemLibRoutesStore();
+
+  useEffect(() => {
+    // Update the parameter name if needed
+    update({ parameterName: parameterName ? parameterName : "path" });
+  }, [parameterName]);
+
+  const routeParamName = paramName || "path";
   const routeType = type || "URLBased";
+
+  const checkIfPathIsIncludedToRoutes = (routePath) => {
+    let pathFound = false;
+    if (routes) {
+      routes.forEach((routeItem) => {
+        if (pathFound) return;
+
+        if (!pathFound) {
+          pathFound = routeItem.path === routePath;
+        }
+      });
+    }
+    return pathFound;
+  };
 
   useEffect(() => {
     // BOS.props
@@ -19,13 +45,23 @@ const Routes = ({ routes, type }) => {
       isDevelopment && state.alemConfig_maintainRouteWhenDeveloping;
 
     if (routes) {
+      // Check if currentUrlPath exists in the routes list, if not, use
+      // the first element's path
+      let currentUrlPath =
+        bosProps[routeParamName] &&
+        checkIfPathIsIncludedToRoutes(bosProps[routeParamName])
+          ? bosProps[routeParamName]
+          : routes[0].path;
+
       update({
         // list routes
         routes: routes.map((route) => route.path),
         type: routeType,
-        // path= has priority
-        ...(bosProps.path && routeType === "URLBased" && state.alemRouteBlocked
-          ? { activeRoute: bosProps.path }
+        // [routeParamName]= has priority
+        ...(currentUrlPath && routeType === "URLBased" && state.alemRouteBlocked
+          ? {
+              activeRoute: currentUrlPath,
+            }
           : {
               activeRoute:
                 // maintainRoutesWhenDeveloping: If in development and ContentBased type,
@@ -76,14 +112,14 @@ export const navigate = (routePath) => {
 };
 
 export const RouteLink = ({ to, children, className }) => {
-  const { type } = useAlemLibRoutesStore();
+  const { type, parameterName } = useAlemLibRoutesStore();
 
   if (type === "URLBased") {
     return (
       <a
         className={className}
         style={{ cursor: "pointer", textDecoration: "none" }}
-        href={`?path=${to}`}
+        href={`?${parameterName}=${to}`}
       >
         {children}
       </a>

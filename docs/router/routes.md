@@ -16,8 +16,9 @@ const AppRoutes = () => {
   // Initializing Routes
   return (
     <Routes
+      parameterName="tab" {/* Optional: default is "path" */}
+      type="ContentBased" {/* Optional: default is "URLBased" */}
       routes={[FeatureOverviewRoute, StateManagementRoute]}
-      type="ContentBased"
     />
   );
 };
@@ -34,18 +35,16 @@ export default AppRoutes;
 
 You can pass the type of behavior using the `type` property of Routes.
 
-```html
-<!-- URL Based -->
+```tsx
+/* URL Based */
 <Routes
-  routes="{[FeatureOverviewRoute,"
-  StateManagementRoute]}
+  routes={[FeatureOverviewRoute, StateManagementRoute]}
   type="URLBased"
 />
 
-<!-- Content Based -->
+/* Content Based */
 <Routes
-  routes="{[FeatureOverviewRoute,"
-  StateManagementRoute]}
+  routes={[FeatureOverviewRoute, StateManagementRoute]}
   type="ContentBased"
 />
 ```

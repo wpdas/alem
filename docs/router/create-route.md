@@ -15,8 +15,9 @@ const AppRoutes = () => {
 
   return (
     <Routes
+      parameterName="page" {/* Optional: default is "path" */}
+      type="ContentBased" {/* Optional: default is "URLBased" */}
       routes={[FeatureOverviewRoute, StateManagementRoute]}
-      type="ContentBased"
     />
   );
 };

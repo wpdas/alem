@@ -32,15 +32,16 @@ type RoutesProps = {
    * Consider using `URLBased` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
    */
   type?: RouteType;
+  /**
+   * Parameter name to store current route name. Default is "path".
+   */
+  parameterName?: string;
 };
 
 /**
  * Create Routes
  */
-export declare const Routes: ({
-  routes,
-  type,
-}: RoutesProps) => JSX.Element | "";
+export declare const Routes: (props: RoutesProps) => JSX.Element | "";
 
 type RouteLinkProps = {
   to: string;
