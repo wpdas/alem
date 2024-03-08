@@ -1,1 +1,5 @@
 - Implement support for Testnet.
+- Implement `loadExternalStyles` API to load external css files
+- E2E Tests
+- Add parameter `routeParamName` for `Routes` component. This is going to allow changing the default route param name ("path") that's used to control and watch all routes.
+- Implement feature to the compiler that changes the consts/lets/vars names to avoid conflicts.
