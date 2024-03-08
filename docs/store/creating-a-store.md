@@ -1,6 +1,6 @@
 ## Creating a Store
 
-Store is important and make it easier to process data through the application. You can create them and save them in a folder designed just for this purpose.
+The state management is made using a combination of features `createStore` and `useStore`. This feature is used to create store objects that can be used over the app in any level down the tree.
 
 ```tsx
 // ./stores/useCartStore.ts

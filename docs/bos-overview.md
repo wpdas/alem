@@ -1,9 +1,34 @@
-## Bos Props
+## NEAR APIs and Components
 
-The native BOS widget properties continue to function as well as all other features already present.
+The native NEAR VM (BOS) resources continue to function.
+
+Get to know more about the BOS built in resources here: [https://docs.near.org/bos/api/state](https://docs.near.org/bos/api/state)
 
 ```tsx
-import { props } from "alem/bos";
+import {
+  Files,
+  InfiniteScroll,
+  IpfsImageUpload,
+  Markdown,
+  Near,
+  OverlayTrigger,
+  Social,
+  State,
+  Storage,
+  Tooltip,
+  TypeAhead,
+  VM,
+  Widget,
+  asyncFetch,
+  clipboard,
+  context,
+  fetch,
+  props,
+  state,
+  useCache,
+  useEffect,
+  useState,
+} from "alem/bos";
 
 export const ComponentC = () => {
   console.log(props); // will print the widget props
