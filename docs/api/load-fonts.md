@@ -14,7 +14,7 @@ p {
 ```
 
 ```tsx
-import { loadFonts } from "alem/theme";
+import { loadFonts } from "alem/api";
 
 const App = () => {
   const fontsLoaded = loadFonts([

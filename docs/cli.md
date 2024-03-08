@@ -12,9 +12,9 @@ Options:
   -h, --help      display help for command
 
 Commands:
-  dev             Run the development server
-  build           Build the project
-  deploy          Deploy the project
+  dev                 Run the development server
+  build               Build the project
+  deploy              Deploy the project
   upload-metadata     Upload metadata to SocialDB (app name, description, icon, tags, etc)
 ```
 
