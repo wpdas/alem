@@ -15,7 +15,7 @@ Commands:
   dev             Run the development server
   build           Build the project
   deploy          Deploy the project
-  upload-data     Upload data to SocialDB (app name, description, icon, tags, etc)
+  upload-metadata     Upload metadata to SocialDB (app name, description, icon, tags, etc)
 ```
 
 #### Command: `dev`
@@ -35,7 +35,7 @@ Options:
 Build the project:
 
 ```bash
-Usage: bos build
+Usage: alem build
 ```
 
 This will output valid widget code to the `/build` directory.
@@ -45,13 +45,13 @@ This will output valid widget code to the `/build` directory.
 Deploy the project to Near BOS:
 
 ```bash
-Usage: bos deploy
+Usage: alem deploy
 ```
 
-#### Command: `upload-data`
+#### Command: `upload-metadata`
 
-Upload data to SocialDB. This is going to use the data provided by `bos.config.json` file. The content represents the app's details like `name, description, icon, tags, etc`. You can update this information manually by going to the widget metadata tab using the [Near Sandbox](https://near.org/sandbox).
+Upload metadata to SocialDB. This is going to use the data provided by `bos.config.json` file. The content represents the app's details like `name, description, icon, tags, etc`. You can update this information manually by going to the widget metadata tab using the [Near Sandbox](https://near.org/sandbox).
 
 ```bash
-Usage: bos upload-data
+Usage: alem upload-metadata
 ```

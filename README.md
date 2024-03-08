@@ -3,13 +3,13 @@
 
 # <div align="center">Além</div>
 
-Alem is a web3 JavaScript / TypeScript library for building user interfaces for NEAR Bos dApps.
+Alem is a web3 JavaScript / TypeScript library for building user interfaces for NEAR BOS DApps.
 
 - **Declarative:** Alem makes it painless to create interactive UIs. Design simple views for each state in your application, and Alem will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.
 - **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
 - **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in Alem without rewriting existing code.
 - **CSS:** Alem supports .css files. Just create them and they will all be included in the application.
-- **Easy State Management:** Use state management to make it easier to process data through the application.
+- **Easy State Management:** Use state management to make it easier to persist data through the application.
 - **Routes System:** An integrated router system that makes it possible to navigate between pages easily.
 - **Much more:** Take a look at the other documentation items to learn how to use all the features provided by Alem.
 
@@ -19,7 +19,7 @@ Alem is a web3 JavaScript / TypeScript library for building user interfaces for 
 
 **You’ll need to have Node 18.0.0 or later version on your local development machine**. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
 
-Use the command bellow to start an initial boilerplate.
+Use the command below to start an initial boilerplate.
 
 ### JavaScript
 

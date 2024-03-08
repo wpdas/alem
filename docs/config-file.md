@@ -1,12 +1,14 @@
 ## Config File
 
-Create an `bos.config.json` file at the root of the project with the following content:
+Create a `bos.config.json` file at the root of the project with the following content:
 
 ```json
 {
-  // If "true", the app is going to be saved as Index app, the main app of the account. If "false", this is going to use "name" as the widget name. The spaces will be trimmed.
+  // This is the root path of the app.
+  // if true: alem-lib.near/widget/Index
+  // if false: alem-lib.near/widget/alem-docs (it's going to use the slugified "name")
   "isIndex": true,
-  // Account that owns the app.
+  // The account ID under which the app will be deployed.
   "account": "alem-lib.near",
   // App name
   "name": "Alem Docs",
