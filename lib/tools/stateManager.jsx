@@ -17,12 +17,10 @@ State.init({
   // first registered route every time a file is changed. This property enables or
   // disables this behavior.
   alemConfig_maintainRouteWhenDeveloping: ":::MAINTAIN_ROUTE:::", // boolean
-  // External Fonts
-  alemFontsLoaded: false,
-  alemFontsBody: "", // store fonts in css format
-  // External Styles
+  // External Styles (fonts and css files)
   alemExternalStylesLoaded: false,
-  alemExternalStylesBody: "",
+  alemExternalStylesBody: "", // store fonts and css body
+  stores: [],
 });
 
 // Load previous store
@@ -60,8 +58,6 @@ if (!state.alemStoreReady) {
 const removeAlemPropsFromState = (stateObj) => {
   delete stateObj.alemStoreReady;
   delete stateObj.alemRouteSystemInitialized;
-  delete stateObj.alemFontsLoaded;
-  delete stateObj.alemFontsBody;
   delete stateObj.alemRouteBlocked;
   delete stateObj.alemEnvironment;
   delete stateObj.alemConfig_maintainRouteWhenDeveloping;
