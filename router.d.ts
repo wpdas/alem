@@ -89,4 +89,8 @@ export declare const useLocation: () => {
    * Routes available
    */
   routes: string[];
+  /**
+   * Is routes ready?
+   */
+  isRoutesReady: boolean;
 };
