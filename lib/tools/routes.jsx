@@ -108,9 +108,12 @@ export const navigate = (routePath) => {
   const { routes, update } = useAlemLibRoutesStore();
 
   if (routes.includes(routePath)) {
-    // Umblock route to bypass "path=" parameter and change route
-    State.update({ alemRouteBlocked: false });
-    update({ activeRoute: routePath });
+    // Wait next tick to prevent invisible conflicts
+    setTimeout(() => {
+      // Umblock route to bypass "path=" parameter and change route
+      State.update({ alemRouteBlocked: false });
+      update({ activeRoute: routePath });
+    }, 0);
   }
 };
 
