@@ -4,4 +4,4 @@
 - Add parameter `parameterName` for `Routes` component. This is going to allow changing the default route param name ("path") that's used to control and watch all routes. - ✔
 - Implement feature to the compiler that changes the consts/lets/vars names to avoid conflicts.
 - Add support to tsconfig.json `baseUrl` and `paths`.
-- Support to use same const names in defferent files.
+- Support to using the same const names in different files.
