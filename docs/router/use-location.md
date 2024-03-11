@@ -10,7 +10,8 @@ import { useLocation } from "alem/hooks";
 
 export const SomeComponent = () => {
   const location = useLocation();
-  console.log(location); // { isRoutesReady: true, pathname: "profile", routes: ["home", "profile"] }
+  console.log(location);
+  // { isRoutesReady: true, pathname: "profile", routes: ["home", "profile"] }
 
   return "";
 };
