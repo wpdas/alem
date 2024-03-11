@@ -13,7 +13,7 @@ Alem is a web3 JavaScript / TypeScript library for building user interfaces for 
 - **Routes System:** An integrated router system that makes it possible to navigate between pages easily.
 - **Much more:** Take a look at the other documentation items to learn how to use all the features provided by Alem.
 
-[**Documentation - Learn how to use Alem in your project**](https://near.org/alem-lib.near/widget/Index).
+[**Documentation - Learn how to use Alem in your project**](https://alem.dev).
 
 If you have questions or need help, please ask in the [**Alem Discussions**](https://t.me/alemlib/8).
 
@@ -57,9 +57,9 @@ yarn start
 
 ## Documentation
 
-You can find the Alem documentation [**on the website**](https://near.org/alem-lib.near/widget/Index).
+You can find the Alem documentation [**on the website**](https://alem.dev).
 
-Check out the [**Getting Started**](https://near.org/alem-lib.near/widget/Index) page for a quick overview.
+Check out the [**Getting Started**](https://alem.dev) page for a quick overview.
 
 ## Contributing
 
