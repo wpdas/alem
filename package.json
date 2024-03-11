@@ -1,7 +1,7 @@
 {
   "name": "alem",
   "description": "Create web3 applications for NEAR BOS with a focus on performance while using concepts that are based on ReactJS.",
-  "version": "0.0.1-alpha.18",
+  "version": "0.0.1-alpha.19",
   "main": "main.js",
   "types": "index.d.ts",
   "author": "Wenderson Pires - wendersonpires.near",
@@ -24,12 +24,11 @@
     "lib",
     "main.js",
     "gateway/dist/*",
+    "api.d.ts",
     "bos.d.ts",
-    "hooks.d.ts",
+    "index.d.ts",
     "router.d.ts",
-    "store.d.ts",
-    "theme.d.ts",
-    "utils.d.ts"
+    "store.d.ts"
   ],
   "scripts": {
     "build-gateway": "cd ./gateway && npm install && npm run build",
