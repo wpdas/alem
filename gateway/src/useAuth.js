@@ -20,8 +20,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useEthersProviderContext } from "./useWeb3";
 
+import ls from "local-storage";
+import * as nearAPI from "near-api-js";
+import { flags } from "../config/flags";
+
 export const refreshAllowanceObj = {};
-const NetworkId = "mainnet";
+const NetworkId = flags.network;
 
 export function useAuth() {
   const [connected, setConnected] = useState(false);
@@ -147,9 +151,6 @@ export function useAuth() {
 
   return passProps;
 }
-
-import ls from "local-storage";
-import * as nearAPI from "near-api-js";
 
 export async function getSocialKeyPair(accountId) {
   const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();

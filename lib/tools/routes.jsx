@@ -117,10 +117,13 @@ export const navigate = (routePath) => {
   }
 };
 
-export const RouteLink = ({ to, children, className }) => {
+export const RouteLink = ({ to, children, className, onClick }) => {
   const { type, parameterName } = useAlemLibRoutesStore();
 
   if (type === "URLBased") {
+    if (onClick) {
+      onClick();
+    }
     return (
       <a
         className={className}
@@ -133,6 +136,9 @@ export const RouteLink = ({ to, children, className }) => {
   }
 
   const onClickHandler = () => {
+    if (onClick) {
+      onClick();
+    }
     navigate(to);
   };
 

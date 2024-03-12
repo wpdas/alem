@@ -47,6 +47,7 @@ type RouteLinkProps = {
   to: string;
   children: JSX.Element;
   className?: string;
+  onClick?: () => void;
 };
 
 /**

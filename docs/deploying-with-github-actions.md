@@ -13,7 +13,6 @@ jobs:
   deploy-mainnet:
     uses: wpdas/alem/.github/workflows/deploy.yml@main
     with:
-      deploy-env: "mainnet" # environemnt to deploy to
       signer-account-address: <SIGNER_ACCOUNT_ID> # account to sign with (should match bos.config.json > account)
       signer-public-key: <SIGNER_PUBLIC_KEY>
     secrets:

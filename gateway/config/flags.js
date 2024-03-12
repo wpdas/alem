@@ -2,6 +2,7 @@ const envConfig = document.getElementById("env-config").textContent;
 const config = JSON.parse(envConfig);
 
 export const flags = {
+  network: process.env.NETWORK || config.network || "mainnet",
   bosLoaderUrl:
     process.env.BOS_LOADER_URL ||
     config.bosLoaderUrl ||

@@ -1,6 +1,6 @@
 ## Route Link
 
-This component is used to allow users to navigate between routes. You must inform the destination path using the `to` property.
+This component is used to allow users to navigate between routes. You must inform the destination path using the `to` property. It also has `className` and `onClick` properties.
 
 ```tsx
 import { RouteLink } from "alem/router";
