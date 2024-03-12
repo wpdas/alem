@@ -8,8 +8,10 @@ Create a `bos.config.json` file at the root of the project with the following co
   // if true: alem-lib.near/widget/Index
   // if false: alem-lib.near/widget/alem-docs (it's going to use the slugified "name")
   "isIndex": true,
-  // The account ID under which the app will be deployed.
-  "account": "alem-lib.near",
+  // The mainnet account ID under which the app will be deployed.
+  "mainnetAccount": "alem-lib.near",
+  // The testnet account ID under which the app will be deployed.
+  "testnetAccount": "alem-lib.testnet",
   // App name
   "name": "Alem Docs",
   // App Description
