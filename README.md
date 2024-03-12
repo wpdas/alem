@@ -3,7 +3,7 @@
 
 # <div align="center">Além</div>
 
-Alem is a web3 JavaScript / TypeScript library for building user interfaces for NEAR BOS DApps.
+Alem is a web3 **JavaScript** / **TypeScript** library for building applications for NEAR BOS DApps.
 
 - **Declarative:** Alem makes it painless to create interactive UIs. Design simple views for each state in your application, and Alem will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.
 - **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
