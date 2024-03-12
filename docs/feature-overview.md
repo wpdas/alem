@@ -41,29 +41,3 @@ export const ComponentB = () => {
   return <ComponentA name="Wendz" />;
 };
 ```
-
-## Good to Know
-
-You can't use the same name for things. Otherwise, the compiler will break.
-
-### Correct
-
-```ts
-// fileA.ts
-const MyValue = 2;
-
-// fileB.ts
-const MyValueB = 5;
-```
-
-### Incorrect
-
-The example below will break up the app because both consts are using the same name.
-
-```ts
-// fileA.ts
-const MyValue = 2;
-
-// fileB.ts
-const MyValue = 5;
-```
