@@ -5,3 +5,4 @@
 - Implement feature to the compiler that changes the consts/lets/vars names to avoid conflicts.
 - Add support to tsconfig.json `baseUrl` and `paths`.
 - Support to using the same const names in different files. - ✔
+- Each component should have its own state -
