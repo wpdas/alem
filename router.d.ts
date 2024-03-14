@@ -81,17 +81,17 @@ export declare const useParams: () => {
  * This hook returns the current location object.
  * This can be useful if you'd like to perform some side effect whenever the current location changes.
  */
-export declare const useLocation: () => {
-  /**
-   * The path of the current Route.
-   */
-  pathname: string;
-  /**
-   * Routes available
-   */
-  routes: string[];
-  /**
-   * Is routes ready?
-   */
-  isRoutesReady: boolean;
-};
+// export declare const useLocation: () => {
+//   /**
+//    * The path of the current Route.
+//    */
+//   pathname: string;
+//   /**
+//    * Routes available
+//    */
+//   routes: string[];
+//   /**
+//    * Is routes ready?
+//    */
+//   isRoutesReady: boolean;
+// };

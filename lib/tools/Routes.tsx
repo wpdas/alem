@@ -10,7 +10,9 @@ import {
   _alemRouteType,
   _alemRouteBlocked,
   _activeRoute,
+  _alemRegisterGetRoutePropsMethod,
 } from "./tools";
+import { routeUpdateObservable } from "./utils";
 
 /**
  * Route register
@@ -51,9 +53,11 @@ type RoutesProps = {
    */
   parameterName?: string;
   // navigateFactory?: (navigate: (route: string) => void) => void;
+  onRouteChange?: (data: any) => void;
 };
 
-const Routes = ({ routes, type, parameterName }: RoutesProps) => {
+const Routes = (props: RoutesProps) => {
+  const { routes, type, parameterName, onRouteChange } = props;
   const [activeRoute, setActiveRoute] = useState(routes[0].path);
 
   // Atualiza o _activeRoute
@@ -66,6 +70,7 @@ const Routes = ({ routes, type, parameterName }: RoutesProps) => {
   const routeParamName = parameterName
     ? parameterName
     : _alemRouteParameterName;
+
   const routeType = type || "URLBased";
 
   const [seq, setSeq] = useState(0);
@@ -80,10 +85,38 @@ const Routes = ({ routes, type, parameterName }: RoutesProps) => {
     }
   }, [seq]);
 
+  //onRouteChange
+  useEffect(() => {
+    // console.log("11111111111");
+    // if (onRouteChange) {
+    //   console.log("22222222", activeRoute, parameterName, routes);
+    //   onRouteChange({ activeRoute, parameterName, routes });
+    // }
+
+    // SE Funcionar deu bao!!!!
+    routeUpdateObservable.notify({
+      activeRoute,
+      parameterName: parameterName || "path",
+      routes,
+    });
+  }, [activeRoute, parameterName, routes]);
+
+  // Expose props function
+  const exposeRouteProps = () => {
+    return { activeRoute, parameterName: parameterName || "path", routes };
+  };
+
+  // Exposes
   useEffect(() => {
     // Set navigate method (used globally)
+    // Expose the navigation function
     _alemNavigateFactory((route: string) => {
       setActiveRoute(route);
+    });
+
+    // Expose the route props
+    _alemRegisterGetRoutePropsMethod(() => {
+      return { activeRoute, parameterName: parameterName || "path", routes };
     });
   }, []);
 

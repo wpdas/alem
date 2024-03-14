@@ -1,5 +1,10 @@
 // ALEM Items:
 
+type Route = {
+  path: string;
+  component: () => JSX.Element;
+};
+
 // Expose navigate globally: This is going to be initialized by Route
 // Usado para receber o método "navigate" gerado pelo Rout
 export declare let _alemNavigateMethod: (route: string) => void;
@@ -21,6 +26,16 @@ export declare let _alemRoutes: string[];
 export declare let _alemRouteBlocked: boolean;
 // Rota ativa no momento, vai ser atualizada pelo Routes
 export declare let _activeRoute: "";
+// Recebe a funcao de pegar as propriedades atuais da rota
+export declare let _alemGetRoutePropsMethod: () => {};
+// Registra o metodo de pegar as propriedades da rota
+export declare let _alemRegisterGetRoutePropsMethod: (
+  getRoutePropsMethod: () => {
+    activeRoute: string;
+    parameterName: string;
+    routes: Route[];
+  },
+) => void;
 
 // BOS Below:
 
