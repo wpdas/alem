@@ -5,7 +5,7 @@
 // alemRouteSystemInitialized: used to check if route is ready to be used
 // alemRouteBlocked: used to force navigate to other paths even when the "path=" parameter is present into the URL
 State.init({
-  alemStoreReady: false,
+  alemStoreReady: true,
   alemRouteSystemInitialized: false,
   alemRouteBlocked: true,
   // Some resources can change its behaviour depending of the environment
@@ -21,30 +21,31 @@ State.init({
   alemExternalStylesLoaded: false,
   alemExternalStylesBody: "", // store fonts and css body
   stores: [],
+  _activeRoute: "",
 });
 
 // Load previous store
-if (!state.alemStoreReady) {
-  promisify(
-    () => Storage.privateGet("alem:store"),
-    (storeData) => {
-      // Check if previous storage has data
-      if (Object.keys(storeData).length > 1) {
-        State.update({
-          alemStoreReady: true,
-          ...storeData,
-          stores: storeData?.stores || [],
-        });
-      } else {
-        State.update({ alemStoreReady: true, stores: [] });
-      }
-    },
-    () => {
-      State.update({ alemStoreReady: true, stores: [] });
-    },
-    300,
-  );
-}
+// if (!state.alemStoreReady) {
+//   promisify(
+//     () => Storage.privateGet("alem:store"),
+//     (storeData) => {
+//       // Check if previous storage has data
+//       if (Object.keys(storeData).length > 1) {
+//         State.update({
+//           alemStoreReady: true,
+//           ...storeData,
+//           stores: storeData?.stores || [],
+//         });
+//       } else {
+//         State.update({ alemStoreReady: true, stores: [] });
+//       }
+//     },
+//     () => {
+//       State.update({ alemStoreReady: true, stores: [] });
+//     },
+//     300,
+//   );
+// }
 
 if (!state.alemStoreReady) {
   return <AlemSpinner />;
@@ -88,7 +89,7 @@ const createStore = (storeKey, obj) => {
       stores: updatedStores,
     });
     State.update(updatedState);
-    Storage.privateSet("alem:store", updatedState);
+    // Storage.privateSet("alem:store", updatedState);
   }
 };
 
@@ -121,10 +122,10 @@ const useStore = (storeKey) => {
         State.update(updateParsedObj);
 
         const updatedState = removeAlemPropsFromState({ ...state });
-        Storage.privateSet(
-          "alem:store",
-          removeAlemPropsFromState(updatedState),
-        );
+        // Storage.privateSet(
+        //   "alem:store",
+        //   removeAlemPropsFromState(updatedState),
+        // );
       }
     },
   };
@@ -134,7 +135,7 @@ const useStore = (storeKey) => {
  * clearStore - State Management
  */
 const clearStore = () => {
-  Storage.privateSet("alem:store", {});
+  // Storage.privateSet("alem:store", {});
 };
 
 /**
