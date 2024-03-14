@@ -4,6 +4,21 @@ type Route = {
   component: () => JSX.Element;
 };
 
+/**
+ * Defines how the routes will behave
+ *
+ * `URLBased`: Update the URL and reload/load page
+ * `ContentBased`: Doesn't update the URL and doesn't reload page
+ *
+ * E.g.:
+ * ```
+ * const HomeRoute = createRoute("home", HomePage);
+ * const ProfileRoute = createRoute("profile", ProfilePage);
+ * return <Routes routes={[HomeRoute, ProfileRoute]} type="URLBased" />;
+ * ```
+ */
+export type RouteType = "URLBased" | "ContentBased";
+
 // BOS Below:
 
 // Bos

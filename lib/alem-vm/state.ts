@@ -2,7 +2,15 @@
  * Todos os items do state inicial
  */
 
-import { Route, State, Storage, asyncFetch, props, state } from "./alem-vm";
+import {
+  Route,
+  RouteType,
+  State,
+  Storage,
+  asyncFetch,
+  props,
+  state,
+} from "./alem-vm";
 
 /**
  * Update the alem state
@@ -21,12 +29,22 @@ const updateAlemState = (updatedState: Record<string, any>) => {
  * Get alem state
  * @returns
  */
-const alemState = () => state.alem as typeof StateInitialBody.alem;
+const alemState = () => state.alem;
 
 const StateInitialBody = {
   alem: {
+    // ==================================== Configs ====================================
+    /**
+     * During development, if the route is of type ContentBased, it will return to the
+     * first registered route every time a file is changed. This property enables or
+     * disables this behavior.
+     */
+    alemConfig_maintainRouteWhenDeveloping: ":::MAINTAIN_ROUTE:::", // boolean
+    alemEnvironment: ":::ENV:::", // production | development
+
     // ==================================== State Management ====================================
-    alemStoreReady: false,
+    // TODO: Se usar o recurso persistencia (criar um config pra isso), deve iniciar "falso" e ser true na logica de carregar dados do localstorage
+    alemStoreReady: true,
     alemStateManagement: {},
     stores: [] as string[],
 
@@ -118,6 +136,32 @@ const StateInitialBody = {
     routeParameterName: "path",
     routes: [],
     routeType: "URLBased", // URLBased | ContentBased
+    routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
+
+    /**
+     * Update Route Parameter Name
+     * @param parameterName
+     */
+    updateRouteParameterName: (parameterName: string) => {
+      updateAlemState({
+        routeParameterName: parameterName,
+      });
+    },
+
+    /**
+     * Update route parameters
+     */
+    updateRouteParameters: (props: {
+      routes: string[];
+      routeType: RouteType;
+      activeRoute: string;
+    }) => {
+      updateAlemState({
+        routes: props.routes || alemState().routes,
+        routeType: props.routeType || alemState().routeType,
+        activeRoute: props.activeRoute || alemState().activeRoute,
+      });
+    },
 
     /**
      * Create Routes
@@ -242,8 +286,6 @@ const StateInitialBody = {
       find();
     },
 
-    alemEnvironment: ":::ENV:::", // production | development
-
     /**
      * Is Development?
      */
@@ -258,9 +300,10 @@ export type Alem = typeof StateInitialBody.alem;
 
 State.init(StateInitialBody);
 
-const alemProps = {
+// Props para ser compartilhada com todos os Widgets
+export const alemProps = {
   ...props,
   ...state,
 };
 
-// TODO: Load previous store
+// TODO: (Store -> Ser usar persistencia) Load previous store
