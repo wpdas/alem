@@ -29,7 +29,7 @@ const Routes = (props: RoutesProps) => {
     }
   }, []);
 
-  const { routeParameterName, routeType } = alem;
+  const { routeParameterName, routeType, activeRoute } = alem;
 
   const checkIfPathIsIncludedToRoutes = (routePath) => {
     let pathFound = false;
@@ -45,62 +45,43 @@ const Routes = (props: RoutesProps) => {
     return pathFound;
   };
 
-  // BOS.props
-  const bosProps = props;
+  useEffect(() => {
+    // BOS.props
+    const bosProps = props;
 
-  // ContentBased config only: should maintain the current route over refreshes?
-  const maintainRoutesWhenDeveloping =
-    alem.isDevelopment && alem.alemConfig_maintainRouteWhenDeveloping;
+    // ContentBased config only: should maintain the current route over refreshes?
+    const maintainRoutesWhenDeveloping =
+      alem.isDevelopment && alem.alemConfig_maintainRouteWhenDeveloping;
 
-  if (routes) {
-    // Check if currentUrlPath exists in the routes list, if not, use
-    // the first element's path
-    let currentUrlPath =
-      bosProps[routeParameterName] &&
-      checkIfPathIsIncludedToRoutes(bosProps[routeParameterName])
-        ? bosProps[routeParameterName]
-        : routes[0].path;
+    if (routes) {
+      // Check if currentUrlPath exists in the routes list, if not, use
+      // the first element's path
+      let currentUrlPath =
+        bosProps[routeParameterName] &&
+        checkIfPathIsIncludedToRoutes(bosProps[routeParameterName])
+          ? bosProps[routeParameterName]
+          : routes[0].path;
 
-    // Updates
-    // List of routes and route type
-    const _routes = routes.map((route) => route.path);
-    const _type = type || "URLBased";
-    let _activeRoute = currentUrlPath;
+      // Updates
+      // List of routes and route type
+      const _routes = routes.map((route) => route.path);
+      const _type = type || "URLBased";
+      let _activeRoute = currentUrlPath;
 
-    alem.updateRoutesAndRouteType(
-      routes.map((route) => route.path),
-      type || "URLBased",
-    );
+      if (!(currentUrlPath && routeType == "URLBased" && alem.routeBlocked)) {
+        _activeRoute = maintainRoutesWhenDeveloping
+          ? activeRoute
+          : routes[0].path;
+      }
 
-    if (!(currentUrlPath && routeType == "URLBased" && alem.routeBlocked)) {
-      _activeRoute = 
+      alem.updateRouteParameters({
+        routes: _routes,
+        routeType: _type,
+        activeRoute: _activeRoute,
+        routeBlocked: true,
+      });
     }
-
-    update({
-      // list routes
-      routes: routes.map((route) => route.path),
-      type: routeType,
-      // [routeParamName]= has priority
-      ...(currentUrlPath && routeType === "URLBased" && state.alemRouteBlocked
-        ? {
-            activeRoute: currentUrlPath,
-          }
-        : {
-            activeRoute:
-              // maintainRoutesWhenDeveloping: If in development and ContentBased type,
-              // maintain the route even when alemRouteSystemInitialized is not initialized?
-              state.alemRouteSystemInitialized || maintainRoutesWhenDeveloping
-                ? activeRoute
-                : routes[0].path,
-          }),
-    });
-
-    // set route ready and block route to give priority to "path="
-    State.update({
-      alemRouteSystemInitialized: true,
-      alemRouteBlocked: true,
-    });
-  }
+  }, [routeParameterName, routeType, activeRoute]);
 
   // Default route
   if (activeRoute === "") {

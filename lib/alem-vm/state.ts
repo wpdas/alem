@@ -2,15 +2,7 @@
  * Todos os items do state inicial
  */
 
-import {
-  Route,
-  RouteType,
-  State,
-  Storage,
-  asyncFetch,
-  props,
-  state,
-} from "./alem-vm";
+import { Route, RouteType, State, asyncFetch, state } from "./alem-vm";
 
 /**
  * Update the alem state
@@ -29,9 +21,9 @@ const updateAlemState = (updatedState: Record<string, any>) => {
  * Get alem state
  * @returns
  */
-const alemState = () => state.alem;
+const alemState = () => state.alem as typeof AlemStateInitialBody.alem;
 
-const StateInitialBody = {
+const AlemStateInitialBody = {
   alem: {
     // ==================================== Configs ====================================
     /**
@@ -47,6 +39,34 @@ const StateInitialBody = {
     alemStoreReady: true,
     alemStateManagement: {},
     stores: [] as string[],
+
+    // ==================================== Routes ====================================
+    activeRoute: "",
+    routeParameterName: "path",
+    routes: [],
+    routeType: "URLBased", // URLBased | ContentBased
+    routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
+
+    // ==================================== APIs ====================================
+    alemExternalStylesLoaded: false,
+    alemExternalStylesBody: "",
+  },
+  // ======= FIM ALEM =======
+
+  /**:::STATE.INIT:::*/
+};
+
+State.init(AlemStateInitialBody);
+
+// Props para ser compartilhada com todos os Widgets
+export const props = {
+  ...props,
+
+  // Alem
+  alem: {
+    // ==================================== State Management ====================================
+
+    // ...state.alem,
 
     /**
      * createStore - State Management
@@ -132,11 +152,6 @@ const StateInitialBody = {
     },
 
     // ==================================== Routes ====================================
-    activeRoute: "",
-    routeParameterName: "path",
-    routes: [],
-    routeType: "URLBased", // URLBased | ContentBased
-    routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
 
     /**
      * Update Route Parameter Name
@@ -152,14 +167,16 @@ const StateInitialBody = {
      * Update route parameters
      */
     updateRouteParameters: (props: {
-      routes: string[];
-      routeType: RouteType;
-      activeRoute: string;
+      routes?: string[];
+      routeType?: RouteType;
+      activeRoute?: string;
+      routeBlocked?: boolean;
     }) => {
       updateAlemState({
         routes: props.routes || alemState().routes,
         routeType: props.routeType || alemState().routeType,
         activeRoute: props.activeRoute || alemState().activeRoute,
+        routeBlocked: props.routeBlocked || alemState().routeBlocked,
       });
     },
 
@@ -209,8 +226,6 @@ const StateInitialBody = {
     },
 
     // ==================================== APIs ====================================
-    alemExternalStylesLoaded: false,
-    alemExternalStylesBody: "",
 
     /**
      * loadExternalStyles: load external fonts and css styles
@@ -291,19 +306,8 @@ const StateInitialBody = {
      */
     isDevelopment: alemState().alemEnvironment === "development",
   },
-  // ======= FIM ALEM =======
-
-  /**:::STATE.INIT:::*/
 };
 
-export type Alem = typeof StateInitialBody.alem;
-
-State.init(StateInitialBody);
-
-// Props para ser compartilhada com todos os Widgets
-export const alemProps = {
-  ...props,
-  ...state,
-};
+export type Alem = any;
 
 // TODO: (Store -> Ser usar persistencia) Load previous store
