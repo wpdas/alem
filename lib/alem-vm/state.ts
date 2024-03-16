@@ -305,6 +305,12 @@ export const props = {
      * Is Development?
      */
     isDevelopment: alemState().alemEnvironment === "development",
+
+    // ==================================== Components|Widgets Code ====================================
+    componentsCode: {
+      /**:::ALEM_COMPONENTS_CODE:::*/
+      /**:::COMPONENTS_CODE:::*/
+    },
   },
 };
 
