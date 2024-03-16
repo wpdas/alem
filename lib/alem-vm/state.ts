@@ -65,8 +65,7 @@ export const props = {
   // Alem
   alem: {
     // ==================================== State Management ====================================
-
-    // ...state.alem,
+    ...state.alem,
 
     /**
      * createStore - State Management
