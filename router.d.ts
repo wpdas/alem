@@ -45,8 +45,9 @@ export declare const Routes: (props: RoutesProps) => JSX.Element | "";
 
 type RouteLinkProps = {
   to: string;
-  children: JSX.Element | string;
+  label: string;
   className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
 };
 
