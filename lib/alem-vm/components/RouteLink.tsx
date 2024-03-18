@@ -29,9 +29,7 @@ export const RouteLink = ({
         style={{ cursor: "pointer", textDecoration: "none" }}
         href={`?${alem.routeParameterName || "path"}=${to}`}
       >
-        {/* Isso quebra porque tem que escapar multiplos ` */}
-        <Widget code={`return (${children})`} />
-        {/* <p>LINK</p> */}
+        {children}
       </a>
     );
   }
