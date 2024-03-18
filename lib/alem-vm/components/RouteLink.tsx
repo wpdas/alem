@@ -18,6 +18,7 @@ export const RouteLink = ({
   onClick,
   alem,
 }: RouteLinkProps) => {
+  console.log("LINKKKKKK:", children);
   if (alem.routeType === "URLBased") {
     if (onClick) {
       onClick();
@@ -26,9 +27,11 @@ export const RouteLink = ({
       <a
         className={className}
         style={{ cursor: "pointer", textDecoration: "none" }}
-        // href={`?${alem.routeParameterName || "path"}=${to}`}
+        href={`?${alem.routeParameterName || "path"}=${to}`}
       >
-        {children}
+        {/* Isso quebra porque tem que escapar multiplos ` */}
+        <Widget code={`return (${children})`} />
+        {/* <p>LINK</p> */}
       </a>
     );
   }
