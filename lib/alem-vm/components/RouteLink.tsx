@@ -26,7 +26,7 @@ export const RouteLink = ({
       <a
         className={className}
         style={{ cursor: "pointer", textDecoration: "none" }}
-        href={`?${alem.routeParameterName || "path"}=${to}`}
+        // href={`?${alem.routeParameterName || "path"}=${to}`}
       >
         {children}
       </a>
