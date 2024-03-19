@@ -1,3 +1,6 @@
+<!-- TODO: Deve ser realocado para hooks-->
+<!-- Funciona globalmente -->
+
 ## Use Params
 
 This hook returns all parameters provided by the URL.

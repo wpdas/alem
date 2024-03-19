@@ -1,3 +1,6 @@
+<!-- TODO: Deve ser realocado para hooks -->
+<!-- Funciona apenas dentro dos filhos do Routes -->
+
 ## Use Location
 
 This hook returns the current location object. It can be useful if you'd like to perform some side effect whenever the current location changes.

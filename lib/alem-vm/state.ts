@@ -25,6 +25,10 @@ const alemState = () => state.alem as typeof AlemStateInitialBody.alem;
 
 const AlemStateInitialBody = {
   alem: {
+    /**
+     * Root project props
+     */
+    rootProps: props,
     // ==================================== Configs ====================================
     /**
      * During development, if the route is of type ContentBased, it will return to the
@@ -40,16 +44,22 @@ const AlemStateInitialBody = {
     alemStateManagement: {},
     stores: [] as string[],
 
-    // ==================================== Routes ====================================
-    activeRoute: "",
-    routeParameterName: "path",
-    routes: [],
-    routeType: "URLBased", // URLBased | ContentBased
-    routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
+    // // ==================================== Routes ====================================
+    // activeRoute: "",
+    // routeParameterName: "path",
+    // routes: [] as string[],
+    // routeType: "URLBased", // URLBased | ContentBased
+    // routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
 
     // ==================================== APIs ====================================
     alemExternalStylesLoaded: false,
     alemExternalStylesBody: "",
+
+    // ==================================== Routes ====================================
+    // routesInitialized: false,
+    // useLocation: () => null,
+
+    // navigate: (route: string) => console.log("TRUCOOO", route),
   },
   // ======= FIM ALEM =======
 
@@ -151,33 +161,54 @@ export const props = {
     },
 
     // ==================================== Routes ====================================
+    // Alguns recursos do Routes vivem no escopo global, outros apenas dentro do componente
+    // Routes
+    // useLocation: () => null,
 
-    /**
-     * Update Route Parameter Name
-     * @param parameterName
-     */
-    updateRouteParameterName: (parameterName: string) => {
-      updateAlemState({
-        routeParameterName: parameterName,
-      });
-    },
+    // navigate: (route: string) => console.log("TRUCOOO", route),
 
-    /**
-     * Update route parameters
-     */
-    updateRouteParameters: (props: {
-      routes?: string[];
-      routeType?: RouteType;
-      activeRoute?: string;
-      routeBlocked?: boolean;
-    }) => {
-      updateAlemState({
-        routes: props.routes || alemState().routes,
-        routeType: props.routeType || alemState().routeType,
-        activeRoute: props.activeRoute || alemState().activeRoute,
-        routeBlocked: props.routeBlocked || alemState().routeBlocked,
-      });
-    },
+    // initializeRoutes: (
+    //   _useLocation: () => void,
+    //   _navigate: (route: string) => void,
+    // ) => {
+    //   if (!alemState().routesInitialized) {
+    //     // console.log("Use Location:", _useLocation, "Navigate:", _navigate);
+    //     // _navigate();
+    //     updateAlemState({
+    //       useLocation: _useLocation,
+    //       // navigate: (route: string) => _navigate(route),
+    //       navigate: (route: string) => console.log(route, "TICO!"),
+    //       routesInitialized: true,
+    //     });
+    //   }
+    // },
+
+    // /**
+    //  * Update Route Parameter Name
+    //  * @param parameterName
+    //  */
+    // updateRouteParameterName: (parameterName: string) => {
+    //   updateAlemState({
+    //     routeParameterName: parameterName,
+    //   });
+    // },
+
+    // /**
+    //  * Update route parameters
+    //  */
+    // updateRouteParameters: (props: {
+    //   routes?: string[];
+    //   routeType?: RouteType;
+    //   activeRoute?: string;
+    //   routeBlocked?: boolean;
+    // }) => {
+    //   updateAlemState({
+    //     routes: props.routes || alemState().routes,
+    //     routeType: props.routeType || alemState().routeType,
+    //     activeRoute: props.activeRoute || alemState().activeRoute,
+    //     routeBlocked: props.routeBlocked || alemState().routeBlocked,
+    //   });
+    // },
 
     /**
      * Create Routes
@@ -187,40 +218,40 @@ export const props = {
      */
     createRoute: (path, component) => ({ path, component }) as Route,
 
-    /**
-     * Programmatically navigate to available routes. The URL will not be affected!
-     */
-    navigate: (route) => {
-      if (alemState().routes.includes[route]) {
-        updateAlemState({ activeRoute: route });
-      }
-    },
+    // /**
+    //  * Programmatically navigate to available routes. The URL will not be affected!
+    //  */
+    // navigate: (route: string) => {
+    //   if (alemState().routes.includes(route)) {
+    //     updateAlemState({ activeRoute: route });
+    //   }
+    // },
 
-    /**
-     * This hook returns the current location object.
-     * It can be useful if you'd like to perform some side effect whenever the current location changes.
-     * @returns
-     */
-    useLocation: () => {
-      return {
-        pathname: alemState().activeRoute,
-        routes: alemState().routes,
-        isRoutesReady: alemState().routes && alemState().routes.length > 0,
-      };
-    },
+    // /**
+    //  * This hook returns the current location object.
+    //  * It can be useful if you'd like to perform some side effect whenever the current location changes.
+    //  * @returns
+    //  */
+    // useLocation: () => {
+    //   return {
+    //     pathname: alemState().activeRoute,
+    //     routes: alemState().routes,
+    //     isRoutesReady: alemState().routes && alemState().routes.length > 0,
+    //   };
+    // },
 
     /**
      * All parameters provided by the URL.
      * @returns
      */
-    useParams: (removeRoutePathParam: false) => {
+    useParams: () => {
       // Remove "path" (being used internally)
-      let params = props;
-      if (removeRoutePathParam) {
-        if (Object.keys(params).includes(alemState().routeParameterName)) {
-          delete params[alemState().routeParameterName];
-        }
-      }
+      let params = alemState().rootProps;
+      // if (removeRoutePathParam) {
+      //   if (Object.keys(params).includes(alemState().routeParameterName)) {
+      //     delete params[alemState().routeParameterName];
+      //   }
+      // }
       return params;
     },
 
