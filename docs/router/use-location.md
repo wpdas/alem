@@ -1,4 +1,4 @@
-<!-- TODO: Deve ser realocado para hooks -->
+<!-- TODO: Mudar para getLocation() -->
 <!-- Funciona apenas dentro dos filhos do Routes -->
 
 ## Use Location
