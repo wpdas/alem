@@ -1,6 +1,10 @@
 <!-- TODO: Mudar para getLocation() -->
 <!-- Funciona apenas dentro dos filhos do Routes -->
 
+<!-- Documentar o seguinte: Prefira usar getLocation().pathname <recurso> para evitar conflitos de nomes após a compilação. -->
+<!-- ou embrulhe o recurso com a função na qual ele está sendo usado. -->
+<!-- TODO: Pensar numa forma de corrigir isso nas proximas versões -->
+
 ## Use Location
 
 This hook returns the current location object. It can be useful if you'd like to perform some side effect whenever the current location changes.
