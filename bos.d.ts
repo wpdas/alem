@@ -11,6 +11,7 @@ export declare var context: BosContext;
 export declare const Widget: (params: {
   code?: string;
   src?: string;
+  loading?: any;
   props: object;
 }) => React.ReactNode;
 
