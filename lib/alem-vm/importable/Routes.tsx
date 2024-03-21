@@ -49,6 +49,7 @@ const Routes = (props: RoutesProps) => {
   }, []);
 
   const { routeParameterName, routeType, activeRoute } = alemRoutes;
+  const routeParamName = parameterName || routeParameterName;
 
   const checkIfPathIsIncludedToRoutes = (routePath: string) => {
     let pathFound = false;
@@ -76,23 +77,28 @@ const Routes = (props: RoutesProps) => {
       // Check if currentUrlPath exists in the routes list, if not, use
       // the first element's path
       let currentUrlPath =
-        bosProps[routeParameterName] &&
-        checkIfPathIsIncludedToRoutes(bosProps[routeParameterName])
-          ? bosProps[routeParameterName]
+        bosProps[routeParamName] &&
+        checkIfPathIsIncludedToRoutes(bosProps[routeParamName])
+          ? bosProps[routeParamName]
           : routes[0].path;
+
+      console.log(currentUrlPath, routeParamName);
 
       // Updates
       // List of routes and route type
       const _routes = routes.map((route: Route) => route.path);
-      // console.log("ROUTES================>:", _routes, alemRoutes);
       const _type = type || "URLBased";
       let _activeRoute = initialRoute || currentUrlPath;
 
-      if (!(currentUrlPath && routeType == "URLBased" && alem.routeBlocked)) {
+      if (
+        !(currentUrlPath && routeType == "URLBased" && alemRoutes.routeBlocked)
+      ) {
         _activeRoute = maintainRoutesWhenDeveloping
           ? initialRoute || activeRoute
           : routes[0].path;
       }
+
+      console.log(_activeRoute, alemRoutes.routeBlocked);
 
       // Se nenhuma rota está ativa, define o primeiro item das rotas como o ativo
       if (!_activeRoute) {
