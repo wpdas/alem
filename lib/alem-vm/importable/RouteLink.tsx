@@ -1,9 +1,15 @@
-import { LinkProps, useContext } from "../alem-vm";
+import { LinkProps, navigate, useContext } from "../alem-vm";
 
 /**
  * Link to access routes.
  */
-export const Link = ({ to, label, className, style, onClick }: LinkProps) => {
+export const RouteLink = ({
+  to,
+  label,
+  className,
+  style,
+  onClick,
+}: LinkProps) => {
   const routeContext = useContext<any>("alemRoutesProvider");
   if (!routeContext) {
     console.error("Link component is being used without Routes on top of it.");
@@ -12,6 +18,10 @@ export const Link = ({ to, label, className, style, onClick }: LinkProps) => {
   const onClickHandler = () => {
     if (onClick) {
       onClick();
+    }
+
+    if (routeContext.alemRoutes.routeType === "ContentBased") {
+      navigate(to);
     }
   };
 

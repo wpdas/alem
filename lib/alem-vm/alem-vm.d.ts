@@ -49,7 +49,7 @@ type LinkProps = {
 /**
  * Link to access routes.
  */
-export declare const Link: ({
+export declare const RouteLink: ({
   to,
   label,
   className,
