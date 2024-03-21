@@ -66,6 +66,7 @@ const RoutesProvider = () => {
           routeType: props.routeType || alemRoutesState().routeType,
           activeRoute: props.activeRoute || alemRoutesState().activeRoute,
           routeBlocked: props.routeBlocked || alemRoutesState().routeBlocked,
+          routesInitialized: true,
         });
       },
 
@@ -91,12 +92,10 @@ const RoutesProvider = () => {
 
       /**
        * This hook returns the current location object.
-       * It can be useful if you'd like to perform some side effect whenever the current location changes.
        * @returns
        */
       getLocation: () => {
         return {
-          routeParameterName: alemRoutesState().routeParameterName,
           pathname: alemRoutesState().activeRoute,
           routes: alemRoutesState().routes,
           isRoutesReady:

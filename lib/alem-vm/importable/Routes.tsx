@@ -96,12 +96,6 @@ const Routes = (props: RoutesProps) => {
       }
 
       // Comes from RoutesProvider
-      console.log("Routes =======>", {
-        routes: _routes,
-        routeType: _type,
-        activeRoute: _activeRoute,
-        routeBlocked: true,
-      });
       alemRoutes.updateRouteParameters({
         routes: _routes,
         routeType: _type,

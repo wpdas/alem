@@ -1,7 +1,9 @@
 import { State, props, state } from "../alem-vm";
 
 /**
- * Create context for statefull component and send context props to its children
+ * Create context for statefull component and send context props to its children.
+ * This can be useful if you'd like to perform some side effect whenever some context data changes.
+ *
  * @param contextKey Context key name (must be unique)
  * @param defaultStateValue Default values to be inserted to the Component's State
  * @param defaultPropsValue Default values to be inserted to the Component's props
