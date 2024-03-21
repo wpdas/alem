@@ -95,10 +95,14 @@ export declare const useParams: () => {
 };
 
 /**
- * This hook returns the current location object.
+ * This returns the current location object.
  * This can be useful if you'd like to perform some side effect whenever the current location changes.
  */
-export declare const useLocation: () => {
+export declare const getLocation: () => {
+  /**
+   * Route parameter name. This is used as the prop to define which route the user is on.
+   */
+  routeParameterName: string;
   /**
    * The path of the current Route.
    */

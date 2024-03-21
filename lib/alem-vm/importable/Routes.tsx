@@ -90,7 +90,18 @@ const Routes = (props: RoutesProps) => {
           : routes[0].path;
       }
 
+      // Se nenhuma rota está ativa, define o primeiro item das rotas como o ativo
+      if (!_activeRoute) {
+        _activeRoute = routes[0].path;
+      }
+
       // Comes from RoutesProvider
+      console.log("Routes =======>", {
+        routes: _routes,
+        routeType: _type,
+        activeRoute: _activeRoute,
+        routeBlocked: true,
+      });
       alemRoutes.updateRouteParameters({
         routes: _routes,
         routeType: _type,

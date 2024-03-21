@@ -15,6 +15,8 @@ export const RouteLink = ({
     console.error("Link component is being used without Routes on top of it.");
   }
 
+  console.log("VENDO:", routeContext);
+
   const onClickHandler = () => {
     if (onClick) {
       onClick();
@@ -26,6 +28,7 @@ export const RouteLink = ({
   };
 
   if (routeContext.alemRoutes.routeType === "URLBased") {
+    console.log("BUTICO LOKO ===> URLBased");
     return (
       <a
         onClick={onClickHandler}
@@ -37,6 +40,8 @@ export const RouteLink = ({
       </a>
     );
   }
+
+  console.log("BRABO ===> ContentBased", to);
 
   return (
     <a

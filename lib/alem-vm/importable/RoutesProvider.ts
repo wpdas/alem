@@ -94,8 +94,9 @@ const RoutesProvider = () => {
        * It can be useful if you'd like to perform some side effect whenever the current location changes.
        * @returns
        */
-      useLocation: () => {
+      getLocation: () => {
         return {
+          routeParameterName: alemRoutesState().routeParameterName,
           pathname: alemRoutesState().activeRoute,
           routes: alemRoutesState().routes,
           isRoutesReady:
