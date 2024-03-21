@@ -1,21 +1,29 @@
 // TODO: Documentar isso
 
 // ou useContext
-
-import { State, props, state } from "./alem-vm";
+import { State, props, state } from "alem";
 
 // useContext
-const createContext = (
+// ATENCAO: Deve ser usado somente por statefull components
+const createContext = <S extends {}, P extends {}>(
   contextKey: string,
-  defaultStateValue: {},
-  defaultPropsValue: {} | void,
+  defaultStateValue: S,
+  defaultPropsValue: P | void,
 ) => {
-  console.log("Create Context Check", state);
   if (!state || (state[contextKey] && !state[contextKey].initialized)) {
+    const stateKeys = Object.keys(defaultStateValue);
+    const propsKeys = Object.keys(defaultPropsValue || {});
+    let mainKeys = [...stateKeys, ...propsKeys];
+
+    // Remove duplicate
+    mainKeys = mainKeys.filter(
+      (item, index) => mainKeys.indexOf(item) === index,
+    );
+
     State.update({
       ...state,
       ...defaultStateValue,
-      [contextKey]: { initialized: true },
+      [contextKey]: { initialized: true, keys: mainKeys },
     });
   }
 
@@ -27,3 +35,5 @@ const createContext = (
 };
 
 export default createContext;
+
+// TODO: talvez criar um createStore / useStore usando a mesma estrutura mas com localstorage?
