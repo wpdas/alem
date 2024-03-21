@@ -82,8 +82,6 @@ const Routes = (props: RoutesProps) => {
           ? bosProps[routeParamName]
           : routes[0].path;
 
-      console.log(currentUrlPath, routeParamName);
-
       // Updates
       // List of routes and route type
       const _routes = routes.map((route: Route) => route.path);
