@@ -1,8 +1,61 @@
 // ALEM Items:
+
+// ======= Routes =======
+
+/**
+ * Provides the necessary states and props for Routes.
+ */
+export declare const RoutesProvider: () => void;
+
 type Route = {
   path: string;
   component: () => JSX.Element;
 };
+
+type RoutesProps = {
+  routes: Route[];
+  /**
+   * Defines how the routes will behave. Default is `URLBased`.
+   *
+   * `URLBased`: Update the URL and reload/load page;
+   * `ContentBased`: Doesn't update the URL and doesn't reload page.
+   *
+   * Consider using `URLBased` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
+   */
+  type?: RouteType;
+  /**
+   * Parameter name to store current route name. Default is "path".
+   */
+  parameterName?: string;
+  alem?: any;
+  alemRoutes?: any;
+};
+
+/**
+ * Init routes
+ * @param props
+ * @returns
+ */
+export declare const Routes: (props: RoutesProps) => React.JSX.Element;
+
+type LinkProps = {
+  to: string;
+  label: string;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+};
+
+/**
+ * Link to access routes.
+ */
+export declare const Link: ({
+  to,
+  label,
+  className,
+  style,
+  onClick,
+}: LinkProps) => React.JSX.Element;
 
 /**
  * Defines how the routes will behave
@@ -18,6 +71,154 @@ type Route = {
  * ```
  */
 export type RouteType = "URLBased" | "ContentBased";
+
+/**
+ * Go programmatically to the route ("route Path").
+ *
+ * This is NOT going to update the URL path.
+ */
+export declare const navigate: (routePath: string) => void;
+
+/**
+ * Create Route child
+ */
+export declare const createRoute: (
+  path: string,
+  component: () => JSX.Element,
+) => Route;
+
+/**
+ * Get URL params and returns an object of key/value pairs objects
+ */
+export declare const useParams: () => {
+  [values: string]: any;
+};
+
+/**
+ * This hook returns the current location object.
+ * This can be useful if you'd like to perform some side effect whenever the current location changes.
+ */
+export declare const useLocation: () => {
+  /**
+   * The path of the current Route.
+   */
+  pathname: string;
+  /**
+   * Routes available
+   */
+  routes: string[];
+  /**
+   * Is routes ready?
+   */
+  isRoutesReady: boolean;
+};
+
+// ======= Context =======
+
+/**
+ * Create context for statefull component and send context props to its children
+ * @param contextKey Context key name (must be unique)
+ * @param defaultStateValue Default values to be inserted to the Component's State
+ * @param defaultPropsValue Default values to be inserted to the Component's props
+ */
+export declare const createContext: <S extends {}, P extends {}>(
+  contextKey: string,
+  defaultStateValue: S,
+  defaultPropsValue: void | P,
+) => void;
+
+/**
+ * Use context. This is helpful to get a previous created context's props.
+ *
+ * @param contextKey Context key name
+ * @returns
+ */
+export declare const useContext: <D>(contextKey: string) => D | undefined;
+
+// ======= State Management =======
+
+/**
+ * State Management - useStore Hook
+ *
+ * ```
+ * // Creating
+ * createStore('myStore', {age: 12, name: 'Liz'});
+ * // Custom Hook - Reading
+ * const useMyStore = () => useStore('myStore');
+ * // Reading from custom hook
+ * const { age, name, update } = useMyStore();
+ * // Updating / Creating new value
+ * update({ age: 15, eyes: 'dark' });
+ * ```
+ */
+export declare const useStore: <T>(storeKey: string) => {
+  update: (updateState: T) => void;
+} & T;
+
+/**
+ * State Management - create store
+ */
+export declare const createStore: (storeKey: string, initialState: {}) => void;
+
+/**
+ * State Management - clear all store data
+ */
+export declare const clearStore: () => void;
+
+/**
+ * Return all store items with their data
+ */
+export declare const getStore: () => Record<string, any>;
+
+// ======= APIs =======
+
+/**
+ * Load external fonts and css files using their URLs.
+ *
+ * You can use any fonts source.
+ *
+ * E.g.: Fonts source: https://www.cdnfonts.com/
+ *
+ *
+ * Usage example:
+ *
+ * ```
+ * const stylesLoaded = loadExternalStyles([
+ * "https://fonts.cdnfonts.com/css/display",
+ * "https://cdn.jsdelivr.net/gh/codemirror/codemirror5/lib/codemirror.css",
+ * ]);
+ *
+ * console.log(stylesLoaded); // true / false
+ * ```
+ *
+ * @returns {boolean} styles files loaded?
+ */
+export declare const loadExternalStyles: (fontURLs: string[]) => boolean;
+
+/**
+ * Call resolve or reject for a given caller
+ * E.g:
+ * ```
+ * const getStorage = () => Storage.get('my-key');
+ * const resolve = (storageData) => console.log(storageData);
+ * const reject = () => console.log('Error');
+ * const timeout = 5000; // 5sec
+ * promisify(getStorage, resolve, reject, timeout);
+ * ```
+ *
+ * Default timeout is 10 seconds
+ */
+export declare const promisify: (
+  caller: () => any,
+  resolve: (data: any) => void,
+  reject?: () => void,
+  _timeout?: number,
+) => void;
+
+/**
+ * Flag saying if it's a development environment
+ */
+export declare const isDevelopment: boolean;
 
 // BOS Below:
 

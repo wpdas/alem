@@ -1,10 +1,11 @@
-// TODO: Documentar isso
+import { State, props, state } from "../alem-vm";
 
-// ou useContext
-import { State, props, state } from "alem";
-
-// useContext
-// ATENCAO: Deve ser usado somente por statefull components
+/**
+ * Create context for statefull component and send context props to its children
+ * @param contextKey Context key name (must be unique)
+ * @param defaultStateValue Default values to be inserted to the Component's State
+ * @param defaultPropsValue Default values to be inserted to the Component's props
+ */
 const createContext = <S extends {}, P extends {}>(
   contextKey: string,
   defaultStateValue: S,
@@ -35,5 +36,3 @@ const createContext = <S extends {}, P extends {}>(
 };
 
 export default createContext;
-
-// TODO: talvez criar um createStore / useStore usando a mesma estrutura mas com localstorage?

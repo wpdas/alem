@@ -1,5 +1,4 @@
 import { Route, RouteType, useEffect } from "../alem-vm";
-import { Alem } from "../state";
 
 type RoutesProps = {
   routes: Route[];
@@ -16,25 +15,41 @@ type RoutesProps = {
    * Parameter name to store current route name. Default is "path".
    */
   parameterName?: string;
-  alem: Alem;
+  alem?: any;
+  alemRoutes?: any;
 };
 
+/**
+ * Init routes
+ * @param props
+ * @returns
+ */
 const Routes = (props: RoutesProps) => {
-  const { routes, type, parameterName, alem } = props;
+  const { routes, type, parameterName, alem, alemRoutes } = props;
+
+  // Checa se sao rotas validas
+  useEffect(() => {
+    routes.forEach((route) => {
+      if (!route.component) {
+        console.error(`Routes: Invalid component for route "${route.path}"`);
+      }
+    });
+  }, [routes]);
 
   // Update the parameter name if needed
   useEffect(() => {
     if (parameterName && parameterName !== alem.routeParameterName) {
-      alem.updateRouteParameterName(parameterName);
+      // Comes from RoutesProvider
+      alemRoutes.updateRouteParameterName(parameterName);
     }
   }, []);
 
-  const { routeParameterName, routeType, activeRoute } = alem;
+  const { routeParameterName, routeType, activeRoute } = alemRoutes;
 
-  const checkIfPathIsIncludedToRoutes = (routePath) => {
+  const checkIfPathIsIncludedToRoutes = (routePath: string) => {
     let pathFound = false;
     if (routes) {
-      routes.forEach((routeItem) => {
+      routes.forEach((routeItem: Route) => {
         if (pathFound) return;
 
         if (!pathFound) {
@@ -47,7 +62,7 @@ const Routes = (props: RoutesProps) => {
 
   useEffect(() => {
     // BOS.props
-    const bosProps = props;
+    const bosProps = alem.rootProps;
 
     // ContentBased config only: should maintain the current route over refreshes?
     const maintainRoutesWhenDeveloping =
@@ -64,7 +79,8 @@ const Routes = (props: RoutesProps) => {
 
       // Updates
       // List of routes and route type
-      const _routes = routes.map((route) => route.path);
+      const _routes = routes.map((route: Route) => route.path);
+      // console.log("ROUTES================>:", _routes, alemRoutes);
       const _type = type || "URLBased";
       let _activeRoute = currentUrlPath;
 
@@ -74,14 +90,15 @@ const Routes = (props: RoutesProps) => {
           : routes[0].path;
       }
 
-      alem.updateRouteParameters({
+      // Comes from RoutesProvider
+      alemRoutes.updateRouteParameters({
         routes: _routes,
         routeType: _type,
         activeRoute: _activeRoute,
         routeBlocked: true,
       });
     }
-  }, [routeParameterName, routeType, activeRoute]);
+  }, [routeType]);
 
   // Default route
   if (activeRoute === "") {
@@ -91,14 +108,14 @@ const Routes = (props: RoutesProps) => {
 
   // Route by route path
   const Component = routes.find(
-    (route) => route.path === activeRoute,
+    (route: Route) => route.path === activeRoute,
   )?.component;
   if (Component) {
     return <Component />;
   }
 
   // Empty
-  return "";
+  return <></>;
 };
 
 export default Routes;

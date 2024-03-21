@@ -25,27 +25,27 @@ State.init({
 });
 
 // Load previous store
-// if (!state.alemStoreReady) {
-//   promisify(
-//     () => Storage.privateGet("alem:store"),
-//     (storeData) => {
-//       // Check if previous storage has data
-//       if (Object.keys(storeData).length > 1) {
-//         State.update({
-//           alemStoreReady: true,
-//           ...storeData,
-//           stores: storeData?.stores || [],
-//         });
-//       } else {
-//         State.update({ alemStoreReady: true, stores: [] });
-//       }
-//     },
-//     () => {
-//       State.update({ alemStoreReady: true, stores: [] });
-//     },
-//     300,
-//   );
-// }
+if (!state.alemStoreReady) {
+  promisify(
+    () => Storage.privateGet("alem:store"),
+    (storeData) => {
+      // Check if previous storage has data
+      if (Object.keys(storeData).length > 1) {
+        State.update({
+          alemStoreReady: true,
+          ...storeData,
+          stores: storeData?.stores || [],
+        });
+      } else {
+        State.update({ alemStoreReady: true, stores: [] });
+      }
+    },
+    () => {
+      State.update({ alemStoreReady: true, stores: [] });
+    },
+    300,
+  );
+}
 
 if (!state.alemStoreReady) {
   return <AlemSpinner />;
