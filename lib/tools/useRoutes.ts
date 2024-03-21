@@ -1,4 +1,4 @@
-import { useContext } from "../alem-vm";
+import { useContext } from "alem";
 
 type UseRoutesProps = {
   alemRoutes: {

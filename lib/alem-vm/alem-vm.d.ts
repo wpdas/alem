@@ -27,6 +27,10 @@ type RoutesProps = {
    * Parameter name to store current route name. Default is "path".
    */
   parameterName?: string;
+  /**
+   * Initial route on which you want to start.
+   */
+  initialRoute?: string;
   alem?: any;
   alemRoutes?: any;
 };
@@ -113,7 +117,7 @@ export declare const getLocation: () => {
 };
 
 /**
- * Use Routes Context props
+ * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
  * @returns
  */
 export declare const useRoutes: () => {

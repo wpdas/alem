@@ -15,6 +15,10 @@ type RoutesProps = {
    * Parameter name to store current route name. Default is "path".
    */
   parameterName?: string;
+  /**
+   * Initial route on which you want to start.
+   */
+  initialRoute?: string;
   alem?: any;
   alemRoutes?: any;
 };
@@ -25,7 +29,7 @@ type RoutesProps = {
  * @returns
  */
 const Routes = (props: RoutesProps) => {
-  const { routes, type, parameterName, alem, alemRoutes } = props;
+  const { routes, type, parameterName, alem, alemRoutes, initialRoute } = props;
 
   // Checa se sao rotas validas
   useEffect(() => {
@@ -82,11 +86,11 @@ const Routes = (props: RoutesProps) => {
       const _routes = routes.map((route: Route) => route.path);
       // console.log("ROUTES================>:", _routes, alemRoutes);
       const _type = type || "URLBased";
-      let _activeRoute = currentUrlPath;
+      let _activeRoute = initialRoute || currentUrlPath;
 
       if (!(currentUrlPath && routeType == "URLBased" && alem.routeBlocked)) {
         _activeRoute = maintainRoutesWhenDeveloping
-          ? activeRoute
+          ? initialRoute || activeRoute
           : routes[0].path;
       }
 
