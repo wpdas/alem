@@ -71,7 +71,7 @@ export function NavigationWrapper(props) {
           }}
         >
           <img src={logo} height={32} />
-          <p style={{ marginBottom: 0 }}>Alem</p>
+          <p style={{ marginBottom: 0 }}>Além</p>
         </Link>
         <div className="navigation-section"></div>
         <div className="user-section">
