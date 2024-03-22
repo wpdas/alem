@@ -7,3 +7,4 @@
 - `createContext`, `useContext` feature - ✔
 - E2E Tests
 - Add support to tsconfig.json `baseUrl` and `paths`
+- Put a file validator (tsx, jsx) above the Além server so that when it breaks, it doesn't break the main server/compiler
