@@ -44,10 +44,11 @@ export declare const Router: (props: RouterProps) => React.JSX.Element;
 
 type LinkProps = {
   to: string;
-  label: string;
+  label?: string;
   className?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
+  children?: JSX.Element | JSX.Element[] | string | number;
 };
 
 /**

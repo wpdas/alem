@@ -13,7 +13,7 @@ Use `useLocation().isRoutesReady` to get to know when the routes are ready to be
 
 ```ts
 // http://127.0.0.1:8080/alem-lib.near/widget/Index?path=profile
-import { useLocation } from "alem/hooks";
+import { useLocation } from "alem";
 
 export const SomeComponent = () => {
   const location = useLocation();

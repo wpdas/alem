@@ -24,11 +24,7 @@
     "lib",
     "main.js",
     "gateway/dist/*",
-    "api.d.ts",
-    "bos.d.ts",
-    "index.d.ts",
-    "router.d.ts",
-    "store.d.ts"
+    "index.d.ts"
   ],
   "scripts": {
     "build-gateway": "cd ./gateway && npm install && npm run build",

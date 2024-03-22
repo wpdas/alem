@@ -9,6 +9,7 @@ export const RouteLink = ({
   className,
   style,
   onClick,
+  children,
 }: LinkProps) => {
   const routeContext = useContext<any>("alemRouterProvider");
   if (!routeContext) {
@@ -33,7 +34,7 @@ export const RouteLink = ({
         style={{ cursor: "pointer", textDecoration: "none", ...style }}
         href={`?${routeContext.alemRoutes.routeParameterName || "path"}=${to}`}
       >
-        {label}
+        {label || children}
       </a>
     );
   }
@@ -44,7 +45,7 @@ export const RouteLink = ({
       className={className}
       onClick={onClickHandler}
     >
-      {label}
+      {label || children}
     </a>
   );
 };
