@@ -16,9 +16,9 @@ type UseRoutesProps = {
  * @returns
  */
 const useRoutes = () => {
-  const contextData = useContext<UseRoutesProps>("alemRoutesProvider");
+  const contextData = useContext<UseRoutesProps>("alemRouterProvider");
   if (!contextData) {
-    console.error("useRoutes: You need to call `RoutesProvider()` first.");
+    console.error("useRoutes: You need to call `RouterProvider()` first.");
   }
   return contextData!.alemRoutes;
 };

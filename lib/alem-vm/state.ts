@@ -38,28 +38,9 @@ const AlemStateInitialBody = {
     alemConfig_maintainRouteWhenDeveloping: ":::MAINTAIN_ROUTE:::", // boolean
     alemEnvironment: ":::ENV:::", // production | development
 
-    // ==================================== State Management ====================================
-    // TODO: Se usar o recurso persistencia (criar um config pra isso), deve iniciar "falso" e ser true na logica de carregar dados do localstorage
-    alemStoreReady: true,
-    alemStateManagement: {},
-    stores: [] as string[],
-
-    // // ==================================== Routes ====================================
-    // activeRoute: "",
-    // routeParameterName: "path",
-    // routes: [] as string[],
-    // routeType: "URLBased", // URLBased | ContentBased
-    // routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
-
     // ==================================== APIs ====================================
     alemExternalStylesLoaded: false,
     alemExternalStylesBody: "",
-
-    // ==================================== Routes ====================================
-    // routesInitialized: false,
-    // useLocation: () => null,
-
-    // navigate: (route: string) => console.log("TRUCOOO", route),
   },
   // ======= FIM ALEM =======
 
@@ -74,141 +55,10 @@ export const props = {
 
   // Alem
   alem: {
-    // ==================================== State Management ====================================
     ...state.alem,
-
-    /**
-     * createStore - State Management
-     */
-    createStore: (storeKey: string, obj) => {
-      // store was not initialized yet & obj is available...
-      if (
-        !alemState().stores.includes(storeKey) &&
-        obj &&
-        alemState().alemStoreReady
-      ) {
-        const initParsedObj = {};
-        Object.keys(obj).forEach(
-          (key) =>
-            (initParsedObj[`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}${key}`] =
-              obj[key]),
-        );
-
-        const updatedStores = alemState().stores
-          ? [...alemState().stores, storeKey]
-          : [storeKey];
-
-        updateAlemState({
-          alemStateManagement: {
-            ...alemState().alemStateManagement,
-            ...initParsedObj,
-          },
-          stores: updatedStores,
-        });
-        // Storage.privateSet("alem:store", updatedState);
-      }
-    },
-
-    /**
-     * useStore - State Management
-     */
-    useStore: (storeKey) => {
-      // return its "values" and "update" method
-      const getParsedObj = {};
-      Object.keys(alemState().alemStateManagement).forEach((key) => {
-        if (key.includes(`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}`)) {
-          getParsedObj[
-            key.replace(`${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}`, "")
-          ] = alemState().alemStateManagement[key];
-        }
-      });
-      return {
-        // values
-        ...getParsedObj,
-        // update method
-        update: (updateObj) => {
-          if (alemState().alemStoreReady) {
-            const updateParsedObj = {};
-            Object.keys(updateObj).forEach(
-              (key) =>
-                (updateParsedObj[
-                  `${storeKey}${ALEM_USESTORE_KEY_SEPARATOR}${key}`
-                ] = updateObj[key]),
-            );
-
-            updateAlemState({
-              alemStateManagement: {
-                ...alemState().alemStateManagement,
-                ...updateParsedObj,
-              },
-            });
-
-            // Storage.privateSet(
-            //   "alem:store",
-            //   removeAlemPropsFromState(updatedState),
-            // );
-          }
-        },
-      };
-    },
-
-    /**
-     * clearStore - State Management
-     */
-    clearStore: () => {
-      updateAlemState({ alemStateManagement: {} });
-      // Storage.privateSet("alem:store", {});
-    },
 
     // ==================================== Routes ====================================
     // Alguns recursos do Routes vivem no escopo global, outros apenas dentro do componente
-    // Routes
-    // useLocation: () => null,
-
-    // navigate: (route: string) => console.log("TRUCOOO", route),
-
-    // initializeRoutes: (
-    //   _useLocation: () => void,
-    //   _navigate: (route: string) => void,
-    // ) => {
-    //   if (!alemState().routesInitialized) {
-    //     // console.log("Use Location:", _useLocation, "Navigate:", _navigate);
-    //     // _navigate();
-    //     updateAlemState({
-    //       useLocation: _useLocation,
-    //       // navigate: (route: string) => _navigate(route),
-    //       navigate: (route: string) => console.log(route, "TICO!"),
-    //       routesInitialized: true,
-    //     });
-    //   }
-    // },
-
-    // /**
-    //  * Update Route Parameter Name
-    //  * @param parameterName
-    //  */
-    // updateRouteParameterName: (parameterName: string) => {
-    //   updateAlemState({
-    //     routeParameterName: parameterName,
-    //   });
-    // },
-
-    // /**
-    //  * Update route parameters
-    //  */
-    // updateRouteParameters: (props: {
-    //   routes?: string[];
-    //   routeType?: RouteType;
-    //   activeRoute?: string;
-    //   routeBlocked?: boolean;
-    // }) => {
-    //   updateAlemState({
-    //     routes: props.routes || alemState().routes,
-    //     routeType: props.routeType || alemState().routeType,
-    //     activeRoute: props.activeRoute || alemState().activeRoute,
-    //     routeBlocked: props.routeBlocked || alemState().routeBlocked,
-    //   });
-    // },
 
     /**
      * Create Routes
@@ -218,40 +68,12 @@ export const props = {
      */
     createRoute: (path, component) => ({ path, component }) as Route,
 
-    // /**
-    //  * Programmatically navigate to available routes. The URL will not be affected!
-    //  */
-    // navigate: (route: string) => {
-    //   if (alemState().routes.includes(route)) {
-    //     updateAlemState({ activeRoute: route });
-    //   }
-    // },
-
-    // /**
-    //  * This hook returns the current location object.
-    //  * It can be useful if you'd like to perform some side effect whenever the current location changes.
-    //  * @returns
-    //  */
-    // useLocation: () => {
-    //   return {
-    //     pathname: alemState().activeRoute,
-    //     routes: alemState().routes,
-    //     isRoutesReady: alemState().routes && alemState().routes.length > 0,
-    //   };
-    // },
-
     /**
      * All parameters provided by the URL.
      * @returns
      */
     useParams: () => {
-      // Remove "path" (being used internally)
       let params = alemState().rootProps;
-      // if (removeRoutePathParam) {
-      //   if (Object.keys(params).includes(alemState().routeParameterName)) {
-      //     delete params[alemState().routeParameterName];
-      //   }
-      // }
       return params;
     },
 

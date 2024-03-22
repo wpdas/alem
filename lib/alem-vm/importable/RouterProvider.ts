@@ -1,6 +1,6 @@
 import { State, state, RouteType, createContext } from "../alem-vm";
 
-const RoutesProvider = () => {
+const RouterProvider = () => {
   // Controle de rotas
   const AlemRoutesStateInitialBody = {
     alemRoutes: {
@@ -106,10 +106,10 @@ const RoutesProvider = () => {
   };
 
   createContext(
-    "alemRoutesProvider",
+    "alemRouterProvider",
     AlemRoutesStateInitialBody,
     alemRoutesProps,
   );
 };
 
-export default RoutesProvider;
+export default RouterProvider;

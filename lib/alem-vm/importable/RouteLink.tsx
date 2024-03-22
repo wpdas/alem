@@ -10,9 +10,9 @@ export const RouteLink = ({
   style,
   onClick,
 }: LinkProps) => {
-  const routeContext = useContext<any>("alemRoutesProvider");
+  const routeContext = useContext<any>("alemRouterProvider");
   if (!routeContext) {
-    console.error("Link component is being used without Routes on top of it.");
+    console.error("Link component is being used without Router on top of it.");
   }
 
   const onClickHandler = () => {

@@ -1,6 +1,6 @@
 import { Route, RouteType, useEffect } from "../alem-vm";
 
-type RoutesProps = {
+type RouterProps = {
   routes: Route[];
   /**
    * Defines how the routes will behave. Default is `URLBased`.
@@ -28,7 +28,7 @@ type RoutesProps = {
  * @param props
  * @returns
  */
-const Routes = (props: RoutesProps) => {
+const Router = (props: RouterProps) => {
   const { routes, type, parameterName, alem, alemRoutes, initialRoute } = props;
 
   // Checa se sao rotas validas
@@ -43,7 +43,7 @@ const Routes = (props: RoutesProps) => {
   // Update the parameter name if needed
   useEffect(() => {
     if (parameterName && parameterName !== alem.routeParameterName) {
-      // Comes from RoutesProvider
+      // Comes from RouterProvider
       alemRoutes.updateRouteParameterName(parameterName);
     }
   }, []);
@@ -96,14 +96,12 @@ const Routes = (props: RoutesProps) => {
           : routes[0].path;
       }
 
-      console.log(_activeRoute, alemRoutes.routeBlocked);
-
       // Se nenhuma rota está ativa, define o primeiro item das rotas como o ativo
       if (!_activeRoute) {
         _activeRoute = routes[0].path;
       }
 
-      // Comes from RoutesProvider
+      // Comes from RouterProvider
       alemRoutes.updateRouteParameters({
         routes: _routes,
         routeType: _type,
@@ -131,4 +129,4 @@ const Routes = (props: RoutesProps) => {
   return <></>;
 };
 
-export default Routes;
+export default Router;

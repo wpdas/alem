@@ -3,16 +3,16 @@
 // ======= Routes =======
 
 /**
- * Provides the necessary states and props for Routes.
+ * Provides the necessary states and props for Router.
  */
-export declare const RoutesProvider: () => void;
+export declare const RouterProvider: () => void;
 
 type Route = {
   path: string;
   component: () => JSX.Element;
 };
 
-type RoutesProps = {
+type RouterProps = {
   routes: Route[];
   /**
    * Defines how the routes will behave. Default is `URLBased`.
@@ -40,7 +40,7 @@ type RoutesProps = {
  * @param props
  * @returns
  */
-export declare const Routes: (props: RoutesProps) => React.JSX.Element;
+export declare const Router: (props: RouterProps) => React.JSX.Element;
 
 type LinkProps = {
   to: string;
@@ -152,41 +152,6 @@ export declare const createContext: <S extends {}, P extends {}>(
  * @returns
  */
 export declare const useContext: <D>(contextKey: string) => D | undefined;
-
-// ======= State Management =======
-
-/**
- * State Management - useStore Hook
- *
- * ```
- * // Creating
- * createStore('myStore', {age: 12, name: 'Liz'});
- * // Custom Hook - Reading
- * const useMyStore = () => useStore('myStore');
- * // Reading from custom hook
- * const { age, name, update } = useMyStore();
- * // Updating / Creating new value
- * update({ age: 15, eyes: 'dark' });
- * ```
- */
-export declare const useStore: <T>(storeKey: string) => {
-  update: (updateState: T) => void;
-} & T;
-
-/**
- * State Management - create store
- */
-export declare const createStore: (storeKey: string, initialState: {}) => void;
-
-/**
- * State Management - clear all store data
- */
-export declare const clearStore: () => void;
-
-/**
- * Return all store items with their data
- */
-export declare const getStore: () => Record<string, any>;
 
 // ======= APIs =======
 
