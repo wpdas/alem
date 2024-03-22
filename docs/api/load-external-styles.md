@@ -9,7 +9,7 @@ You can use any fonts like Google Fonts or CDN Fonts.
 You must specify `font-family` in the application's styles.
 
 ```tsx
-import { loadExternalStyles } from "alem/api";
+import { loadExternalStyles } from "alem";
 
 const App = () => {
   const stylesLoaded = loadExternalStyles([

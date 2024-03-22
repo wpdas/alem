@@ -1,3 +1,211 @@
+// ALEM Items:
+
+// ======= Routes =======
+
+/**
+ * Provides the necessary states and props for Router.
+ */
+export declare const RouterProvider: () => void;
+
+type Route = {
+  path: string;
+  component: () => JSX.Element;
+};
+
+type RouterProps = {
+  routes: Route[];
+  /**
+   * Defines how the routes will behave. Default is `URLBased`.
+   *
+   * `URLBased`: Update the URL and reload/load page;
+   * `ContentBased`: Doesn't update the URL and doesn't reload page.
+   *
+   * Consider using `URLBased` if your project's URL paths are important to its functionality. E.g.: sharing a link for a specific page.
+   */
+  type?: RouteType;
+  /**
+   * Parameter name to store current route name. Default is "path".
+   */
+  parameterName?: string;
+  /**
+   * Initial route on which you want to start.
+   */
+  initialRoute?: string;
+  alem?: any;
+  alemRoutes?: any;
+};
+
+/**
+ * Init routes
+ * @param props
+ * @returns
+ */
+export declare const Router: (props: RouterProps) => React.JSX.Element;
+
+type LinkProps = {
+  to: string;
+  label?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+  children?: JSX.Element | JSX.Element[] | string | number;
+};
+
+/**
+ * Link to access routes.
+ */
+export declare const RouteLink: ({
+  to,
+  label,
+  className,
+  style,
+  onClick,
+}: LinkProps) => React.JSX.Element;
+
+/**
+ * Defines how the routes will behave
+ *
+ * `URLBased`: Update the URL and reload/load page
+ * `ContentBased`: Doesn't update the URL and doesn't reload page
+ *
+ * E.g.:
+ * ```
+ * const HomeRoute = createRoute("home", HomePage);
+ * const ProfileRoute = createRoute("profile", ProfilePage);
+ * return <Routes routes={[HomeRoute, ProfileRoute]} type="URLBased" />;
+ * ```
+ */
+export type RouteType = "URLBased" | "ContentBased";
+
+/**
+ * Go programmatically to the route ("route Path").
+ *
+ * This is NOT going to update the URL path.
+ */
+export declare const navigate: (routePath: string) => void;
+
+/**
+ * Create Route child
+ */
+export declare const createRoute: (
+  path: string,
+  component: () => JSX.Element,
+) => Route;
+
+/**
+ * Get URL params and returns an object of key/value pairs objects
+ */
+export declare const useParams: () => {
+  [values: string]: any;
+};
+
+/**
+ * This returns the current location object.
+ */
+export declare const getLocation: () => {
+  /**
+   * The path of the current Route.
+   */
+  pathname: string;
+  /**
+   * Routes available
+   */
+  routes: string[];
+  /**
+   * Is routes ready?
+   */
+  isRoutesReady: boolean;
+};
+
+/**
+ * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
+ * @returns
+ */
+export declare const useRoutes: () => {
+  routesInitialized: boolean;
+  activeRoute: string;
+  routeParameterName: string;
+  routes: string[];
+  routeType: string;
+  routeBlocked: boolean;
+};
+
+// ======= Context =======
+
+/**
+ * Create context for stateful component and send context props to its children
+ * This can be useful if you'd like to perform some side effect whenever some context data changes.
+ *
+ * @param contextKey Context key name (must be unique)
+ * @param defaultStateValue Default values to be inserted to the Component's State
+ * @param defaultPropsValue Default values to be inserted to the Component's props
+ */
+export declare const createContext: <S extends {}, P extends {}>(
+  contextKey: string,
+  defaultStateValue: S,
+  defaultPropsValue: void | P,
+) => void;
+
+/**
+ * Use context. This is helpful to get a previous created context's props.
+ *
+ * @param contextKey Context key name
+ * @returns
+ */
+export declare const useContext: <D>(contextKey: string) => D | undefined;
+
+// ======= APIs =======
+
+/**
+ * Load external fonts and css files using their URLs.
+ *
+ * You can use any fonts source.
+ *
+ * E.g.: Fonts source: https://www.cdnfonts.com/
+ *
+ *
+ * Usage example:
+ *
+ * ```
+ * const stylesLoaded = loadExternalStyles([
+ * "https://fonts.cdnfonts.com/css/display",
+ * "https://cdn.jsdelivr.net/gh/codemirror/codemirror5/lib/codemirror.css",
+ * ]);
+ *
+ * console.log(stylesLoaded); // true / false
+ * ```
+ *
+ * @returns {boolean} styles files loaded?
+ */
+export declare const loadExternalStyles: (fontURLs: string[]) => boolean;
+
+/**
+ * Call resolve or reject for a given caller
+ * E.g:
+ * ```
+ * const getStorage = () => Storage.get('my-key');
+ * const resolve = (storageData) => console.log(storageData);
+ * const reject = () => console.log('Error');
+ * const timeout = 5000; // 5sec
+ * promisify(getStorage, resolve, reject, timeout);
+ * ```
+ *
+ * Default timeout is 10 seconds
+ */
+export declare const promisify: (
+  caller: () => any,
+  resolve: (data: any) => void,
+  reject?: () => void,
+  _timeout?: number,
+) => void;
+
+/**
+ * Flag saying if it's a development environment
+ */
+export declare const isDevelopment: boolean;
+
+// BOS Below:
+
 // Bos
 export declare interface BosContext {
   accountId?: string;

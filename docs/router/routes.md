@@ -1,24 +1,33 @@
 ## Routes
 
-This component is responsible for managing the content to be displayed on the screen according to the active route. You can use the `createRoute` resource to create application routes and pass them to Routes.
+This component is responsible for managing the content to be displayed on the screen according to the active route. You can use the `createRoute` resource to create application routes and pass them to the Router.
 
 ```tsx
-import { Routes, createRoute } from "alem/router";
+import { RouterProvider, Router, createRoute } from "alem";
 
 import HomePage from "./HomePage";
 import ProfilePage from "./ProfilePage";
 
 const AppRoutes = () => {
+
+  // It must be placed above all resources that will use the Router tools.
+  RouterProvider();
+
   // Creating routes
   const FeatureOverviewRoute = createRoute("home", HomePage);
   const StateManagementRoute = createRoute("profile", ProfilePage);
 
+  const routes = [
+    FeatureOverviewRoute,
+    StateManagementRoute,
+  ]
+
   // Initializing Routes
   return (
-    <Routes
+    <Router
       parameterName="tab" {/* Optional: default is "path" */}
       type="ContentBased" {/* Optional: default is "URLBased" */}
-      routes={[FeatureOverviewRoute, StateManagementRoute]}
+      routes={routes}
     />
   );
 };

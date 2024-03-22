@@ -29,7 +29,7 @@ import {
   useCache,
   useEffect,
   useState,
-} from "alem/bos";
+} from "alem";
 
 export const ComponentC = () => {
   console.log(props); // will print the widget props

@@ -1,7 +1,10 @@
 - Implement support for Testnet. - ✔
 - Implement `loadExternalStyles` API to load external fonts and css files. - ✔
-- E2E Tests
-- Add parameter `parameterName` for `Routes` component. This is going to allow changing the default route param name ("path") that's used to control and watch all routes. - ✔
+- Add parameter `parameterName` for `Router` component. This is going to allow changing the default route param name ("path") that's used to control and watch all routes. - ✔
 - Implement feature to the compiler that changes the consts/lets/vars names to avoid conflicts.
-- Add support to tsconfig.json `baseUrl` and `paths`.
 - Support to using the same const names in different files. - ✔
+- Each component should have its own state - ✔
+- `createContext`, `useContext` feature - ✔
+- E2E Tests
+- Add support to tsconfig.json `baseUrl` and `paths`
+- Put a file validator (tsx, jsx) above the Além server so that when it breaks, it doesn't break the main server/compiler

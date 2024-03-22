@@ -1,4 +1,1 @@
-export * from "./bos";
-export * from "./router";
-export * from "./store";
-export * from "./api";
+export * from "./lib/alem-vm/alem-vm";

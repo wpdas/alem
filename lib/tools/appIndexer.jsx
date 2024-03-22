@@ -1,5 +1,0 @@
-return (
-  <AlemTheme>
-    <App />
-  </AlemTheme>
-);

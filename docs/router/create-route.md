@@ -1,9 +1,9 @@
 ## Create Route
 
-This feature is used to create routes. These routes must be passed to the `Routes` component later.
+This feature is used to create routes. These routes must be passed to the `Router` component later.
 
 ```tsx
-import { Routes, createRoute } from "alem/router";
+import { Router, createRoute } from "alem";
 
 import HomePage from "./HomePage";
 import ProfilePage from "./ProfilePage";
@@ -14,7 +14,7 @@ const AppRoutes = () => {
   const StateManagementRoute = createRoute("profile", ProfilePage);
 
   return (
-    <Routes
+    <Router
       parameterName="page" {/* Optional: default is "path" */}
       type="ContentBased" {/* Optional: default is "URLBased" */}
       routes={[FeatureOverviewRoute, StateManagementRoute]}
