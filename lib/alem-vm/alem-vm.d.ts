@@ -133,7 +133,7 @@ export declare const useRoutes: () => {
 // ======= Context =======
 
 /**
- * Create context for statefull component and send context props to its children
+ * Create context for stateful component and send context props to its children
  * This can be useful if you'd like to perform some side effect whenever some context data changes.
  *
  * @param contextKey Context key name (must be unique)

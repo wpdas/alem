@@ -9,7 +9,6 @@ Alem is a web3 **JavaScript** / **TypeScript** library for building applications
 - **Component-Based:** Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
 - **Learn Once, Write Anywhere:** We don't make assumptions about the rest of your technology stack, so you can develop new features in Alem without rewriting existing code.
 - **CSS:** Alem supports .css files. Just create them and they will all be included in the application.
-- **Easy State Management:** Use state management to make it easier to persist data through the application.
 - **Routes System:** An integrated router system that makes it possible to navigate between pages easily.
 - **Much more:** Take a look at the other documentation items to learn how to use all the features provided by Alem.
 
