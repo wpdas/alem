@@ -1,14 +1,12 @@
 import { useContext } from "../alem-vm";
 
 type UseRoutesProps = {
-  alemRoutes: {
-    routesInitialized: boolean;
-    activeRoute: string;
-    routeParameterName: string;
-    routes: string[];
-    routeType: string;
-    routeBlocked: boolean;
-  };
+  routesInitialized: boolean;
+  activeRoute: string;
+  routeParameterName: string;
+  routes: string[];
+  routeType: string;
+  routeBlocked: boolean;
 };
 
 /**
@@ -16,11 +14,11 @@ type UseRoutesProps = {
  * @returns
  */
 const useRoutes = () => {
-  const contextData = useContext<UseRoutesProps>("alemRouterProvider");
+  const contextData = useContext<UseRoutesProps>("alemRoutes");
   if (!contextData) {
     console.error("useRoutes: You need to call `RouterProvider()` first.");
   }
-  return contextData!.alemRoutes;
+  return contextData!;
 };
 
 export default useRoutes;

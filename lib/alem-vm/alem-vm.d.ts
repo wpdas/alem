@@ -140,11 +140,12 @@ export declare const useRoutes: () => {
  * @param defaultStateValue Default values to be inserted to the Component's State
  * @param defaultPropsValue Default values to be inserted to the Component's props
  */
-export declare const createContext: <S extends {}, P extends {}>(
+export declare const createContext: <S extends {}>(
   contextKey: string,
-  defaultStateValue: S,
-  defaultPropsValue: void | P,
-) => void;
+) => {
+  setDefaultData: (defaultStateValue: S) => void;
+  updateData: (updates: Partial<S>) => void;
+};
 
 /**
  * Use context. This is helpful to get a previous created context's props.
@@ -152,7 +153,7 @@ export declare const createContext: <S extends {}, P extends {}>(
  * @param contextKey Context key name
  * @returns
  */
-export declare const useContext: <D>(contextKey: string) => D | undefined;
+export declare const useContext: <D>(contextKey: string) => D;
 
 // ======= APIs =======
 
@@ -217,8 +218,10 @@ export declare var props: any;
 export declare var context: BosContext;
 
 export declare const Widget: (params: {
-  src: string;
-  props: object;
+  loading?: JSX.Element | JSX.Element[] | string | number;
+  code?: string;
+  src?: string;
+  props?: object;
 }) => React.ReactNode;
 
 export declare const Markdown: (params: {
@@ -239,6 +242,8 @@ export declare function useEffect(
   effect: EffectCallback,
   deps?: DependencyList,
 ): void;
+
+export declare function useMemo<T>(factory: () => T, deps: DependencyList): T;
 
 /**
  * `fetch` allows to fetch data from the URL. It acts like a hook. It's a wrapper around the fetch function from the browser behind the caching layer.
@@ -340,7 +345,7 @@ export declare const Near: {
     args?: {},
     blockId?: string,
     subscribe?: boolean,
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * Call
@@ -359,7 +364,7 @@ export declare const Near: {
     args?: {},
     gas?: string | number,
     deposit?: string | number,
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * Queries a block from the blockchain.
@@ -402,7 +407,7 @@ export declare const Social: {
        */
       return_deleted?: boolean;
     },
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * `Social.getr` is just a wrapper helper for Social.get, it appends ** to each of the path pattern.
@@ -427,7 +432,7 @@ export declare const Social: {
        */
       return_deleted?: boolean;
     },
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * It calls the SocialDB's `keys` API and returns the data. While the data is fetching the returned value equals to `null`.
@@ -463,7 +468,7 @@ export declare const Social: {
     cacheOptions?: {
       ignoreCache: boolean;
     },
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * Takes a `data` object and commits it to SocialDB. It works similarly to the `CommitButton` by spawning the modal window prompt
@@ -493,7 +498,7 @@ export declare const Social: {
        */
       onCancel?: () => void;
     },
-  ) => Promise<R>;
+  ) => R;
 
   /**
    * Returns the array of matched indexed values. Ordered by `blockHeight`.
@@ -530,7 +535,7 @@ export declare const Social: {
        */
       from?: 0 | "Max";
     },
-  ) => Promise<R>;
+  ) => R;
 };
 
 /**
