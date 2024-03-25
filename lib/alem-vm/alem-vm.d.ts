@@ -36,11 +36,11 @@ type RouterProps = {
 };
 
 /**
- * Init routes
+ * Init routes usint complex and statefull Router system.
  * @param props
  * @returns
  */
-export declare const Router: (props: RouterProps) => React.JSX.Element;
+export declare const Router: (props: RouterProps) => JSX.Element;
 
 type LinkProps = {
   to: string;
@@ -50,6 +50,17 @@ type LinkProps = {
   onClick?: () => void;
   children?: JSX.Element | JSX.Element[] | string | number;
 };
+
+type URLRouterProps = {
+  routes: Route[];
+  /**
+   * Parameter name to store current route name. Default is "path".
+   */
+  parameterName?: string;
+  alem?: any;
+};
+
+export declare const SimpleRouter: (props: URLRouterProps) => JSX.Element;
 
 /**
  * Link to access routes.
@@ -204,6 +215,17 @@ export declare const promisify: (
  * Flag saying if it's a development environment
  */
 export declare const isDevelopment: boolean;
+
+/**
+ * Create a debounced method to obtain the data after the desired interval.
+ * @param cb Callback
+ * @param timeout Timeout. Default is 1 sec.
+ * @returns
+ */
+export declare const createDebounce: <D>(
+  cb: (data: D) => void,
+  timeout?: number,
+) => (args: any) => void;
 
 // BOS Below:
 

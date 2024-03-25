@@ -19,8 +19,7 @@ const RouterProvider = () => {
    * Get alem state
    * @returns
    */
-  const alemRoutesState = () =>
-    useContext<any>(ALEM_ROUTES_CONTEXT_KEY).alemRoutes;
+  const alemRoutesState = () => useContext<any>(ALEM_ROUTES_CONTEXT_KEY);
 
   setDefaultData({
     // ==================================== Routes ====================================
@@ -79,19 +78,6 @@ const RouterProvider = () => {
       if (alemRoutesState().routes.includes(route)) {
         updateAlemRoutesState({ activeRoute: route });
       }
-    },
-
-    /**
-     * This hook returns the current location object.
-     * @returns
-     */
-    getLocation: () => {
-      return {
-        pathname: alemRoutesState().activeRoute,
-        routes: alemRoutesState().routes,
-        isRoutesReady:
-          alemRoutesState().routes && alemRoutesState().routes.length > 0,
-      };
     },
   });
 };

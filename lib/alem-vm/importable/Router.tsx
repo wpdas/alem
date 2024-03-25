@@ -37,6 +37,10 @@ const Router = (props: RouterProps) => {
       if (!route.component) {
         console.error(`Routes: Invalid component for route "${route.path}"`);
       }
+
+      if (!route.path) {
+        console.error("Routes: Invalid path:", route.path);
+      }
     });
   }, [routes]);
 
@@ -111,22 +115,12 @@ const Router = (props: RouterProps) => {
     }
   }, [routeType]);
 
-  // Default route
-  if (activeRoute === "") {
-    const Component = routes[0].component;
-    return <Component />;
-  }
-
   // Route by route path
-  const Component = routes.find(
-    (route: Route) => route.path === activeRoute,
-  )?.component;
-  if (Component) {
-    return <Component />;
-  }
+  const Component = routes.find((route: Route) => route.path === activeRoute)
+    ?.component ||
+    routes[0].component || <></>;
 
-  // Empty
-  return <></>;
+  return <Component />;
 };
 
 export default Router;

@@ -11,6 +11,9 @@ type UseRoutesProps = {
 
 /**
  * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
+ *
+ * Works with Router only.
+ *
  * @returns
  */
 const useRoutes = () => {
