@@ -1,4 +1,4 @@
-import { Route } from "../alem-vm";
+import { Route, props } from "../alem-vm";
 
 type URLRouterProps = {
   routes: Route[];
@@ -6,7 +6,6 @@ type URLRouterProps = {
    * Parameter name to store current route name. Default is "path".
    */
   parameterName?: string;
-  alem?: any;
 };
 
 /**
@@ -15,9 +14,7 @@ type URLRouterProps = {
  * @param props
  * @returns
  */
-const SimpleRouter = (props: URLRouterProps) => {
-  const { routes, parameterName, alem } = props;
-
+const SimpleRouter = ({ routes, parameterName }: URLRouterProps) => {
   // Checa se sao rotas validas
   routes.forEach((route) => {
     if (!route.component) {
@@ -30,7 +27,7 @@ const SimpleRouter = (props: URLRouterProps) => {
   });
 
   // BOS.props
-  const bosProps: Record<string, any> = alem.rootProps || {};
+  const bosProps: Record<string, any> = props.alem.rootProps || {};
   const activeRoute = bosProps[parameterName || "path"] || routes[0].path;
 
   const Component = routes.find((route: Route) => route.path === activeRoute)

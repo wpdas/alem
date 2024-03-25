@@ -57,7 +57,6 @@ type URLRouterProps = {
    * Parameter name to store current route name. Default is "path".
    */
   parameterName?: string;
-  alem?: any;
 };
 
 export declare const SimpleRouter: (props: URLRouterProps) => JSX.Element;
@@ -294,7 +293,10 @@ export declare const asyncFetch: (url: string) => Promise<any>;
  *
  * Know more: https://docs.near.org/bos/api/web-methods#cache
  */
-export declare const useCache: (promise: () => Promise<any>) => any;
+export declare const useCache: (
+  promise: () => Promise<any>,
+  key?: string,
+) => any;
 
 /**
  * Storage object to store data for widgets that is persistent across refreshes. Simulates localStorage access.
@@ -345,6 +347,24 @@ export declare const clipboard: {
   writeText: (text: string) => void;
 };
 
+type Call = <R extends {}>(
+  contractName: string,
+  methodName: string,
+  args?: {},
+  gas?: string | number,
+  deposit?: string | number,
+) => void;
+
+type CallList = <R extends {}>(
+  callList: {
+    contractName: string;
+    methodName: string;
+    args?: {};
+    gas?: string | number;
+    deposit?: string | number;
+  }[],
+) => void;
+
 /**
  * Use Near object to interact with smart contracts in the NEAR blockchain.
  */
@@ -380,13 +400,22 @@ export declare const Near: {
    * @param gas Maximum amount of gas to be used for the transaction (default 300Tg)
    * @param deposit Amount of NEAR tokens to attach to the call as deposit (in yoctoNEAR units)
    */
-  call: <R extends {}>(
-    contractName: string,
-    methodName: string,
-    args?: {},
-    gas?: string | number,
-    deposit?: string | number,
-  ) => R;
+  call: Call | CallList | any;
+
+  /**
+   * A list of calls
+   * @param callList
+   * @returns
+   */
+  // call: <R extends {}>(
+  //   callList: {
+  //     contractName: string;
+  //     methodName: string;
+  //     args?: {};
+  //     gas?: string | number;
+  //     deposit?: string | number;
+  //   }[],
+  // ) => R[];
 
   /**
    * Queries a block from the blockchain.
@@ -575,11 +604,13 @@ export declare const IpfsImageUpload: (params: {
  * Know more: https://docs.near.org/bos/api/builtin-components#files
  */
 export declare const Files: (params: {
-  children: JSX.Element;
+  children?: JSX.Element;
   multiple?: boolean;
   accepts: string[];
   clickable?: boolean;
   className?: string;
+  minFileSize?: number;
+  style?: React.CSSProperties;
   onChange: (files: File[]) => void;
 }) => React.ReactNode;
 
