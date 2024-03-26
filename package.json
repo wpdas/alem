@@ -34,6 +34,10 @@
     "prepublishOnly": "npm run build-gateway"
   },
   "dependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-react": "^7.24.1",
+    "@babel/traverse": "^7.24.1",
+    "@babel/types": "^7.24.0",
     "bos-cli": "^0.3.6",
     "chokidar": "^3.5.3",
     "commander": "^11.1.0",
