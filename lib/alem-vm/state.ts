@@ -48,6 +48,8 @@ const AlemStateInitialBody = {
 };
 
 State.init(AlemStateInitialBody);
+// Note: força atualização do rootProps
+State.update({ alem: { ...state.alem, rootProps: props } });
 
 // Props para ser compartilhada com todos os Widgets
 export const props = {

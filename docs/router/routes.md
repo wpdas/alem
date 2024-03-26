@@ -37,7 +37,7 @@ export default AppRoutes;
 
 ## Types of Behavior
 
-`Routes` can handle links in two ways:
+`Router` can handle links in two ways:
 
 - **URLBased:** This is the default behavior. Every link will reload the page by changing the URL structure in the browser;
 - **ContentBased:** This behavior does not change the URL in the browser and does not reload the page. Therefore, it is faster to display content on the screen.
@@ -46,13 +46,13 @@ You can pass the type of behavior using the `type` property of Routes.
 
 ```tsx
 /* URL Based */
-<Routes
+<Router
   routes={[FeatureOverviewRoute, StateManagementRoute]}
   type="URLBased"
 />
 
 /* Content Based */
-<Routes
+<Router
   routes={[FeatureOverviewRoute, StateManagementRoute]}
   type="ContentBased"
 />

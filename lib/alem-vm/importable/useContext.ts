@@ -12,13 +12,13 @@ const useContext = <D>(contextKey: string) => {
   const wasContextInitialized = props[contextKey].initialized;
   if (!wasContextInitialized) {
     console.error(`Context "${contextKey}" not found.`);
-    return;
+    return {};
   }
   const contextKeys: string[] = props[contextKey].keys;
   const contextItems: Record<string, any> = {};
 
   contextKeys.forEach((key: string) => {
-    contextItems[key] = props[key];
+    contextItems[key] = props[contextKey][key];
   });
 
   return contextItems as D;
