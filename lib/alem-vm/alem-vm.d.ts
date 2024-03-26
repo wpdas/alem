@@ -586,6 +586,7 @@ export declare const Social: {
        */
       from?: 0 | "Max";
     },
+    cacheOptions?: {},
   ) => R;
 };
 
@@ -596,6 +597,18 @@ export declare const Social: {
  */
 export declare const IpfsImageUpload: (params: {
   image: string;
+}) => React.ReactNode;
+
+/**
+ * CommitButton
+ */
+export declare const CommitButton: (params: {
+  disabled?: boolean;
+  force?: boolean;
+  className?: string;
+  data?: {};
+  onCommit?: () => void;
+  children?: JSX.Element | JSX.Element[] | string | number;
 }) => React.ReactNode;
 
 /**
@@ -653,6 +666,10 @@ export declare const InfiniteScroll: (params: {
   loadMore: (page: number) => void;
   hasMore: boolean;
   useWindow?: boolean;
+  pageStart?: number;
+  threshold?: number;
+  loader?: JSX.Element | JSX.Element[] | string | number;
+  children?: JSX.Element | JSX.Element[] | string | number;
 }) => React.ReactNode;
 
 /**
