@@ -90,7 +90,8 @@ const Router = (props: RouterProps) => {
       // List of routes and route type
       const _routes = routes.map((route: Route) => route.path);
       const _type = type || "URLBased";
-      let _activeRoute = initialRoute || currentUrlPath;
+      let _activeRoute =
+        initialRoute || alemRoutes.activeRoute || currentUrlPath;
 
       if (
         !(currentUrlPath && routeType == "URLBased" && alemRoutes.routeBlocked)
@@ -106,12 +107,15 @@ const Router = (props: RouterProps) => {
       }
 
       // Comes from RouterProvider
-      alemRoutes.updateRouteParameters({
-        routes: _routes,
-        routeType: _type,
-        activeRoute: _activeRoute,
-        routeBlocked: true,
-      });
+      console.log("HAPPENNN ROUTER>>>>>", alemRoutes);
+      if (!alemRoutes.routesInitialized) {
+        alemRoutes.updateRouteParameters({
+          routes: _routes,
+          routeType: _type,
+          activeRoute: _activeRoute,
+          routeBlocked: true,
+        });
+      }
     }
   }, [routeType]);
 

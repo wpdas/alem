@@ -11,9 +11,11 @@ export const RouteLink = ({
   onClick,
   children,
 }: LinkProps) => {
-  const routeContext = useContext<any>("alemRouterProvider");
+  const routeContext = useContext<any>("alemRoutes");
   if (!routeContext) {
-    console.error("Link component is being used without Router on top of it.");
+    console.error(
+      "RouteLink component is being used without Router on top of it.",
+    );
   }
 
   const onClickHandler = () => {
@@ -21,18 +23,18 @@ export const RouteLink = ({
       onClick();
     }
 
-    if (routeContext.alemRoutes.routeType === "ContentBased") {
+    if (routeContext.routeType === "ContentBased") {
       navigate(to);
     }
   };
 
-  if (routeContext.alemRoutes.routeType === "URLBased") {
+  if (routeContext.routeType === "URLBased") {
     return (
       <a
         onClick={onClickHandler}
         className={className}
         style={{ cursor: "pointer", textDecoration: "none", ...style }}
-        href={`?${routeContext.alemRoutes.routeParameterName || "path"}=${to}`}
+        href={`?${routeContext.routeParameterName || "path"}=${to}`}
       >
         {label || children}
       </a>
@@ -45,7 +47,7 @@ export const RouteLink = ({
       className={className}
       onClick={onClickHandler}
     >
-      {label || children}
+      {label || children} - Na
     </a>
   );
 };

@@ -9,6 +9,10 @@ import { props } from "../alem-vm";
  * @returns
  */
 const useContext = <D>(contextKey: string) => {
+  // TODO: talvez tenha que procurar pelo state e pelo props ja que as vezes
+  // é requerido o acesso ainda na raíz. (Isso nao é verdade pois o state é
+  // compartilhado nas props)
+
   const wasContextInitialized = props[contextKey].initialized;
   if (!wasContextInitialized) {
     console.error(`Context "${contextKey}" not found.`);
