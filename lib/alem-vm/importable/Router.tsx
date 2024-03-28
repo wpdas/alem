@@ -107,7 +107,6 @@ const Router = (props: RouterProps) => {
       }
 
       // Comes from RouterProvider
-      console.log("HAPPENNN ROUTER>>>>>", alemRoutes);
       if (!alemRoutes.routesInitialized) {
         alemRoutes.updateRouteParameters({
           routes: _routes,

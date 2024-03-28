@@ -47,7 +47,7 @@ export const RouteLink = ({
       className={className}
       onClick={onClickHandler}
     >
-      {label || children} - Na
+      {label || children}
     </a>
   );
 };

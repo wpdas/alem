@@ -6,11 +6,11 @@ const navigate = (route: string) => {
     console.error("navigate is being used without Router on top of it.");
   }
 
-  console.log("navigate ----------> ", routeContext);
-
   if (routeContext.routes.includes(route)) {
-    console.log("SIIUUU");
-    // updateAlemRoutesState({ activeRoute: route });
+    // Precia enviar toda a estrura ja existente e atualizar somente o recurso desejado.
+    // Isso se deve devido a quando se altera um state, o componente onde ele está é
+    // renderizado novamente. Ou seja, o Router também vai ser renderizado novamente
+    // e as propriedades precisam se manter, caso contrário, voltam para o estado inicial.
     routeContext.updateRouteParameters({ ...routeContext, activeRoute: route });
   }
 };
