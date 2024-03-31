@@ -1,5 +1,15 @@
 return (
   <AlemTheme>
+    {iframeModulesCode && (
+      <iframe
+        style={{ height: 0, width: 0 }}
+        srcDoc={iframeModulesCode}
+        message={"init modules"}
+        onMessage={(message) => {
+          console.log("Message:", message);
+        }}
+      />
+    )}
     <Widget
       loading=" "
       code={props.alem.componentsCode.App}

@@ -154,11 +154,12 @@ export const props = {
 
     // ==================================== Components|Widgets Code ====================================
     componentsCode: {
-      /**:::ALEM_COMPONENTS_CODE:::*/
-      /**:::COMPONENTS_CODE:::*/
+      COMPONENTS_CODE: {},
     },
   },
 };
+
+const MODULES_IFRAME = {};
 
 export type Alem = any;
 
