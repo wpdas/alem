@@ -2,7 +2,7 @@
  * Todos os items do state inicial
  */
 
-import { Route, RouteType, State, asyncFetch, state } from "./alem-vm";
+import { Route, State, asyncFetch, state } from "./alem-vm";
 
 /**
  * Update the alem state
@@ -30,12 +30,6 @@ const AlemStateInitialBody = {
      */
     rootProps: props,
     // ==================================== Configs ====================================
-    /**
-     * During development, if the route is of type ContentBased, it will return to the
-     * first registered route every time a file is changed. This property enables or
-     * disables this behavior.
-     */
-    alemConfig_maintainRouteWhenDeveloping: ":::MAINTAIN_ROUTE:::", // boolean
     alemEnvironment: ":::ENV:::", // production | development
 
     // ==================================== APIs ====================================
@@ -43,8 +37,6 @@ const AlemStateInitialBody = {
     alemExternalStylesBody: "",
   },
   // ======= FIM ALEM =======
-
-  /**:::STATE.INIT:::*/
 };
 
 State.init(AlemStateInitialBody);
@@ -162,11 +154,12 @@ export const props = {
 
     // ==================================== Components|Widgets Code ====================================
     componentsCode: {
-      /**:::ALEM_COMPONENTS_CODE:::*/
-      /**:::COMPONENTS_CODE:::*/
+      COMPONENTS_CODE: {},
     },
   },
 };
+
+const MODULES_IFRAME = {};
 
 export type Alem = any;
 

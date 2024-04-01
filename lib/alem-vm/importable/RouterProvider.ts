@@ -45,39 +45,19 @@ const RouterProvider = () => {
     /**
      * Update route parameters
      */
-    updateRouteParameters: (props: {
+    updateRouteParameters: (routeProps: {
       routes?: string[];
       routeType?: RouteType;
       activeRoute?: string;
       routeBlocked?: boolean;
     }) => {
       updateAlemRoutesState({
-        routes: props.routes || alemRoutesState().routes,
-        routeType: props.routeType || alemRoutesState().routeType,
-        activeRoute: props.activeRoute || alemRoutesState().activeRoute,
-        routeBlocked: props.routeBlocked || alemRoutesState().routeBlocked,
+        routes: routeProps.routes || alemRoutesState().routes,
+        routeType: routeProps.routeType || alemRoutesState().routeType,
+        activeRoute: routeProps.activeRoute || alemRoutesState().activeRoute,
+        routeBlocked: routeProps.routeBlocked || alemRoutesState().routeBlocked,
         routesInitialized: true,
       });
-    },
-
-    /**
-     * Update route type
-     * @param route
-     */
-    // updateRouteType: (type: RouteType) => {
-    //   updateAlemRoutesState({
-    //     routeType: type,
-    //   })
-    // },
-
-    /**
-     * Programmatically navigate to available routes. The URL will not be affected!
-     */
-    navigate: (route: string) => {
-      // console.log("RoutesProvider -> navigate to:", route, alemRoutesState());
-      if (alemRoutesState().routes.includes(route)) {
-        updateAlemRoutesState({ activeRoute: route });
-      }
     },
   });
 };

@@ -2,10 +2,7 @@ import { State, props, state } from "../alem-vm";
 
 const createContext = <S extends {}>(contextKey: string) => {
   const setDefaultData = (defaultStateValue: S) => {
-    if (
-      !state[contextKey] ||
-      (state[contextKey] && !state[contextKey].initialized)
-    ) {
+    if (!state[contextKey] || !state[contextKey].initialized) {
       const stateKeys = Object.keys(defaultStateValue);
       // const propsKeys = Object.keys(defaultPropsValue || {});
       // let mainKeys = [...stateKeys, ...propsKeys];
