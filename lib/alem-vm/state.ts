@@ -2,7 +2,7 @@
  * Todos os items do state inicial
  */
 
-import { Route, State, asyncFetch, state } from "./alem-vm";
+import { Route, State, Storage, asyncFetch, state } from "./alem-vm";
 
 /**
  * Update the alem state
@@ -88,6 +88,9 @@ export const props = {
 
       const loadStyle = (styleURL) => {
         asyncFetch(styleURL).then((response) => {
+          // Cache response
+          Storage.set(styleURL, response.body);
+
           stylesBody += response.body;
           loadedCounter += 1;
 
@@ -101,7 +104,25 @@ export const props = {
       };
 
       URLs.forEach((styleURL) => {
-        loadStyle(styleURL);
+        // Try to get cached data first, if not available, proceed
+        props.alem.promisify(
+          () => Storage.get(styleURL),
+          (response) => {
+            stylesBody += response;
+            loadedCounter += 1;
+
+            if (loadedCounter === totalItems) {
+              updateAlemState({
+                alemExternalStylesLoaded: true,
+                alemExternalStylesBody: stylesBody,
+              });
+            }
+          },
+          () => {
+            loadStyle(styleURL);
+          },
+          100,
+        );
       });
 
       return alemState().alemExternalStylesLoaded;
