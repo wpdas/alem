@@ -5,7 +5,7 @@
 
 Além is a web3 **JavaScript** / **TypeScript** library to create web3 apps for Near BOS.
 
-Alem makes it painless to create interactive UIs. Design simple views for each state in your application, and Alem will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable, simpler to understand, and easier to debug.
+Alem makes it painless to create interactive UIs. Design simple views for each state in your application. Declarative views make your code more predictable, simpler to understand, and easier to debug.
 
 Build encapsulated components that manage their own state, then compose them to make complex UIs. Since component logic is written in JavaScript, you can easily pass rich data through your app.
 
