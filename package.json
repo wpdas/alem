@@ -1,7 +1,7 @@
 {
   "name": "alem",
   "description": "Create web3 applications for NEAR BOS with a focus on performance and friendly development.",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "main": "main.js",
   "types": "index.d.ts",
   "author": "Wenderson Pires - wendersonpires.near",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.24.3",
+    "@babel/plugin-syntax-jsx": "^7.24.1",
     "@babel/preset-env": "^7.24.3",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
