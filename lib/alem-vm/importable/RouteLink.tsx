@@ -5,6 +5,7 @@ import { LinkProps, navigate, useContext } from "../alem-vm";
  */
 export const RouteLink = ({
   to,
+  params,
   label,
   className,
   style,
@@ -24,17 +25,26 @@ export const RouteLink = ({
     }
 
     if (routeContext.routeType === "ContentBased") {
-      navigate(to);
+      navigate(to, params);
     }
   };
 
   if (routeContext.routeType === "URLBased") {
+    let strParams = "";
+
+    // Process params
+    if (params) {
+      Object.keys(params).forEach((paramKey) => {
+        strParams += `&${paramKey}=${params[paramKey]}`;
+      });
+    }
+
     return (
       <a
         onClick={onClickHandler}
         className={className}
         style={{ cursor: "pointer", textDecoration: "none", ...style }}
-        href={`?${routeContext.routeParameterName || "path"}=${to}`}
+        href={`?${routeContext.routeParameterName || "path"}=${to}${strParams}`}
       >
         {label || children}
       </a>

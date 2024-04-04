@@ -1,13 +1,4 @@
-import { useContext } from "../alem-vm";
-
-type UseRoutesProps = {
-  routesInitialized: boolean;
-  activeRoute: string;
-  routeParameterName: string;
-  routes: string[];
-  routeType: string;
-  routeBlocked: boolean;
-};
+import { UseRoutesProps, useContext } from "../alem-vm";
 
 /**
  * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
@@ -21,7 +12,17 @@ const useRoutes = () => {
   if (!contextData) {
     console.error("useRoutes: You need to call `RouterProvider()` first.");
   }
-  return contextData!;
+
+  const data = {
+    routesInitialized: contextData.routesInitialized,
+    activeRoute: contextData.activeRoute,
+    routeParameterName: contextData.routeParameterName,
+    routes: contextData.routes,
+    routeType: contextData.routeType,
+    routeParams: contextData.routeParams,
+  };
+
+  return data!;
 };
 
 export default useRoutes;
