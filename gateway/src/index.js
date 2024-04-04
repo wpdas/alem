@@ -18,6 +18,7 @@ import {
 import { useHashRouterLegacy } from "./useHashRouterLegacy";
 import { useAuth } from "./useAuth";
 import { NavigationWrapper } from "./navigation/NavigationWrapper";
+import { flags } from "../config/flags";
 
 function Viewer({ widgetSrc, code }) {
   const [widgetProps, setWidgetProps] = useState({});
@@ -123,7 +124,7 @@ function App() {
           path="*"
           element={
             <>
-              <NavigationWrapper {...passProps} />
+              {!flags.hideAlemBar && <NavigationWrapper {...passProps} />}
               <Viewer {...passProps} />
             </>
           }

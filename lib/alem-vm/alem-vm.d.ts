@@ -49,6 +49,7 @@ type LinkProps = {
   style?: React.CSSProperties;
   onClick?: () => void;
   children?: JSX.Element | JSX.Element[] | string | number;
+  params?: Record<string, any>;
 };
 
 type URLRouterProps = {
@@ -92,7 +93,10 @@ export type RouteType = "URLBased" | "ContentBased";
  *
  * This is NOT going to update the URL path.
  */
-export declare const navigate: (routePath: string) => void;
+export declare const navigate: (
+  routePath: string,
+  params?: Record<string, string>,
+) => void;
 
 /**
  * Create Route child
@@ -127,18 +131,21 @@ export declare const getLocation: () => {
   isRoutesReady: boolean;
 };
 
-/**
- * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
- * @returns
- */
-export declare const useRoutes: () => {
+export type UseRoutesProps = {
   routesInitialized: boolean;
   activeRoute: string;
   routeParameterName: string;
   routes: string[];
   routeType: string;
   routeBlocked: boolean;
+  routeParams: Record<string, any>;
 };
+
+/**
+ * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
+ * @returns
+ */
+export declare const useRoutes: () => UseRoutesProps;
 
 // ======= Context =======
 

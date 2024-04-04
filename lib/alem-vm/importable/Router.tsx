@@ -1,4 +1,4 @@
-import { Route, RouteType, useEffect } from "../alem-vm";
+import { Route, RouteType, Storage, useEffect } from "../alem-vm";
 
 type RouterProps = {
   routes: Route[];
@@ -99,6 +99,11 @@ const Router = (props: RouterProps) => {
         _activeRoute = maintainRoutesWhenDeveloping
           ? initialRoute || activeRoute
           : routes[0].path;
+      }
+
+      // Checa se o config.keepRoute esta ativado e se tiver, se tem uma rota salva
+      if (alem.keepRoute && type === "ContentBased") {
+        _activeRoute = Storage.privateGet("alem::keep-route");
       }
 
       // Se nenhuma rota está ativa, define o primeiro item das rotas como o ativo
