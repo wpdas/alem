@@ -34,6 +34,7 @@ const AlemStateInitialBody = {
     alemEnvironment: ":::ENV:::", // production | development
     keepRoute: ":::KEEP_ROUTE:::",
     previousRoute: null,
+    previousRouteParams: null,
 
     // ==================================== APIs ====================================
     alemExternalStylesLoaded: false,
@@ -183,15 +184,14 @@ export const props = {
   },
 };
 
-const MODULES_IFRAME = {};
-
 // Try to load previous route for keep-route
 if (props.alem.keepRoute) {
   props.alem.promisify(
     () => Storage.privateGet("alem::keep-route"),
     (data) => {
       updateAlemState({
-        previousRoute: data,
+        previousRoute: data.route,
+        previousRouteParams: data.routeParams,
         ready: true,
       });
     },

@@ -1,11 +1,47 @@
 // ALEM Items:
 
+export type ChildrenProps = {
+  children: JSX.Element | JSX.Element[] | string | number;
+};
+
+export type ModuleResponseData = { response: any; forCallId: number };
+
+/**
+ * Provides the necessary states to handle modules
+ */
+export declare const ModulesContext: () => void;
+
+/**
+ * Modules Provider
+ */
+export declare const ModulesProvider: ({
+  children,
+}: ChildrenProps) => JSX.Element;
+
+/**
+ * useModule hook
+ */
+export type UseModuleProps = {
+  setupCode?: string;
+  code: string;
+  onComplete?: <D>(data: D) => void;
+};
+
+export declare const useModule: (inputs: UseModuleProps) => void;
+
 // ======= Routes =======
 
 /**
  * Provides the necessary states and props for Router.
  */
-export declare const RouterProvider: () => void;
+// export declare const RouterProvider: ({
+//   children,
+// }: ChildrenProps) => JSX.Element;
+
+/**
+ * Provides the necessary states and props for Router.
+ */
+export declare const RouterContext: () => void;
 
 type Route = {
   path: string;
@@ -93,10 +129,18 @@ export type RouteType = "URLBased" | "ContentBased";
  *
  * This is NOT going to update the URL path.
  */
-export declare const navigate: (
-  routePath: string,
-  params?: Record<string, string>,
-) => void;
+export declare const navigate: {
+  /**
+   * Go to new route
+   * @param route
+   * @param params
+   */
+  to: (route: string, params?: Record<string, any>) => void;
+  /**
+   * Go back to the previous route
+   */
+  back: () => void;
+};
 
 /**
  * Create Route child
@@ -131,6 +175,11 @@ export declare const getLocation: () => {
   isRoutesReady: boolean;
 };
 
+export type History = {
+  route: string;
+  routeParams?: Record<string, any>;
+};
+
 export type UseRoutesProps = {
   routesInitialized: boolean;
   activeRoute: string;
@@ -139,13 +188,16 @@ export type UseRoutesProps = {
   routeType: string;
   routeBlocked: boolean;
   routeParams: Record<string, any>;
+  history: string[];
 };
+
+export type UseRoutes = Omit<UseRoutesProps, "routeBlocked">;
 
 /**
  * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
  * @returns
  */
-export declare const useRoutes: () => UseRoutesProps;
+export declare const useRoutes: () => UseRoutes;
 
 // ======= Context =======
 
@@ -154,14 +206,13 @@ export declare const useRoutes: () => UseRoutesProps;
  * This can be useful if you'd like to perform some side effect whenever some context data changes.
  *
  * @param contextKey Context key name (must be unique)
- * @param defaultStateValue Default values to be inserted to the Component's State
- * @param defaultPropsValue Default values to be inserted to the Component's props
  */
 export declare const createContext: <S extends {}>(
   contextKey: string,
 ) => {
   setDefaultData: (defaultStateValue: S) => void;
   updateData: (updates: Partial<S>) => void;
+  getSelf: () => S;
 };
 
 /**

@@ -39,16 +39,25 @@ const createContext = <S extends {}>(contextKey: string) => {
   };
 
   const updateData = (updates: Partial<S>) => {
-    State.update({ [contextKey]: { ...state[contextKey], ...updates } });
+    // NOTE: Tem que ser assim, passar o objeto pronto para o props,
+    // antes estava pegando apenas o ...state mas estava falhando a atualizacao
+    // das props
+    const updatedState = { [contextKey]: { ...state[contextKey], ...updates } };
+
+    State.update(updatedState);
+
     props = {
       ...props,
-      ...state,
+      ...updatedState,
     };
   };
+
+  const getSelf = () => props[contextKey] as S;
 
   return {
     setDefaultData,
     updateData,
+    getSelf,
   };
 };
 
