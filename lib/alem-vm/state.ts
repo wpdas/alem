@@ -186,23 +186,25 @@ export const props = {
 
 // Try to load previous route for keep-route
 if (props.alem.keepRoute) {
-  props.alem.promisify(
-    () => Storage.privateGet("alem::keep-route"),
-    (data) => {
-      updateAlemState({
-        previousRoute: data.route,
-        previousRouteParams: data.routeParams,
-        ready: true,
-      });
-    },
-    () => {
-      updateAlemState({
-        previousRoute: null,
-        ready: true,
-      });
-    },
-    300,
-  );
+  if (!props.alem.ready) {
+    props.alem.promisify(
+      () => Storage.privateGet("alem::keep-route"),
+      (data) => {
+        updateAlemState({
+          previousRoute: data.route,
+          previousRouteParams: data.routeParams,
+          ready: true,
+        });
+      },
+      () => {
+        updateAlemState({
+          previousRoute: null,
+          ready: true,
+        });
+      },
+      300,
+    );
+  }
 } else {
   updateAlemState({
     previousRoute: null,
