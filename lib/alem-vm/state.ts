@@ -184,8 +184,6 @@ export const props = {
   },
 };
 
-const MODULES_IFRAME = {};
-
 // Try to load previous route for keep-route
 if (props.alem.keepRoute) {
   props.alem.promisify(

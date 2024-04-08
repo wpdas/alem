@@ -1,10 +1,42 @@
 // ALEM Items:
 
-// ======= Routes =======
-
-export type RouterProviderProps = {
+export type ChildrenProps = {
   children: JSX.Element | JSX.Element[] | string | number;
 };
+
+export type ModuleResponseData = { response: any; forCallId: number };
+
+/**
+ * Provides the necessary states to handle modules
+ */
+export declare const ModulesContext: () => void;
+
+/**
+ * Modules Provider
+ */
+export declare const ModulesProvider: ({
+  children,
+}: ChildrenProps) => JSX.Element;
+
+/**
+ * useModule hook
+ */
+export type UseModuleProps = {
+  setupCode?: string;
+  code: string;
+  onComplete?: <D>(data: D) => void;
+};
+
+export declare const useModule: (inputs: UseModuleProps) => void;
+
+// ======= Routes =======
+
+/**
+ * Provides the necessary states and props for Router.
+ */
+// export declare const RouterProvider: ({
+//   children,
+// }: ChildrenProps) => JSX.Element;
 
 /**
  * Provides the necessary states and props for Router.
@@ -174,14 +206,13 @@ export declare const useRoutes: () => UseRoutes;
  * This can be useful if you'd like to perform some side effect whenever some context data changes.
  *
  * @param contextKey Context key name (must be unique)
- * @param defaultStateValue Default values to be inserted to the Component's State
- * @param defaultPropsValue Default values to be inserted to the Component's props
  */
 export declare const createContext: <S extends {}>(
   contextKey: string,
 ) => {
   setDefaultData: (defaultStateValue: S) => void;
   updateData: (updates: Partial<S>) => void;
+  getSelf: () => S;
 };
 
 /**

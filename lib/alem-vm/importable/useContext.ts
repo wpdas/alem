@@ -15,9 +15,9 @@ const useContext = <D>(contextKey: string) => {
 
   const wasContextInitialized = props[contextKey].initialized;
   if (!wasContextInitialized) {
-    // if (props.alem.isDevelopment) {
-    //   console.warn(`Context "${contextKey}" not ready or not found.`);
-    // }
+    if (props.alem.isDevelopment) {
+      console.warn(`Context "${contextKey}" not ready or not found.`);
+    }
     return {};
   }
   const contextKeys: string[] = props[contextKey].keys;
