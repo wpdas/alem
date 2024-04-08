@@ -102,8 +102,16 @@ const Router = (props: RouterProps) => {
       }
 
       // Checa se o config.keepRoute esta ativado e se tiver, se tem uma rota salva
+      let _activeRouteParams = null;
+      let _history = null;
       if (alem.keepRoute && type === "ContentBased") {
-        _activeRoute = Storage.privateGet("alem::keep-route");
+        const storedRouteProps = Storage.privateGet("alem::keep-route");
+        if (storedRouteProps) {
+          _history = storedRouteProps;
+          const lastHistory = storedRouteProps[storedRouteProps.length - 1];
+          _activeRoute = lastHistory.route || null;
+          _activeRouteParams = lastHistory.routeParams || null;
+        }
       }
 
       // Se nenhuma rota está ativa, define o primeiro item das rotas como o ativo
@@ -117,11 +125,33 @@ const Router = (props: RouterProps) => {
           routes: _routes,
           routeType: _type,
           activeRoute: _activeRoute,
+          routeParams: _activeRouteParams,
+          history: _history,
           routeBlocked: true,
         });
       }
     }
   }, [routeType]);
+
+  // Pre-render: NOTE: parece não ter necessidade ou vai deixar tudo muito complexo
+  // const Components = useMemo(() => {
+  //   return (
+  //     <>
+  //       {routes.map((route) => {
+  //         const Comp = route.component;
+  //         return (
+  //           <div
+  //             style={{ display: activeRoute === route.path ? "block" : "none" }}
+  //           >
+  //             <Comp />
+  //           </div>
+  //         );
+  //       })}
+  //     </>
+  //   );
+  // }, [routes, activeRoute]);
+
+  // return <>{Components}</>;
 
   // Route by route path
   const Component = routes.find((route: Route) => route.path === activeRoute)

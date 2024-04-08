@@ -25,7 +25,7 @@ export const RouteLink = ({
     }
 
     if (routeContext.routeType === "ContentBased") {
-      navigate(to, params);
+      navigate.to(to, params);
     }
   };
 

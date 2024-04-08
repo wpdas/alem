@@ -2,10 +2,14 @@
 
 // ======= Routes =======
 
+export type RouterProviderProps = {
+  children: JSX.Element | JSX.Element[] | string | number;
+};
+
 /**
  * Provides the necessary states and props for Router.
  */
-export declare const RouterProvider: () => void;
+export declare const RouterContext: () => void;
 
 type Route = {
   path: string;
@@ -93,10 +97,18 @@ export type RouteType = "URLBased" | "ContentBased";
  *
  * This is NOT going to update the URL path.
  */
-export declare const navigate: (
-  routePath: string,
-  params?: Record<string, string>,
-) => void;
+export declare const navigate: {
+  /**
+   * Go to new route
+   * @param route
+   * @param params
+   */
+  to: (route: string, params?: Record<string, any>) => void;
+  /**
+   * Go back to the previous route
+   */
+  back: () => void;
+};
 
 /**
  * Create Route child
@@ -131,6 +143,11 @@ export declare const getLocation: () => {
   isRoutesReady: boolean;
 };
 
+export type History = {
+  route: string;
+  routeParams?: Record<string, any>;
+};
+
 export type UseRoutesProps = {
   routesInitialized: boolean;
   activeRoute: string;
@@ -139,13 +156,16 @@ export type UseRoutesProps = {
   routeType: string;
   routeBlocked: boolean;
   routeParams: Record<string, any>;
+  history: string[];
 };
+
+export type UseRoutes = Omit<UseRoutesProps, "routeBlocked">;
 
 /**
  * Use Routes Context props. This can be useful if you'd like to perform some side effect whenever some context data changes.
  * @returns
  */
-export declare const useRoutes: () => UseRoutesProps;
+export declare const useRoutes: () => UseRoutes;
 
 // ======= Context =======
 
