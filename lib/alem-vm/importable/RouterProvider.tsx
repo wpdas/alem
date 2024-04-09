@@ -1,9 +1,9 @@
-import { ChildrenProps, RouterContext } from "../alem-vm";
+import { RouterContext } from "../alem-vm";
 
-const RouterProvider = ({ children }: ChildrenProps) => {
+const RouterProvider = () => {
   RouterContext();
 
-  return <>{children}</>;
+  return <></>;
 };
 
 export default RouterProvider;

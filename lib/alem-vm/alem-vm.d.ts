@@ -14,9 +14,7 @@ export declare const ModulesContext: () => void;
 /**
  * Modules Provider
  */
-export declare const ModulesProvider: ({
-  children,
-}: ChildrenProps) => JSX.Element;
+export declare const ModulesProvider: () => JSX.Element;
 
 /**
  * useModule hook
@@ -34,9 +32,7 @@ export declare const useModule: (inputs: UseModuleProps) => void;
 /**
  * Provides the necessary states and props for Router.
  */
-// export declare const RouterProvider: ({
-//   children,
-// }: ChildrenProps) => JSX.Element;
+export declare const RouterProvider: () => JSX.Element;
 
 /**
  * Provides the necessary states and props for Router.

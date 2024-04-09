@@ -1,7 +1,7 @@
 import ModulesContext from "./ModulesContext";
-import { ChildrenProps, ModuleResponseData, useContext } from "../alem-vm";
+import { ModuleResponseData, useContext } from "../alem-vm";
 
-const ModulesProvider = ({ children }: ChildrenProps) => {
+const ModulesProvider = () => {
   ModulesContext();
 
   const modulesHandler = `
@@ -36,7 +36,6 @@ const ModulesProvider = ({ children }: ChildrenProps) => {
           }}
         />
       ))}
-      {children}
     </>
   );
 };
