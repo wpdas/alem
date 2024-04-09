@@ -17,7 +17,7 @@ const ModulesContext = () => {
       if (!code || !callId) return;
 
       const codeStructure = `
-      ${setupCode}
+      ${setupCode};
       event.source.postMessage({response: ${code.replaceAll(";", "")}, forCallId: ${callId}}, "*");
       `;
 
