@@ -44,14 +44,6 @@ const Router = (props: RouterProps) => {
     });
   }, [routes]);
 
-  // Update the parameter name if needed
-  useEffect(() => {
-    if (parameterName && parameterName !== alem.routeParameterName) {
-      // Comes from RouterProvider
-      alemRoutes.updateRouteParameterName(parameterName);
-    }
-  }, []);
-
   const { routeParameterName, routeType, activeRoute } = alemRoutes;
   const routeParamName = parameterName || routeParameterName;
 
@@ -128,6 +120,7 @@ const Router = (props: RouterProps) => {
           routeParams: _activeRouteParams,
           history: _history,
           routeBlocked: true,
+          routeParameterName: routeParamName,
         });
       }
     }

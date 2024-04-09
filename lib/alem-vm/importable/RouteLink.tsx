@@ -1,3 +1,7 @@
+// NOTA: Arquivo original antes da descoberta e uso do `Link`
+// `Link` não está sendo usado pois falha quando se tentar voltar ou ir pra frente
+// usando os botoes do navegador
+
 import { LinkProps, navigate, useContext } from "../alem-vm";
 
 /**

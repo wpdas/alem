@@ -42,16 +42,6 @@ const RouterContext = () => {
     // ==================================== Routes - Methods ====================================
 
     /**
-     * Update Route Parameter Name
-     * @param parameterName
-     */
-    updateRouteParameterName: (parameterName: string) => {
-      updateAlemRoutesState({
-        routeParameterName: parameterName,
-      });
-    },
-
-    /**
      * Update route parameters
      */
     updateRouteParameters: (routeProps: {
@@ -61,6 +51,7 @@ const RouterContext = () => {
       routeBlocked?: boolean;
       routeParams?: Record<string, any>;
       history?: History[]; // Previous history if config.keepRoute is true
+      routeParameterName?: string;
     }) => {
       // Update History
       const currentHistory = alemRoutesState().history;
@@ -93,6 +84,8 @@ const RouterContext = () => {
         activeRoute: routeProps.activeRoute || alemRoutesState().activeRoute,
         routeBlocked: routeProps.routeBlocked || alemRoutesState().routeBlocked,
         routeParams: routeProps.routeParams || alemRoutesState().routeParams,
+        routeParameterName:
+          routeProps.routeParameterName || alemRoutesState().routeParameterName,
         history: updatedHistory,
         routesInitialized: true,
       });
