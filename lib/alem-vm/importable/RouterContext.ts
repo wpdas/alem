@@ -10,7 +10,9 @@ import {
 const ALEM_ROUTES_CONTEXT_KEY = "alemRoutes";
 
 const RouterContext = () => {
-  const { setDefaultData, updateData } = createContext(ALEM_ROUTES_CONTEXT_KEY);
+  const { setDefaultData, updateData, getSelf } = createContext<any>(
+    ALEM_ROUTES_CONTEXT_KEY,
+  );
 
   /**
    * Update the alem state
@@ -37,7 +39,6 @@ const RouterContext = () => {
     routeParameterName: "path",
     routes: [] as string[],
     routeType: "URLBased", // URLBased | ContentBased
-    routeBlocked: true, // Used to force navigate to other paths even when the "path=" parameter is present into the URL
 
     // ==================================== Routes - Methods ====================================
 
@@ -48,7 +49,6 @@ const RouterContext = () => {
       routes?: string[];
       routeType?: RouteType;
       activeRoute?: string;
-      routeBlocked?: boolean;
       routeParams?: Record<string, any>;
       history?: History[]; // Previous history if config.keepRoute is true
       routeParameterName?: string;
@@ -79,13 +79,12 @@ const RouterContext = () => {
       }
 
       updateAlemRoutesState({
-        routes: routeProps.routes || alemRoutesState().routes,
-        routeType: routeProps.routeType || alemRoutesState().routeType,
-        activeRoute: routeProps.activeRoute || alemRoutesState().activeRoute,
-        routeBlocked: routeProps.routeBlocked || alemRoutesState().routeBlocked,
-        routeParams: routeProps.routeParams || alemRoutesState().routeParams,
+        routes: routeProps.routes || getSelf().routes,
+        routeType: routeProps.routeType || getSelf().routeType,
+        activeRoute: routeProps.activeRoute || getSelf().activeRoute,
+        routeParams: routeProps.routeParams || getSelf().routeParams,
         routeParameterName:
-          routeProps.routeParameterName || alemRoutesState().routeParameterName,
+          routeProps.routeParameterName || getSelf().routeParameterName,
         history: updatedHistory,
         routesInitialized: true,
       });

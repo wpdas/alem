@@ -87,16 +87,6 @@ type LinkProps = {
   params?: Record<string, any>;
 };
 
-type URLRouterProps = {
-  routes: Route[];
-  /**
-   * Parameter name to store current route name. Default is "path".
-   */
-  parameterName?: string;
-};
-
-export declare const SimpleRouter: (props: URLRouterProps) => JSX.Element;
-
 /**
  * Link to access routes.
  */
@@ -185,7 +175,6 @@ export type UseRoutesProps = {
   routeParameterName: string;
   routes: string[];
   routeType: string;
-  routeBlocked: boolean;
   routeParams: Record<string, any>;
   history: string[];
 };

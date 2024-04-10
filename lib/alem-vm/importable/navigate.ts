@@ -1,4 +1,4 @@
-import { useContext } from "../alem-vm";
+import { isDevelopment, useContext } from "../alem-vm";
 
 const navigate = {
   /**
@@ -10,6 +10,12 @@ const navigate = {
     const routeContext = useContext<any>("alemRoutes");
     if (!routeContext) {
       console.error("navigate is being used without Router on top of it.");
+    }
+
+    if (isDevelopment && routeContext.routeType === "URLBased") {
+      console.warn(
+        'The route type is "URLBased", "navigate" should only be used with the "ContentBased" type.',
+      );
     }
 
     if (routeContext.routes.includes(route)) {
@@ -32,6 +38,12 @@ const navigate = {
     const routeContext = useContext<any>("alemRoutes");
     if (!routeContext) {
       console.error("navigate is being used without Router on top of it.");
+    }
+
+    if (isDevelopment && routeContext.routeType === "URLBased") {
+      console.warn(
+        'The route type is "URLBased", "navigate" should only be used with the "ContentBased" type.',
+      );
     }
 
     const updatedHistory = routeContext.history;

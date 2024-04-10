@@ -47,6 +47,24 @@ const Router = (props: RouterProps) => {
   const { routeParameterName, routeType, activeRoute } = alemRoutes;
   const routeParamName = parameterName || routeParameterName;
 
+  // Registra como listener das props do root
+  useEffect(() => {
+    const handler = (data: any) => {
+      const _type = type || "URLBased";
+      if (_type === "URLBased") {
+        alemRoutes.updateRouteParameters({
+          activeRoute: data[routeParamName],
+        });
+      }
+    };
+
+    alem.registerListenerHandler(handler);
+
+    return () => {
+      alem.unregisterListenerHandler();
+    };
+  }, []);
+
   const checkIfPathIsIncludedToRoutes = (routePath: string) => {
     let pathFound = false;
     if (routes) {
@@ -65,10 +83,6 @@ const Router = (props: RouterProps) => {
     // BOS.props
     const bosProps = alem.rootProps;
 
-    // ContentBased config only: should maintain the current route over refreshes?
-    const maintainRoutesWhenDeveloping =
-      alem.isDevelopment && alem.alemConfig_maintainRouteWhenDeveloping;
-
     if (routes) {
       // Check if currentUrlPath exists in the routes list, if not, use
       // the first element's path
@@ -84,14 +98,6 @@ const Router = (props: RouterProps) => {
       const _type = type || "URLBased";
       let _activeRoute =
         initialRoute || alemRoutes.activeRoute || currentUrlPath;
-
-      if (
-        !(currentUrlPath && routeType == "URLBased" && alemRoutes.routeBlocked)
-      ) {
-        _activeRoute = maintainRoutesWhenDeveloping
-          ? initialRoute || activeRoute
-          : routes[0].path;
-      }
 
       // Checa se o config.keepRoute esta ativado e se tiver, se tem uma rota salva
       let _activeRouteParams = null;
@@ -119,7 +125,6 @@ const Router = (props: RouterProps) => {
           activeRoute: _activeRoute,
           routeParams: _activeRouteParams,
           history: _history,
-          routeBlocked: true,
           routeParameterName: routeParamName,
         });
       }

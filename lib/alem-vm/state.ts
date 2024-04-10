@@ -25,6 +25,19 @@ const alemState = () => state.alem as typeof AlemStateInitialBody.alem;
 
 const AlemStateInitialBody = {
   alem: {
+    // System to send root properties to listeners
+    rootPropsListeners: [],
+    registerListenerHandler: (handler: (data: any) => void) => {
+      if (!props.alem.rootPropsListeners.includes(handler)) {
+        props.alem.rootPropsListeners.push(handler);
+      }
+    },
+    unregisterListenerHandler: (handler: (data: any) => void) => {
+      props.alem.rootPropsListeners = props.alem.rootPropsListeners.filter(
+        (item) => item !== handler,
+      );
+    },
+
     ready: false,
     /**
      * Root project props
@@ -211,6 +224,10 @@ if (props.alem.keepRoute) {
     ready: true,
   });
 }
+
+// Chama todos os metodos guardados no alem.handlers quando a propriedade
+// do root mudar
+props.alem.rootPropsListeners.forEach((handler) => handler(props));
 
 export type Alem = any;
 

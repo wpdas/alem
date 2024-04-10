@@ -1,7 +1,3 @@
-// NOTA: Arquivo original antes da descoberta e uso do `Link`
-// `Link` não está sendo usado pois falha quando se tentar voltar ou ir pra frente
-// usando os botoes do navegador
-
 import { LinkProps, navigate, useContext } from "../alem-vm";
 
 /**
@@ -45,8 +41,11 @@ export const RouteLink = ({
       });
     }
 
+    // Evita o refresh da pagina
+    const Link = styled("Link")``;
+
     return (
-      <a
+      <Link
         onClick={onClickHandler}
         className={className}
         style={{ cursor: "pointer", textDecoration: "none", ...style }}
@@ -58,7 +57,7 @@ export const RouteLink = ({
         }
       >
         {label || children}
-      </a>
+      </Link>
     );
   }
 
