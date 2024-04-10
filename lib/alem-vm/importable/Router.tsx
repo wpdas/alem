@@ -47,24 +47,6 @@ const Router = (props: RouterProps) => {
   const { routeParameterName, routeType, activeRoute } = alemRoutes;
   const routeParamName = parameterName || routeParameterName;
 
-  // Registra como listener das props do root
-  useEffect(() => {
-    const handler = (data: any) => {
-      const _type = type || "URLBased";
-      if (_type === "URLBased") {
-        alemRoutes.updateRouteParameters({
-          activeRoute: data[routeParamName],
-        });
-      }
-    };
-
-    alem.registerListenerHandler(handler);
-
-    return () => {
-      alem.unregisterListenerHandler();
-    };
-  }, []);
-
   const checkIfPathIsIncludedToRoutes = (routePath: string) => {
     let pathFound = false;
     if (routes) {

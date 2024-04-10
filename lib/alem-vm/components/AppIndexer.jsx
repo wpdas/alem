@@ -12,6 +12,6 @@ const AlemApp = useMemo(() => {
       />
     </AlemTheme>
   );
-}, [props.alem.ready, props.alem.alemExternalStylesBody]);
+}, [props.alem.ready, props.alem.alemExternalStylesBody, props.alem.rootProps]);
 
 return AlemApp;

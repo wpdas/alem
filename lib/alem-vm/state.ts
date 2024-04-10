@@ -2,7 +2,15 @@
  * Todos os items do state inicial
  */
 
-import { Route, State, Storage, asyncFetch, state } from "./alem-vm";
+import {
+  Route,
+  State,
+  Storage,
+  asyncFetch,
+  state,
+  useEffect,
+  useState,
+} from "./alem-vm";
 
 /**
  * Update the alem state
@@ -25,18 +33,20 @@ const alemState = () => state.alem as typeof AlemStateInitialBody.alem;
 
 const AlemStateInitialBody = {
   alem: {
-    // System to send root properties to listeners
-    rootPropsListeners: [],
-    registerListenerHandler: (handler: (data: any) => void) => {
-      if (!props.alem.rootPropsListeners.includes(handler)) {
-        props.alem.rootPropsListeners.push(handler);
-      }
-    },
-    unregisterListenerHandler: (handler: (data: any) => void) => {
-      props.alem.rootPropsListeners = props.alem.rootPropsListeners.filter(
-        (item) => item !== handler,
-      );
-    },
+    // === System to send root properties to listeners ===
+    // INFO: Desativado pois as props sao repassadas quando
+    // elas sao mudadas no root (aqui)
+    // rootPropsListeners: [],
+    // registerListenerHandler: (handler: (data: any) => void) => {
+    //   if (!props.alem.rootPropsListeners.includes(handler)) {
+    //     props.alem.rootPropsListeners.push(handler);
+    //   }
+    // },
+    // unregisterListenerHandler: (handler: (data: any) => void) => {
+    //   props.alem.rootPropsListeners = props.alem.rootPropsListeners.filter(
+    //     (item) => item !== handler,
+    //   );
+    // },
 
     ready: false,
     /**
@@ -227,7 +237,7 @@ if (props.alem.keepRoute) {
 
 // Chama todos os metodos guardados no alem.handlers quando a propriedade
 // do root mudar
-props.alem.rootPropsListeners.forEach((handler) => handler(props));
+// props.alem.rootPropsListeners.forEach((handler) => handler(props));
 
 export type Alem = any;
 
