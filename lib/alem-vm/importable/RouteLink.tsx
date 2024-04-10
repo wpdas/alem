@@ -9,6 +9,8 @@ import { LinkProps, navigate, useContext } from "../alem-vm";
  */
 export const RouteLink = ({
   to,
+  href,
+  target,
   params,
   label,
   className,
@@ -48,7 +50,12 @@ export const RouteLink = ({
         onClick={onClickHandler}
         className={className}
         style={{ cursor: "pointer", textDecoration: "none", ...style }}
-        href={`?${routeContext.routeParameterName || "path"}=${to}${strParams}`}
+        target={target}
+        href={
+          href
+            ? href
+            : `?${routeContext.routeParameterName || "path"}=${to}${strParams}`
+        }
       >
         {label || children}
       </a>

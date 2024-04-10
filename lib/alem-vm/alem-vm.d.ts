@@ -76,10 +76,13 @@ export declare const Router: (props: RouterProps) => JSX.Element;
 
 type LinkProps = {
   to: string;
+  /** "href" has priority over "to" */
+  href?: string | null;
+  target?: string | null;
   label?: string;
   className?: string;
   style?: React.CSSProperties;
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
   children?: JSX.Element | JSX.Element[] | string | number;
   params?: Record<string, any>;
 };
