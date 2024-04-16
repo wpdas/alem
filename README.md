@@ -51,6 +51,19 @@ cd my-app
 yarn start
 ```
 
+## CLI
+
+Além has its own command system. To use it, install Além globally.
+
+```sh
+# npm
+npm install alem -g
+# yarn
+yarn global add alem
+```
+
+Get to know more about the CLI [**here**](https://alem.dev/?path=cli).
+
 ## Documentation
 
 You can find the Alem documentation [**on the website**](https://alem.dev).
