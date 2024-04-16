@@ -45,6 +45,7 @@
     "chokidar": "^3.5.3",
     "commander": "^11.1.0",
     "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "mock-fs": "^5.2.0",
     "near-cli-rs": "^0.4.3",
