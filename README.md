@@ -17,6 +17,8 @@ If you have questions or need help, please ask in the [**Alem Discussions**](htt
 
 **You’ll need to have Node 18.0.0 or later version on your local development machine**. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
 
+Also, make sure you have **Git** installed on your machine.
+
 Use the command below to start an initial boilerplate.
 
 ### JavaScript
