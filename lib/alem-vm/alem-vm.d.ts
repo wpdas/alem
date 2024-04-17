@@ -312,19 +312,39 @@ export declare function useEffect(
 
 export declare function useMemo<T>(factory: () => T, deps: DependencyList): T;
 
+type FetchOptions = {
+  responseType?:
+    | "arraybuffer"
+    | "blob"
+    | "formdata"
+    | "json"
+    | "text"
+    | "application/json";
+  method?: string;
+  headers?: Record<string, any>;
+  body?: string;
+  [key]?: any;
+};
+
 /**
  * `fetch` allows to fetch data from the URL. It acts like a hook. It's a wrapper around the fetch function from the browser behind the caching layer.
  *
  * Know more: https://docs.near.org/bos/api/web-methods#fetch
  */
-export declare const fetch: (url: string) => { body: any };
+export declare const fetch: (
+  url: string,
+  options?: FetchOptions,
+) => { body: any };
 
 /**
  * `asyncFetch` is the async version of `fetch`, meaning that it returns a promise instead of a value.
  *
- * Know more: https://docs.near.org/bos/api/web-methods#async-version
+ * Know more: https://docs.near.org/build/near-components/anatomy/web-methods#async-version
  */
-export declare const asyncFetch: (url: string) => Promise<any>;
+export declare const asyncFetch: (
+  url: string,
+  options?: FetchOptions,
+) => Promise<any>;
 
 /**
  * The `useCache` hook takes a promise through a generator function, fetches the data and caches it. It can be used to easily use and cache data from async data sources.
