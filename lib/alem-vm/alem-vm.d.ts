@@ -456,6 +456,26 @@ export declare const Near: {
   ) => R;
 
   /**
+   * asyncView
+   *
+   * Know more: https://docs.near.org/bos/api/near#nearview
+   *
+   * @param contractName Name of the smart contract
+   * @param methodName Name of the method to call
+   * @param args Arguments to pass to the method
+   * @param blockId Block ID or finality of the transaction
+   * @param subscribe This feature allows users to subscribe to a query, which automatically refreshes the data for all subscribers every 5 seconds.
+   * @returns Promise
+   */
+  asyncView: (
+    contractName: string,
+    methodName: string,
+    args?: {},
+    blockId?: string,
+    subscribe?: boolean,
+  ) => Promise<any>;
+
+  /**
    * Call
    *
    * Know more: https://docs.near.org/bos/api/near#nearcall
