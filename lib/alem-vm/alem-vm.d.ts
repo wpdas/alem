@@ -285,7 +285,7 @@ export declare var props: any;
 export declare var context: BosContext;
 
 export declare const Widget: (params: {
-  loading?: JSX.Element | JSX.Element[] | string | number;
+  loading?: JSX.Element | JSX.Element[] | string | number | ReactElement;
   code?: string;
   src?: string;
   props?: object;
@@ -694,7 +694,7 @@ export declare const CommitButton: (params: {
   className?: string;
   data?: {};
   onCommit?: () => void;
-  children?: JSX.Element | JSX.Element[] | string | number;
+  children?: JSX.Element | JSX.Element[] | string | number | ReactElement;
 }) => React.ReactNode;
 
 /**
@@ -703,7 +703,7 @@ export declare const CommitButton: (params: {
  * Know more: https://docs.near.org/bos/api/builtin-components#files
  */
 export declare const Files: (params: {
-  children?: JSX.Element;
+  children?: JSX.Element | ReactElement;
   multiple?: boolean;
   accepts: string[];
   clickable?: boolean;
@@ -754,8 +754,8 @@ export declare const InfiniteScroll: (params: {
   useWindow?: boolean;
   pageStart?: number;
   threshold?: number;
-  loader?: JSX.Element | JSX.Element[] | string | number;
-  children?: JSX.Element | JSX.Element[] | string | number;
+  loader?: JSX.Element | JSX.Element[] | string | number | ReactElement;
+  children?: JSX.Element | JSX.Element[] | string | number | ReactElement;
 }) => React.ReactNode;
 
 /**
@@ -775,7 +775,7 @@ export declare const TypeAhead: (params: {
  */
 export declare const Tooltip: (params: {
   id?: string;
-  children: JSX.Element;
+  children: JSX.Element | ReactElement;
 }) => React.ReactNode;
 
 /**
