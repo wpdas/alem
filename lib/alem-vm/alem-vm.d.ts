@@ -262,6 +262,11 @@ export declare const promisify: (
 export declare const isDevelopment: boolean;
 
 /**
+ * Get the current environment. This can be set using NODE_ENV env var.
+ */
+export declare const getAlemEnvironment: () => string;
+
+/**
  * Create a debounced method to obtain the data after the desired interval.
  * @param cb Callback
  * @param timeout Timeout. Default is 1 sec.
