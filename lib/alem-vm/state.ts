@@ -200,6 +200,11 @@ export const props = {
      */
     isDevelopment: alemState().alemEnvironment === "development",
 
+    /**
+     * Get the Environment
+     */
+    getAlemEnvironment: () => alemState().alemEnvironment,
+
     // ==================================== Components|Widgets Code ====================================
     componentsCode: {
       COMPONENTS_CODE: {},
