@@ -3,10 +3,23 @@ const AlemApp = useMemo(() => {
     return "";
   }
 
+  const Container = styled.div`
+    display: flex;
+    margin-top: 48%;
+    justify-content: center;
+    width: 100%;
+  `;
+
+  const Loading = () => (
+    <Container>
+      <div className="spinner-border text-secondary" role="status" />
+    </Container>
+  );
+
   return (
     <AlemTheme>
       <Widget
-        loading=" "
+        loading={<Loading />}
         code={props.alem.componentsCode.App}
         props={{ alem: props.alem }}
       />
