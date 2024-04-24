@@ -55,7 +55,7 @@ jobs:
       - name: Build the workspaces
         run: |
           cd "$WORKSPACE_DIRECTORY"
-          alem build
+          alem build --network testnet
 
       - name: Deploy widgets (using bos-cli-rs)
         run: |
