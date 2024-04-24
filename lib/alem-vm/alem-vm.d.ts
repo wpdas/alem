@@ -1,7 +1,7 @@
 // ALEM Items:
 
 export type ChildrenProps = {
-  children: JSX.Element | JSX.Element[] | string | number;
+  children: JSX.Element | ReactElement | JSX.Element[] | string | number;
 };
 
 export type ModuleResponseData = { response: any; forCallId: number };
@@ -285,8 +285,14 @@ export declare interface BosContext {
   networkId: NetworkId;
 }
 
+/**
+ * Widget's Props. This is the props the Widget (stateful components) receives.
+ */
 export declare var props: any;
 
+/**
+ * Widget's Context
+ */
 export declare var context: BosContext;
 
 export declare const Widget: (params: {
@@ -418,7 +424,7 @@ export declare const clipboard: {
   writeText: (text: string) => void;
 };
 
-type Call = <R extends {}>(
+type Call = (
   contractName: string,
   methodName: string,
   args?: {},
@@ -426,7 +432,7 @@ type Call = <R extends {}>(
   deposit?: string | number,
 ) => void;
 
-type CallList = <R extends {}>(
+type CallList = (
   callList: {
     contractName: string;
     methodName: string;
@@ -744,6 +750,7 @@ export declare const OverlayTrigger: (params: {
    * The content that will be displayed in the overlay.
    */
   overlay: any;
+  children: JSX.Element | ReactElement | JSX.Element[] | string | number;
 }) => React.ReactNode;
 
 /**
@@ -768,7 +775,7 @@ export declare const InfiniteScroll: (params: {
  *
  * Know more: https://docs.near.org/bos/api/builtin-components#typeahead
  */
-export declare const TypeAhead: (params: {
+export declare const Typeahead: (params: {
   options: string[];
   multiple?: boolean;
   placeholder?: string;
@@ -780,7 +787,7 @@ export declare const TypeAhead: (params: {
  */
 export declare const Tooltip: (params: {
   id?: string;
-  children: JSX.Element | ReactElement;
+  children: JSX.Element | ReactElement | JSX.Element[] | string | number;
 }) => React.ReactNode;
 
 /**
@@ -798,8 +805,8 @@ export declare const VM: {
  * Know more: https://docs.near.org/bos/api/state
  */
 export declare const State: {
-  init: (defaultValue: {}) => void;
-  update: (updatedValues: {}) => void;
+  init: (defaultValue?: {}) => void;
+  update: (updatedValues?: {}) => void;
 };
 
 /**
