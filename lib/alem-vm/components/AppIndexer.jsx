@@ -20,7 +20,7 @@ const AlemApp = useMemo(() => {
         MODULES_CODE: {},
       },  
     }
-  }
+  };
 
   return (
     <Widget loading=" " code={props.alem.componentsCode.App} props={props} />
