@@ -52,6 +52,10 @@ jobs:
         run: |
           npm install alem -g
 
+      - name: Install Dependencies
+        run: |
+            npm install
+
       - name: Build the workspaces
         run: |
           cd "$WORKSPACE_DIRECTORY"
