@@ -18,7 +18,7 @@ const AlemApp = useMemo(() => {
       // m = modulesCode, está sendo usado "m" para reduzir o bundle final
       m: {
         MODULES_CODE: {},
-      },  
+      },
     }
   };
 
