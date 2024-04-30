@@ -13,6 +13,10 @@ Build encapsulated components that manage their own state, then compose them to 
 
 If you have questions or need help, please ask in the [**Alem Discussions**](https://t.me/alemlib/8).
 
+**Support Além**
+
+<a href="https://bos.potlock.org/?tab=project&projectId=alem-lib.near&potId=oss.v1.potfactory.potlock.near">![Sponsor](https://img.shields.io/badge/donate-30363D?style=for-the-badge&logo=Near&logoColor=#white)</a>
+
 ## Installation
 
 **You’ll need to have Node 18.0.0 or later version on your local development machine**. You can use [nvm](https://github.com/creationix/nvm#installation) (macOS/Linux) or [nvm-windows](https://github.com/coreybutler/nvm-windows#node-version-manager-nvm-for-windows) to switch Node versions between different projects.
