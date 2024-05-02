@@ -321,7 +321,19 @@ export declare function useEffect(
   deps?: DependencyList,
 ): void;
 
+/**
+ * `useMemo` will only recompute the memoized value when one of the `deps` has changed.
+ */
 export declare function useMemo<T>(factory: () => T, deps: DependencyList): T;
+
+/**
+ * `useCallback` will return a memoized version of the callback that only changes if one of the `inputs`
+ * has changed.
+ */
+export declare function useCallback<T extends Function>(
+  callback: T,
+  deps: DependencyList,
+): T;
 
 type FetchOptions = {
   responseType?:
