@@ -1,7 +1,7 @@
 {
   "name": "alem",
   "description": "Create web3 applications for NEAR BOS with a focus on performance and friendly development.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "main.js",
   "types": "index.d.ts",
   "author": "Wenderson Pires - wendersonpires.near",
