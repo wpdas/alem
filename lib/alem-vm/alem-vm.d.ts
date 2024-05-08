@@ -745,23 +745,23 @@ export declare const OverlayTrigger: (params: {
   /**
    * A boolean value that determines whether the overlay is currently visible or not.
    */
-  show: string;
+  show?: string;
   /**
    * An array of events that trigger the display of the overlay. In this example, the `trigger` prop is set to `["hover", "focus"]`, which means that the overlay will be displayed when the user hovers over or focuses on the element.
    */
-  trigger: string[];
+  trigger?: string[];
   /**
    * An object that specifies the delay before the overlay is displayed or hidden. In this example, the `delay` prop is set to `{ show: 250, hide: 300 }`, which means that the overlay will be displayed after a 250-millisecond delay and hidden after a 300-millisecond delay.
    */
-  delay: { show: number; hide: number };
+  delay?: { show: number; hide: number };
   /**
    * A string that specifies the position of the overlay relative to the trigger element. In this example, the `placement` prop is set to `"auto"`, which means that the position will be automatically determined based on available space.
    */
-  placement: string;
+  placement?: string;
   /**
    * The content that will be displayed in the overlay.
    */
-  overlay: any;
+  overlay?: any;
   children: JSX.Element | ReactElement | JSX.Element[] | string | number;
 }) => React.ReactNode;
 
