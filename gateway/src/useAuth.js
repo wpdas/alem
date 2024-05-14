@@ -1,12 +1,25 @@
+import "@near-wallet-selector/modal-ui/styles.css";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupModal } from "@near-wallet-selector/modal-ui";
-import "@near-wallet-selector/modal-ui/styles.css";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupNightly } from "@near-wallet-selector/nightly";
 import { setupSender } from "@near-wallet-selector/sender";
+import { setupBitgetWallet } from "@near-wallet-selector/bitget-wallet";
+import { setupCoin98Wallet } from "@near-wallet-selector/coin98-wallet";
+import { setupLedger } from "@near-wallet-selector/ledger";
+import { setupMathWallet } from "@near-wallet-selector/math-wallet";
+import { setupMintbaseWallet } from "@near-wallet-selector/mintbase-wallet";
+import { setupNearMobileWallet } from "@near-wallet-selector/near-mobile-wallet";
+import { setupNearFi } from "@near-wallet-selector/nearfi";
+import { setupWelldoneWallet } from "@near-wallet-selector/welldone-wallet";
+import { setupXDEFI } from "@near-wallet-selector/xdefi";
+import { setupNearSnap } from "@near-wallet-selector/near-snap";
+import { setupNarwallets } from "@near-wallet-selector/narwallets";
+import { setupRamperWallet } from "@near-wallet-selector/ramper-wallet";
+
 import Big from "big.js";
 import { isValidAttribute } from "dompurify";
 import {
@@ -58,6 +71,18 @@ export function useAuth() {
               bundle: false,
             }),
             setupNightly(),
+            setupBitgetWallet(),
+            setupCoin98Wallet(),
+            setupLedger(),
+            setupMathWallet(),
+            setupMintbaseWallet(),
+            setupNearMobileWallet(),
+            setupNearFi(),
+            setupWelldoneWallet(),
+            setupXDEFI(),
+            setupNearSnap(),
+            setupNarwallets(),
+            setupRamperWallet(),
           ],
         }),
         customElements: {
