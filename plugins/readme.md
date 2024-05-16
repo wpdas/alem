@@ -1,6 +1,6 @@
 ## Tailwind
 
-Steps to use Tailwind. Get to know more about [**Tailwind here.**](https://tailwindcss.com/)
+Steps to configure Tailwind manually. Get to know more about [**Tailwind here.**](https://tailwindcss.com/)
 
 ### Install Tailwind CSS
 
