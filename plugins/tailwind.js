@@ -10,8 +10,12 @@ const tailwindcss = require("tailwindcss"); // Tailwind support
 
 // Alem stuff
 const { read_alem_config } = require("../lib/config");
+const { scapeBacktick } = require("../lib/helpers");
 
-const tailwind = () => {
+const config = read_alem_config();
+const cssDirPrep = config?.plugins?.tailwind?.css || "src/globals.css";
+
+const run = () => {
   // Tailwind config file
   const tailwindConfigDir = path.join(".", "./tailwind.config.js");
   const configExist = fs.existsSync(tailwindConfigDir);
@@ -19,8 +23,6 @@ const tailwind = () => {
   return new Promise((resolve) => {
     if (configExist) {
       // Internal Stuff
-      const config = read_alem_config();
-      const cssDirPrep = config?.plugins?.tailwind?.css || "src/globals.css";
       const cssDir = path.join(".", cssDirPrep);
 
       // Tailwind config js
@@ -34,14 +36,22 @@ const tailwind = () => {
       }
 
       fs.readFile(cssDir, (err, css) => {
-        postcss([
+        // Plugins
+        const plugins = [
           autoprefixer,
           postcssNested,
-          cssnano,
           tailwindcss(tailwindConfig),
-        ])
+        ];
+        if (process.env.NODE_ENV === "production" || !process.env.NODE_ENV) {
+          plugins.push(cssnano);
+        }
+
+        // Postcss
+        postcss(plugins)
           .process(css, { from: cssDir })
-          .then(resolve)
+          .then((data) => {
+            resolve(scapeBacktick(data.css));
+          })
           .catch(() => {
             resolve("");
           });
@@ -52,4 +62,8 @@ const tailwind = () => {
   });
 };
 
-module.exports = tailwind;
+module.exports = {
+  run,
+  // CSS files to be ignored during compilation
+  ignoreCssFiles: [cssDirPrep],
+};
