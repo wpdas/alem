@@ -1,6 +1,6 @@
 ## Tailwind
 
-Steps to use Tailwind. Get to know more about [**Tailding here.**](https://tailwindcss.com/)
+Steps to use Tailwind. Get to know more about [**Tailwind here.**](https://tailwindcss.com/)
 
 ### Install Tailwind CSS
 
@@ -19,23 +19,36 @@ npx tailwindcss init
 Add the paths to all of your template files in your `tailwind.config.js` file.
 
 ```js
-const config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: ["./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {},
   },
   plugins: [],
 };
-
-module.exports = config;
 ```
 
 ### Add the Tailwind directives to your CSS
 
-Add the `@tailwind` directives for each of Tailwind’s layers to your main CSS file.
+The main file to be used with tailwind is `src/globals.css`, create this file in your project and add the `@tailwind` directives for each of Tailwind’s layers to your main CSS file.
 
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
+
+### Chaging the Main CSS File
+
+You can change the main css file, to do this, add the following session in the `alem.config.json` file:
+
+```json
+"plugins": {
+    "tailwind": {
+      "css": "src/globals.css"
+    }
+  }
+```
+
+Replace `src/globals.css` with the file you want to use.

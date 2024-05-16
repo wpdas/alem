@@ -46,10 +46,8 @@ const run = () => {
           autoprefixer,
           postcssNested,
           tailwindcss(tailwindConfig),
+          cssnano,
         ];
-        if (process.env.NODE_ENV === "production" || !process.env.NODE_ENV) {
-          plugins.push(cssnano);
-        }
 
         // Postcss
         postcss(plugins)
