@@ -15,6 +15,11 @@ const { scapeBacktick } = require("../lib/helpers");
 const config = read_alem_config();
 const cssDirPrep = config?.plugins?.tailwind?.css || "src/globals.css";
 
+// Escapa "\"
+function escapeBackslashes(str) {
+  return str.replace(/\\/g, "\\\\");
+}
+
 const run = () => {
   // Tailwind config file
   const tailwindConfigDir = path.join(".", "./tailwind.config.js");
@@ -50,7 +55,7 @@ const run = () => {
         postcss(plugins)
           .process(css, { from: cssDir })
           .then((data) => {
-            resolve(scapeBacktick(data.css));
+            resolve(scapeBacktick(escapeBackslashes(data.css)));
           })
           .catch(() => {
             resolve("");
