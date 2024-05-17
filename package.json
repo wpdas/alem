@@ -1,7 +1,7 @@
 {
   "name": "alem",
   "description": "Create web3 applications for NEAR BOS with a focus on performance and friendly development.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "main.js",
   "types": "index.d.ts",
   "author": "Wenderson Pires - wendersonpires.near",
@@ -24,7 +24,8 @@
     "lib",
     "main.js",
     "gateway/dist/*",
-    "index.d.ts"
+    "index.d.ts",
+    "plugins"
   ],
   "scripts": {
     "build-gateway": "cd ./gateway && npm install && npm run build",
