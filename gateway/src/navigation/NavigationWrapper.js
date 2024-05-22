@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../assets/near-script-logo-white.png";
+import { flags } from "../../config/flags";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -59,7 +60,7 @@ export function NavigationWrapper(props) {
     <StyledNavigation>
       <div className="container">
         <Link
-          to="/"
+          to={flags.mainWidgetLink || "/"}
           className="text-white text-2xl font-black"
           style={{
             display: "flex",
