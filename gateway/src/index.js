@@ -75,6 +75,12 @@ function Home() {
   const { components: redirectMap } = useRedirectMap();
   const widgets = {};
 
+  // Force going to the main widget src (indexer)
+  if (location.pathname === "/" && flags.mainWidgetSrc) {
+    navigate(flags.mainWidgetSrc);
+    return "";
+  }
+
   Object.keys(redirectMap).forEach((key) => {
     const parts = key.split("/widget/");
     if (!widgets[parts[0]]) {

@@ -1,7 +1,20 @@
 // ALEM Items:
 
+type Children = JSX.Element | ReactElement | JSX.Element[] | string | number;
+
+type ReturnChildren = (
+  params,
+) => JSX.Element | ReactElement | JSX.Element[] | string | number;
+
+/**
+ * As a Stateful Widget. Tells the compiler to generate this component as a stateful widget (even though it is stateless). When using this type, the file must have only one component present.
+ *
+ * This is useful for when you want to avoid unnecessary re-renders caused by stateless components manipulating the state of the main component.
+ */
+export type AsStateful = ReturnChildren | Children;
+
 export type ChildrenProps = {
-  children: JSX.Element | ReactElement | JSX.Element[] | string | number;
+  children: Children;
 };
 
 export type ModuleResponseData = { response: any; forCallId: number };
